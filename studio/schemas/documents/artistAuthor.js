@@ -23,6 +23,12 @@ export default {
       type: 'array',
       description:"select add item to add a bio in any language (including English)",
       of: [{type: 'translation'}],
+    },
+    {
+        name: 'projects', 
+        type: 'array', 
+        title: 'Projects/articles', 
+        of:[{type:'reference', title:'Project/Article', to: [{type: 'project'}]}]
     }
     
   ],

@@ -20,9 +20,9 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'EHCN',
+      name:'TBN',
       type: 'string',
-      title: 'Experimental Humanities Collaborative Network'
+      title: 'To Be–Named'
     },
     {
         description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',

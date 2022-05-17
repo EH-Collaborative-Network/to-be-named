@@ -7,6 +7,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 // Document types
 import person from './documents/person'
 import page from './documents/page'
+import project from './documents/project'
 import timeZone from './documents/timeZone'
 import siteSettings from './documents/siteSettings'
 import language from './documents/language'
@@ -37,6 +38,7 @@ export default createSchema({
     siteSettings,
     language,
     event,
+    project,
     // The following are document types which will appear
     // in the studio.
     embed,

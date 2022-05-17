@@ -58,13 +58,7 @@ export default {
                 to: [
                   { type: 'page' },
                   { type: 'project' },
-                  { type: 'researchThread' },
-                  { type: 'newsItem' },
-                  { type: 'workingGroup' },
-                  { type: 'course' },
-                  { type: 'event' },
-                  { type: 'learningResource' },
-                  { type: 'partner' }
+                  { type: 'event' }
                   // other types you may want to link to
                 ]
               }
