@@ -5,17 +5,22 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
-import category from './documents/category'
 import person from './documents/person'
-import sampleProject from './documents/sampleProject'
+import page from './documents/page'
+import timeZone from './documents/timeZone'
 import siteSettings from './documents/siteSettings'
-
+import language from './documents/language'
+import event from './documents/event'
 // Object types
-import bioPortableText from './objects/bioPortableText'
+import embed from './objects/embed'
 import figure from './objects/figure'
-import projectMember from './objects/projectMember'
-import projectPortableText from './objects/projectPortableText'
-import simplePortableText from './objects/simplePortableText'
+import link from './objects/link'
+import mediaItem from './objects/mediaItem'
+import pdf from './objects/pdf'
+import richText from './objects/richText'
+import translation from './objects/translation'
+import titleTranslation from './objects/titleTranslation'
+import dateObj from './objects/dateObj'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -26,16 +31,22 @@ export default createSchema({
   types: schemaTypes.concat([
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
-    bioPortableText,
-    figure,
-    projectMember,
-    projectPortableText,
-    simplePortableText,
+    person,
+    page,
+    timeZone,
+    siteSettings,
+    language,
+    event,
     // The following are document types which will appear
     // in the studio.
-    category,
-    person,
-    sampleProject,
-    siteSettings
+    embed,
+    pdf,
+    figure,
+    mediaItem,
+    richText,
+    translation,
+    titleTranslation,
+    dateObj,
+    link
   ])
 })

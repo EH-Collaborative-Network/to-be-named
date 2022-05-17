@@ -1,34 +1,10 @@
-export default {
-  name: 'figure',
+export default{
   title: 'Image',
+  name: 'figure',
   type: 'image',
-  options: {
-    hotspot: true
-  },
+  options: { hotspot:true},
   fields: [
-    {
-      title: 'Caption',
-      name: 'caption',
-      type: 'string',
-      options: {
-        isHighlighted: true
-      }
-    },
-    {
-      name: 'alt',
-      type: 'string',
-      title: 'Alternative text',
-      validation: Rule => Rule.error('You have to fill out the alternative text.').required(),
-      description: 'Important for SEO and accessiblity.',
-      options: {
-        isHighlighted: true
-      }
-    }
-  ],
-  preview: {
-    select: {
-      imageUrl: 'asset.url',
-      title: 'caption'
-    }
-  }
+      {name: 'altText', type: 'text', title: 'Alt Text', description: 'description for screen readers'},
+      {name: 'caption', type: 'text', title: 'Caption', description: 'caption for your image'}
+    ]
 }
