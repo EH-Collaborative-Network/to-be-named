@@ -13,6 +13,7 @@ import timeZone from './documents/timeZone'
 import siteSettings from './documents/siteSettings'
 import language from './documents/language'
 import event from './documents/event'
+import researchThread from './documents/researchThread'
 // Object types
 import embed from './objects/embed'
 import figure from './objects/figure'
@@ -40,6 +41,7 @@ export default createSchema({
     language,
     event,
     project,
+    researchThread,
     artistAuthor,
     // The following are document types which will appear
     // in the studio.

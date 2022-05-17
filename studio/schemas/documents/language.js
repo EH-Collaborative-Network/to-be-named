@@ -26,9 +26,21 @@ export default {
     },
     {
         description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-        name:'aboutEHCN',
+        name:'aboutTBN',
         type: 'string',
-        title: 'About EHCN'
+        title: 'About To Be–Named'
+    },
+    {
+        description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+        name:'aboutVolume',
+        type: 'string',
+        title: 'About The Edited Volume'
+    },
+    {
+        description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+        name:'aboutExhibition',
+        type: 'string',
+        title: 'About The Exhibition'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
@@ -41,18 +53,6 @@ export default {
       name:'availableIn',
       type: 'string',
       title: 'This text is also available in'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'learningResources',
-      type: 'string',
-      title: 'Learning Resources'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'learningResource',
-      type: 'string',
-      title: 'Learning Resource'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
@@ -71,48 +71,6 @@ export default {
       name:'search',
       type: 'string',
       title: 'Search'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'researchThreads',
-      type: 'string',
-      title: 'Research Threads'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'fundingOpportunities',
-      type: 'string',
-      title: 'Funding Opportunities'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'fundingOpportunity',
-      type: 'string',
-      title: 'Funding Opportunity'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'course',
-      type: 'string',
-      title: 'Course'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'courses',
-      type: 'string',
-      title: 'Courses'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'workingGroup',
-      type: 'string',
-      title: 'Working Group'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'workingGroups',
-      type: 'string',
-      title: 'Working Groups'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
@@ -182,39 +140,9 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'news',
-      type: 'string',
-      title: 'News'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'studentLed',
-      type: 'string',
-      title: 'Student-Led'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'facultyLed',
-      type: 'string',
-      title: 'faculty-Led'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'selectCat',
       type: 'string',
       title: 'Select a category'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'networkWide',
-      type: 'string',
-      title: 'Network-Wide'
-    },
-    {
-      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'institutionSpecific',
-      type: 'string',
-      title: 'Institution-Specific'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
@@ -270,9 +198,9 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'ehcnSupported',
+      name:'tbnSupported',
       type: 'string',
-      title: 'EHCN is supported by the <a href="https://opensocietyuniversitynetwork.org/">Open Society University Network</a>.'
+      title: 'TBN is supported by the <a href="https://opensocietyuniversitynetwork.org/">Open Society University Network</a>.'
     },
   ],
   preview: {
