@@ -40,7 +40,7 @@ export default () =>
           )
           .icon(MdLock),
         S.listItem()
-          .title('People')
+          .title('Collaborators')
           .schemaType('person')
           .child(S.documentTypeList('person').title('People')),
       // This returns an array of all the document types
