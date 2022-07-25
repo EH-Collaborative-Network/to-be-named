@@ -1,4 +1,5 @@
-import { MdInsertLink, MdImage } from "react-icons/md";
+import { MdInsertLink } from "react-icons/md";
+import mediaRender from '../components/mediaRender'
 
 export default {
   name: 'richText',
@@ -36,12 +37,31 @@ export default {
             ]
           },
           {
-            title: 'Image',
-            name: 'image',
-            type: 'image',
+            title: 'Media Item',
+            name: 'media',
+            type: 'mediaItem',
             blockEditor: {
-              icon: MdImage,
+              icon: () => '🏞',
+              render: mediaRender
             }
+          },
+          {
+            name: 'person',
+            type: 'object',
+            title: 'EHCN Personnel',
+            blockEditor: {
+              icon: () => '👤'
+            },
+            fields: [
+              {
+                name: 'reference',
+                type: 'reference',
+                title: 'Reference',
+                to: [
+                  { type: 'person' }
+                ]
+              }
+            ]
           },
           {
             name: 'internalLink',
@@ -58,8 +78,8 @@ export default {
                 to: [
                   { type: 'page' },
                   { type: 'project' },
-                  { type: 'event' }
-                  // other types you may want to link to
+                  { type: 'researchThread' },
+                  { type: 'event' },
                 ]
               }
             ]

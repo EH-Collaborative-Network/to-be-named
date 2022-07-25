@@ -5,9 +5,8 @@ import {
   filterOutDocsWithoutSlugs,
   filterOutDocsPublishedInTheFuture
 } from "../lib/helpers";
-import Container from "../components/container";
+import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
-import ProjectPreviewGrid from "../components/project-preview-grid";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 
@@ -17,11 +16,29 @@ export const query = graphql`
       title
       description
       keywords
+      languages {
+        name
+        code
+      }
     }
-    projects: allSanitySampleProject(
+    languagePhrases: allSanityLanguage {
+      edges {
+        node {
+          name
+          code
+          about
+          volume
+          exhibition
+          upcomingEvents
+          researchThreads
+          availableIn
+          search
+        }
+      }
+    }
+    projects: allSanityProject(
       limit: 6
-      sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+      filter: { slug: { current: { ne: null } } }
     ) {
       edges {
         node {
@@ -46,10 +63,7 @@ export const query = graphql`
             asset {
               _id
             }
-            alt
           }
-          title
-          _rawExcerpt
           slug {
             current
           }
@@ -64,7 +78,7 @@ const IndexPage = props => {
 
   if (errors) {
     return (
-      <Layout>
+      <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages}>
         <GraphQLErrorList errors={errors} />
       </Layout>
     );
@@ -76,6 +90,8 @@ const IndexPage = props => {
         .filter(filterOutDocsWithoutSlugs)
         .filter(filterOutDocsPublishedInTheFuture)
     : [];
+    const globalLanguages = site.languages;
+    const languagePhrases = (data || {}).languagePhrases?.edges;
 
   if (!site) {
     throw new Error(
@@ -84,17 +100,11 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout>
+    <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {projectNodes && (
-          <ProjectPreviewGrid
-            title="Latest projects"
-            nodes={projectNodes}
-            browseMoreHref="/archive/"
-          />
-        )}
+        <h1>Hello World</h1>
       </Container>
     </Layout>
   );

@@ -1,0 +1,73 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.root {
+  background: var(--clear);
+  margin-top:0;
+  padding-top:0;
+  position: relative;
+}
+.steering{
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  padding: 0;
+  position: relative;
+  top:-1em;
+}
+.steering li{
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  display: block;
+  cursor: pointer;
+}
+.partners{
+  top: -1em;
+  position: relative;
+}
+
+.modal{
+  background: var(--color-light-blue);
+  height: 94vh;
+  width:90vw;
+  left:5vw;
+  opacity: 0;
+  top:3vh;
+  overflow: scroll;
+  position:fixed;
+  z-index: -2;
+  box-shadow: 0 0 5px 15px #d4eaed;
+  @media (--media-min-medium) {
+    height: 70vh;
+    width:60vw;
+    left:20vw;
+    top:15vh;
+  }
+}
+.close{
+  text-align: right;
+  padding: 25px 30px;
+  cursor: pointer;
+  float:right;
+  position:absolute;
+  right: 0;
+  width: 35px;
+  @media (--media-min-medium) {
+    width: 50px;
+  }
+}
+.close svg{
+  width: 100%;
+}
+.inner{
+  padding:20px 20px;
+  overflow:scroll;
+  height: 90vh;
+  @media (--media-min-medium) {
+    height: 70vh;
+  }
+}
+.inner h4{
+  font-size:1em;
+}

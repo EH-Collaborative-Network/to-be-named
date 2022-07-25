@@ -9,11 +9,10 @@ async function createProjectPages (graphql, actions) {
   const {createPage} = actions
   const result = await graphql(`
     {
-      allSanitySampleProject(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
+      allSanityProject(filter: {slug: {current: {ne: null}}}) {
         edges {
           node {
             id
-            publishedAt
             slug {
               current
             }
@@ -41,7 +40,99 @@ async function createProjectPages (graphql, actions) {
       })
     })
 }
+/* EVENT */
+async function createEventPages (graphql, actions) {
+  const {createPage} = actions
+  const result = await graphql(`
+    {
+      allSanityEvent(filter: {slug: {current: {ne: null}}}) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const eventEdges = (result.data.allSanityEvent || {}).edges || []
+
+  eventEdges
+    .forEach(edge => {
+      const id = edge.node.id
+      const slug = edge.node.slug.current
+      const path = `/event/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/event.js'),
+        context: {id}
+      })
+    })
+}
+
+/* Page */
+async function createDefaultPages (graphql, actions) {
+  const {createPage} = actions
+  const result = await graphql(`
+    {
+      allSanityPage(filter: {slug: {current: {ne: null}}}) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const pageEdges = (result.data.allSanityPage || {}).edges || []
+
+  pageEdges
+    .forEach(edge => {
+      const id = edge.node.id
+      const slug = edge.node.slug.current
+      const path = `/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/page.js'),
+        context: {id}
+      })
+    })
+}
 
 exports.createPages = async ({graphql, actions}) => {
   await createProjectPages(graphql, actions)
+  await createEventPages(graphql, actions)
+  await createDefaultPages(graphql, actions)
 }
+
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === 'build-html' || stage === 'develop-html') {
+      actions.setWebpackConfig({
+          module: {
+              rules: [
+                  {
+                      test: /react-p5-wrapper/,
+                      use: loaders.null()
+                  },
+                  {
+                    test: /p5/,
+                    use: loaders.null()
+                }
+              ]
+          }
+      });
+  }
+};

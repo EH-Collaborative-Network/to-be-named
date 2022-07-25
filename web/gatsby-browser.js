@@ -5,3 +5,10 @@
  */
 
 // You can delete this file if you're not using it
+import React from "react"
+
+import {LangProvider} from "./src/components/context/lang.js"
+
+export const wrapRootElement = ({ element }) => (
+  <LangProvider>{element}</LangProvider>
+)

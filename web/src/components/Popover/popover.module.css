@@ -1,0 +1,81 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.root {
+  background: var(--clear);
+  margin-top:0;
+  padding-top:0;
+  position: relative;
+}
+.steering{
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  padding: 0;
+  position: relative;
+  top:-1em;
+}
+.steering li{
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  display: block;
+  cursor: pointer;
+}
+.partners{
+  top: -1em;
+  position: relative;
+}
+
+.modal{
+  background: var(--color-light-blue);
+  height: auto;
+  width:auto;
+  left:auto;
+  top:auto;
+  margin-left:1em;
+  margin-top:1em;
+  overflow: scroll;
+  position:fixed;
+  z-index: -2;
+  opacity: 0;
+  min-height: none;
+  box-shadow: 0 0 5px 15px #d4eaed;
+}
+
+.modal .inner a{
+  font-size: var(--font-base-size);
+  margin:0;
+  vertical-align: bottom;
+}
+.modal .inner p{
+  margin:0;
+}
+
+.close{
+  text-align: right;
+  padding: 25px 30px;
+  cursor: pointer;
+  float:right;
+  position:absolute;
+  right: 0;
+  width: 35px;
+  @media (--media-min-medium) {
+    width: 50px;
+  }
+}
+.close svg{
+  width: 100%;
+}
+.inner{
+  padding:20px 20px;
+  overflow:scroll;
+  height: auto;
+  @media (--media-min-medium) {
+    height: auto;
+  }
+}
+.inner h4{
+  font-size:1em;
+  margin:0;
+}

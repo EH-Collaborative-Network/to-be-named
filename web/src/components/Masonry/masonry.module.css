@@ -1,0 +1,49 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.root{
+    margin-top:3em;
+}
+.inner{
+    display:block;
+    column-gap:25px;
+    position: relative;
+}
+.one{
+    column-count: 1;
+}
+.three{
+    @media (--media-min-medium) {
+        column-count: 3;
+    }
+}
+.two{
+    @media (--media-min-medium) {
+        column-count: 2;
+    }
+}
+.inner figure {
+   width: 100%;
+   margin:0;
+}
+
+.inner img{
+    object-fit: contain !important;
+    max-width: 100%;
+    min-width:100%;
+    height:auto;
+}
+.inner > div{
+    margin-bottom:25px;
+}
+.inner iframe{
+    pointer-events:none;
+    width: 100%;
+}
+.wrapper{
+    display: block;
+}
+.inner figcaption{
+    top: -1em;
+    position: relative;
+}

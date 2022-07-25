@@ -1,0 +1,125 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.root {
+  background: var(--clear);
+  position: relative;
+}
+
+
+
+.root:-webkit-scrollbar {    display: none;}
+.outer{
+  overflow-x:auto;
+  
+}
+.inner{
+  background-color: var(--color-light-blue);
+  height:40vh;
+  overflow: hidden;
+  /* height:40vh;
+  overflow: visible;
+  white-space:nowrap; */
+}
+
+.root h4{
+  bottom:-1em;
+  padding:0 5px;
+  position: absolute;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 20px);
+  width: calc(100% - 20px);
+  padding-right:20px;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: var(--color-light-blue);
+  box-shadow: 0px 0px 5px 5px var(--color-light-blue);
+  color:var(--color--black);
+  text-decoration: none;
+}
+
+.root li > a{
+  color:var(--color--black);
+  text-decoration: none;
+}
+.figure{
+  margin:0 5px;
+}
+.root .embed{
+  height: 40vh !important;
+  width: 73.5vh !important;
+  overflow: hidden;
+}
+.root .embed iframe{
+  /* max-width: calc(177.778vh);
+    height: calc(56.25vw
+); */
+  height: calc(23vh * (100/56.25)) !important;
+  width: calc(129vh * (100/177.778)) !important;
+  margin:0;
+  pointer-events: none;
+}
+.pdf iframe{
+  height: 40vh;
+  cursor: pointer;
+}
+.noCarousel{
+  display:flex;
+}
+.root .pdf:hover{
+  filter:blur(3px);
+}
+.root .pdf iframe{
+  pointer-events: none;
+}
+.embed > div{
+  padding:0 !important;
+}
+.root .embed,.root .pdf,.root .figure, .root .embed *,.root .pdf *,.root .figure *, .root a{
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.embed > iframe{
+  position: relative !important;
+}
+.embed p{
+  display: none;
+}
+.figure, .figure  div{
+  height: 40vh;
+  display: inline-block;
+}
+.wrapper{
+  box-shadow: inset 0 0 5px 5px var(--color-light-blue);
+  height:100%;
+  width:100%;
+  position: absolute;
+  pointer-events: none;
+  top:0;
+  left:0;
+}
+
+.figure img{
+  height: 100%;
+  width: auto;
+}
+.figure img:hover{
+  filter:blur(3px);
+  cursor: pointer;
+}
+.root .embed:hover{
+  filter:blur(3px);
+  cursor: pointer;
+}
+.root figcaption{
+  display: none;
+}
+.simpleImage{
+  height:auto;
+  margin:0;
+  max-width: 50%;
+  @media (--media-min-medium) {
+    max-width: 25%;
+  }
+}

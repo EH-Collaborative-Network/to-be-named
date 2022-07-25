@@ -1,0 +1,42 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.root {
+  /* background: var(--color-white); */
+  margin-top:1.5em;
+  padding-bottom:25px;
+}
+.root .special li{
+  display: inline-block;
+  margin-right:5px;
+}
+.root li{
+  text-decoration: none;
+  color:inherit;
+  display: block;
+}
+.root li a{
+  display: block;
+  color:inherit;
+  text-decoration: none;
+}
+.root > div > section:first-child > h4:first-child{
+   margin-top:0;
+}
+.root > div{
+  column-count: 1;
+  @media (--media-min-medium) {
+    column-count:2;
+  }
+}
+.root > div > section{
+  break-inside: avoid;
+}
+.root li:first-child a{
+  margin-top:0;
+}
+.date{
+  font-style: italic;
+  display: block;
+  /* font-size: var(--font-small-size); */
+}

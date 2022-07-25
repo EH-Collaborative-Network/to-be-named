@@ -1,0 +1,102 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.searchWrapper{
+    position:relative;
+    width:100%;
+    @media (--media-min-medium) {
+        width:70%;
+    }
+}
+.searchWrapper input{
+    width:90%;
+}
+.searchWrapper button{
+    outline:none;
+    border:none;
+    cursor: pointer;
+    padding:0;
+    right:10px;
+    background-color: transparent;
+    top:12px;
+    position:absolute;
+    vertical-align: top;
+    @media (--media-min-medium) {
+        right:50px;
+    }
+}
+.searchWrapper button:hover svg{
+    top:-4px;
+    left:1px;
+}
+.searchWrapper svg{
+    width:20px;
+    height:20px;
+    vertical-align: top;
+    position:relative;
+    top:-5px;
+}
+.resultsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+}
+.resultsWrapper > div{
+    flex-basis: calc(50% - 10px);
+    margin:10px 0;
+    width: 100%;
+    position:relative;
+}
+.resultsWrapper > div > a > h1{
+    display: inline-block;
+}
+.resultsWrapper > div > a > sup{
+    background: var(--white-gradient);
+    margin-left:5px;
+    font-size: var(--font-small-size);
+    text-transform: none;
+    float:right;
+    position: absolute;
+    top:5px;
+    right:15px;
+    color:var(--color-red);
+    @media (--media-min-medium) {
+        top:10px;
+        right:20px; 
+    }
+}
+.resultsWrapper > div > a > h4 > h4{
+    font-size: var(--font-base-size);
+    margin:0;
+    display: inline-block;
+    margin-top:3px;
+}
+.resultsWrapper > div > a > h4{
+    margin:0;
+    max-width: 90%;
+    display: block;
+    font-size: inherit;
+}
+.resultsWrapper > div > a > div{
+    font-size: var(--font-small-size);
+    max-width: 80%;
+}
+
+.resultsWrapper > div > a {
+    color:inherit;
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding:20px;
+    background-color: var(--color-light-blue);
+    background: var(--blue-link-gradient);
+    /* box-shadow: 0px 0px 6px 6px var(--color-light-blue); */
+    
+}
+.resultsWrapper > div > a:hover{
+    top:2px;
+    background: var(--light-blue-gradient);
+    left:2px;
+}

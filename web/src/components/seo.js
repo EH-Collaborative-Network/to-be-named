@@ -1,69 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
-import { StaticQuery, graphql } from "gatsby";
 
-function SEO({ description, lang, meta, keywords, title }) {
+
+function SEO({lang}) {
+  let keywords = ["EHCN", "The Experimental Humanities Collaborative Network", "Open Society University Network", "OSUN","Open Society"]
   return (
-    <StaticQuery
-      query={detailsQuery}
-      render={data => {
-        const metaDescription = description || (data.site && data.site.description) || "";
-        const siteTitle = (data.site && data.site.title) || "";
-        const siteAuthor = (data.site && data.site.author && data.site.author.name) || "";
-        return (
           <Helmet
             htmlAttributes={{ lang }}
-            title={title}
-            titleTemplate={title === siteTitle ? "%s" : `%s | ${siteTitle}`}
+            title={"EHCN"}
+            titleTemplate={"EHCN"}
             meta={[
               {
                 name: "description",
-                content: metaDescription
+                content: "The Experimental Humanities Collaborative Network is a global network rethinking the humanities in the light of changing technologies, our increasingly connected planet, the ongoing ecological crisis, and the need to create more inclusive institutions."
               },
+              { 
+                name: "google-site-verification",
+                content: "zSNANb4AJmoBGphdqdjRqJTpXd7KqCVNRIxVPJPOfdw",
+              }, 
               {
                 property: "og:title",
-                content: title
+                content: "The Experimental Humanities Collaborative Network"
               },
               {
                 property: "og:description",
-                content: metaDescription
+                content: "The Experimental Humanities Collaborative Network is a global network rethinking the humanities in the light of changing technologies, our increasingly connected planet, the ongoing ecological crisis, and the need to create more inclusive institutions."
               },
               {
                 property: "og:type",
                 content: "website"
               },
               {
-                name: "twitter:card",
-                content: "summary"
-              },
-              {
-                name: "twitter:creator",
-                content: siteAuthor
-              },
-              {
                 name: "twitter:title",
-                content: title
+                content: "EHCN"
               },
               {
                 name: "twitter:description",
-                content: metaDescription
+                content: "The Experimental Humanities Collaborative Network is a global network rethinking the humanities in the light of changing technologies, our increasingly connected planet, the ongoing ecological crisis, and the need to create more inclusive institutions."
               }
-            ]
-              .concat(
+            ].concat(
                 keywords && keywords.length > 0
                   ? {
                       name: "keywords",
                       content: keywords.join(", ")
                     }
                   : []
-              )
-              .concat(meta)}
-          />
-        );
-      }}
-    />
-  );
+              )}
+           />
+          );
 }
 
 SEO.defaultProps = {
@@ -82,15 +67,4 @@ SEO.propTypes = {
 
 export default SEO;
 
-const detailsQuery = graphql`
-  query DefaultSEOQuery {
-    site: sanitySiteSettings(_id: { eq: "siteSettings" }) {
-      title
-      description
-      keywords
-      author {
-        name
-      }
-    }
-  }
-`;
+

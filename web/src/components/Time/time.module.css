@@ -1,0 +1,300 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+
+.timeWrapper{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column-reverse;
+  @media (--media-min-medium) {
+      flex-direction:row;
+  }
+}
+.calendar{
+    width: 100%;
+    position:relative;
+    top:-1.5em;
+    table-layout: fixed;
+    @media (--media-min-medium) {
+        top:-1.85em;
+    }
+    
+}
+.calendar > h4:first-child{
+    font-size: var(--font-small-size);
+    @media (--media-min-medium) {
+        font-size: var(--font-basic-size);
+    }
+}
+.week{
+    width: 100%;
+    position:relative;
+    top:-1.5em;
+    @media (--media-min-medium) {
+        top:-1.85em;
+    }
+}
+.calendar table{
+    width: 100%;
+    height:70vh;
+}
+
+.calendar th{
+    max-width: 14.2%;
+    width: 14.2%;
+    overflow: hidden;
+    
+}
+.calendar td{
+    max-width:50px;
+    width: calc(100% / 7);
+    overflow: hidden;
+}
+.calendar > h4{
+    text-align: center;
+}
+.calendar p{
+    margin:0;
+}
+.calendar svg{
+    display: none;
+}
+.calendar a{
+    display: block;
+}
+.calendar td a > div{
+    width: 400px;
+    height:200px;
+    left:calc(50vw - 200px);
+    top:calc(50vh - 100px);
+}
+.calendar th h4{
+    word-break: break-all;
+    margin:0;
+    height:1.3em;
+    overflow: hidden;
+    font-size: var(--font-small-size);
+    @media(--media-min-medium){
+        height:auto;
+    }
+}
+.calendar tr{
+    border:1px solid transparent;
+    background: var(--blue-link-gradient);
+}
+.calendar td > sup{
+  position:absolute;
+  right: 10px;
+  top:10px;
+  font-size: var(--font-small-size);
+}
+.calendar .multiDay{
+    position: absolute;
+    max-width: 100%;
+    bottom:0;
+    left:0;
+    width:calc(100% - 8px);
+    display: block;
+    background: var(--color-white);
+    opacity: 0.7;
+    padding:0 5px;
+    height:1.5em;
+    color:var(--color-red);
+}
+.calendar .mid {
+    overflow:visible;
+    text-overflow: unset;
+}
+.week a{
+    color: var(--color-red);
+    text-decoration: none;
+}
+.week > h4:first-child{
+    text-align: center;
+    position: relative;
+    font-size: var(--font-basic-size);
+}
+.week a > p{
+    margin:0;
+}
+.week a > p > a{
+    pointer-events: none;
+}
+.week a:hover{
+    text-decoration: underline;
+}
+.multiDayWeek{
+    background: rgba(248,248,248,0.5);
+    opacity: 1;
+    padding:0 5px;
+    height:auto;
+    /* height:1.5em; */
+}
+.multiDayWeek a{
+    pointer-events: none;
+}
+.multiDayWeek p{
+    margin:0;
+}
+.dayRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding:5px;
+    margin:5px 0;
+    min-height:100px;
+    background:  var(--blue-link-gradient);
+}
+.bubbleButton{
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    padding:0;
+}
+.bubbleButton:nth-child(4){
+    padding-left:5px;
+}
+.bubbleButton svg{
+    height: 25px;
+    width: 25px;
+    @media (--media-min-medium) {
+        height: 35px;
+        width: 35px;
+    }
+}
+.bubbleButton:disabled{
+    opacity:0.2;
+    cursor:default;
+}
+.bubbleButton:hover{
+    position: relative;
+    top:2px;
+    left:2px;
+}
+.bubbleButton:disabled:hover{
+    top:0;
+    left:0;
+}
+.bubbleButton svg *{
+    fill: var(--color-black);
+}
+.dayRow > h4{
+    flex-basis: 15%;
+    margin:0;
+    text-align: left;
+    vertical-align: top;
+}
+.dayRow > div{
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 80%;
+    flex-direction: column;
+    vertical-align: top;
+    @media (--media-min-medium) {
+        flex-basis: 85%;
+    }
+}
+
+.dayRow > div > *{
+    margin-bottom:1.5em;
+}
+
+.dayRow > div > * > a >span{
+    font-size: var(--font-small-size);
+    color:var(--color-black);
+}
+.dayRow > div > * > a:hover p a{
+    text-decoration: underline;
+}
+.dayRow a:hover p a{
+    text-decoration: underline;
+}
+
+.calendar a{
+    font-size: var(--font-small-size);
+    display: inline-block;
+    text-decoration: none;
+    color:var(--color-red);
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 2em);
+    overflow: hidden;
+}
+.calendar a:hover{
+    text-decoration: underline;
+}
+.buttonWrapper{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    bottom:-1em;
+    z-index: 2;
+}
+.buttonWrapper button{
+    border:none;
+    margin:0;
+    padding:0;
+    background-color: transparent;
+    cursor: pointer;
+    position:relative;
+}
+.buttonWrapper svg{
+    width: 30px;
+    @media (--media-min-medium) {
+        width: auto;
+    }
+}
+.buttonWrapper button:hover{
+    top:2px;
+    left:2px;
+}
+.label{
+    text-transform: uppercase;
+    vertical-align: top;
+    font-size: var(--font-small-size);
+}
+.selectWrapper{
+    position:absolute;
+    top:115px;
+    right:15px;
+    display: flex;
+    width: auto;
+    align-items: center;
+    @media (--media-min-medium) {
+        top:50px;
+        right:50px;
+    }
+}
+.select{
+    max-width: 200px;
+    vertical-align: top;
+    margin-left:5px;
+}
+.calendar td{
+    height:100px;
+    position: relative;
+}
+.timeWrapper div:first-child{
+    font-weight: bold;
+    margin:0;
+}
+.timeWrapper > div{
+    display: flex;
+    margin-bottom:0.5em;
+    @media (--media-min-medium) {
+        flex-direction:row;
+        margin-bottom:0;
+    }
+}
+.timeWrapper label{
+    white-space: nowrap;
+}
+.timeWrapper select{
+    max-width: 200px;
+    margin:0;
+    top:0px;
+    font-size:var(--font-small-size);
+    position:relative;
+    margin-left:10px;
+    vertical-align: top;
+}

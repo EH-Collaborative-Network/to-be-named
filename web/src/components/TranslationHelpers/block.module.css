@@ -1,0 +1,14 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.blockPerson > span > div:first-child{
+    cursor: pointer;
+    margin-top:0;
+    margin-right:0;
+    padding:0;
+    color:var(--color-red);
+}
+
+.blockPerson > span > div:first-child:hover::after{
+    background:var(--blue-link-gradient);
+}

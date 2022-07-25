@@ -1,3 +1,5 @@
+import mediaRender from '../components/mediaRender'
+
 export default{
     title: 'Media Item',
     name: 'mediaItem',
@@ -7,16 +9,15 @@ export default{
         collapsible: true,
         collapsed: true,
     },
+    blockEditor: {
+      icon: () => '🏞',
+      render: mediaRender
+    },
     fields: [
         {name: 'image', 
          type: 'figure', 
          title: 'Image', 
          description: 'upload image if your media item is an image', 
-         },
-        {name: 'pdf', 
-         type: 'pdf', 
-         title: 'PDF', 
-         description: 'upload pdf if your media item is a pdf', 
          },
         {name: 'embed', 
          type: 'embed', 
@@ -25,7 +26,12 @@ export default{
          options: {
             collapsible: true,
           }
-        }
+        },
+        {name: 'pdf', 
+         type: 'pdf', 
+         title: 'PDF', 
+         description: 'upload pdf if your media item is a pdf', 
+         }
       ],
       preview: {
         select: {

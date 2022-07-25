@@ -14,6 +14,25 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "@reach/router": "^1.3.4",
+    "@sanity/client": "^3.3.1",
+    "cross-env": "^7.0.3",
+    "lerna": "^4.0.0",
+    "gatsby": "^4.17.2",
+    "gatsby-cli": "^4.17.1",
+    "gatsby-plugin-local-search": "^2.0.1",
+    "gatsby-plugin-manifest": "^4.13.0",
+    "gatsby-plugin-react-helmet": "^5.18.0",
+    "gatsby-plugin-remove-fingerprints": "^0.0.2",
+    "flexsearch": "^0.7.21",
+    "react-html-parser": "^2.0.2",
+    "react-p5-wrapper": "^3.3.0",
+    "react-helmet": "^6.1.0",
+    "p5": "^1.4.1",
+    "query-string": "^7.1.1",
+    "prop-types": "^15.8.1",
+    "react-alice-carousel": "^2.6.0",
+    "react-use-flexsearch": "^0.1.1"
+
   }
 }

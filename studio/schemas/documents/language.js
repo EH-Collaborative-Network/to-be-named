@@ -37,6 +37,24 @@ export default {
         title: 'About The Edited Volume'
     },
     {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'exhibition',
+      type: 'string',
+      title: 'Exhibition'
+  },
+  {
+        description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+        name:'volume',
+        type: 'string',
+        title: 'Edited Volume'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'about',
+      type: 'string',
+      title: 'About'
+    },
+    {
         description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
         name:'aboutExhibition',
         type: 'string',
@@ -65,6 +83,12 @@ export default {
       name:'researchThread',
       type: 'string',
       title: 'Research Thread'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'researchThreads',
+      type: 'string',
+      title: 'Research Threads'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
