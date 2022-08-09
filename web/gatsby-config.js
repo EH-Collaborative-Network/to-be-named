@@ -164,6 +164,24 @@ module.exports = {
                 }
               }
             }
+            allSanityArtistAuthor{
+              edges {
+                node {
+                  bios {
+                    _rawText(resolveReferences: {maxDepth: 10})
+                    language {
+                      code
+                      name
+                    }
+                  }
+                  id
+                  name
+                  slug {
+                    current
+                  }
+                }
+              }
+            }
            
           }
         `,
@@ -213,15 +231,23 @@ module.exports = {
             type: "project"
           }))
 
+          let artistAuthors = data.allSanityArtistAuthor.edges.map((edge) => ({
+            id: edge.node.id,
+            descriptions:  edge.node.bios,
+            name: edge.node.name,
+            slug: edge.node.slug,
+            type: "artistAuthor"
+          }))
+
           let threads = data.allSanityResearchThread.edges.map((edge) => ({
             id: edge.node.id,
             descriptions:  edge.node.descriptions,
             titles: edge.node.titles,
             slug: edge.node.slug,
-            type: "project"
+            type: "thread"
           }))
 
-          let finalArray = events.concat( projects, threads, pages)
+          let finalArray = events.concat( projects, threads, pages, artistAuthors)
           return(finalArray.flat(1))
         },
       },

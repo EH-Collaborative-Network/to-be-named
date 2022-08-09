@@ -40,6 +40,41 @@ async function createProjectPages (graphql, actions) {
       })
     })
 }
+/* Artist Authors  */
+async function createArtistAuthorPages (graphql, actions) {
+  const {createPage} = actions
+  const result = await graphql(`
+    {
+      allSanityArtistAuthor(filter: {slug: {current: {ne: null}}}) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const artistAuthorEdges = (result.data.allSanityArtistAuthor || {}).edges || []
+
+  artistAuthorEdges
+    .forEach(edge => {
+      const id = edge.node.id
+      const slug = edge.node.slug.current
+      const path = `/creator/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/artistAuthor.js'),
+        context: {id}
+      })
+    })
+}
 /* Research Threads */
 async function createResearchThreadPages (graphql, actions) {
   const {createPage} = actions
@@ -115,6 +150,7 @@ async function createDefaultPages (graphql, actions) {
 exports.createPages = async ({graphql, actions}) => {
   await createProjectPages(graphql, actions)
   await createResearchThreadPages(graphql, actions)
+  await createArtistAuthorPages(graphql, actions)
   await createDefaultPages(graphql, actions)
 }
 
