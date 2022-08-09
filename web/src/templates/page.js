@@ -20,7 +20,7 @@ export const query = graphql`
 
 const PageTemplate = props => {
   const { data, errors } = props;
-  const project = data && data.sampleProject;
+  const project = data && data.samplePage;
   return (
     <Layout>
       {errors && <SEO title="GraphQL Error" />}
