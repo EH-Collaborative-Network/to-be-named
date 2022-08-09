@@ -213,6 +213,14 @@ module.exports = {
             type: "project"
           }))
 
+          let threads = data.allSanityResearchThread.edges.map((edge) => ({
+            id: edge.node.id,
+            descriptions:  edge.node.descriptions,
+            titles: edge.node.titles,
+            slug: edge.node.slug,
+            type: "project"
+          }))
+
           let finalArray = events.concat( projects, threads, pages)
           return(finalArray.flat(1))
         },
