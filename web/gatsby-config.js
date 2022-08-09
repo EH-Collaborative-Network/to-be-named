@@ -150,7 +150,6 @@ module.exports = {
                     }
                   }
                   id
-                  keywords
                   name
                   titles {
                     text
