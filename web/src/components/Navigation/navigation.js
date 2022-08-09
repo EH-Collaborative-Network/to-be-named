@@ -30,7 +30,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         </div>
     </div>
     <div id="navigation" className={styles.header}>
-      <div className={styles.logo}><Link to="/"><img alt={"EHCN's logo which has an abstracted 'E' with a grey 'H' inside of it. Alongside this, is the text Experimental Humanities Collaborative Network."} src={logo} /></Link></div>
+      <div className={styles.logo}><Link to="/home/"><img alt={"EHCN's logo which has an abstracted 'E' with a grey 'H' inside of it. Alongside this, is the text Experimental Humanities Collaborative Network."} src={logo} /></Link></div>
       <div className={styles.close} onClick={closeHandler}>
         <svg  viewBox="0 0 54 57" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="73.4602" height="3.45354" rx="1.72677" transform="matrix(0.698084 0.716016 -0.698084 0.716016 2.61719 0.69043)" fill="#333333"/>

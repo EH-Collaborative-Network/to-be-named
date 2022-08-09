@@ -63,7 +63,7 @@
     position:relative;
 }
 .searchWrapper input{
-    width:83%;
+    width:calc(100% - 18px);
 }
 .searchWrapper button{
     outline:none;
@@ -93,6 +93,7 @@
 .langWrapper{
     position: relative;
 }
+
 .globe{
     position: absolute;
     width:18px;
@@ -103,6 +104,10 @@
     text-indent:30px;
     height:2.5em;
     margin-left:0;
+}
+.langWrapper select{
+    width: calc(100% - 0px);
+    margin-right:0;
 }
 .menu a{
     color: inherit;

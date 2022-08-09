@@ -4,9 +4,9 @@
   --font-family-sans:"Sharp Sans", sans-serif;
   --font-family-bold: "Sharp Sans Bold", sans-serif;
   --color-black: #1C1E33;
-  --color-red:#BF0D3E;
   --color-white: #F8F8F8;
   --clear: rgba(245,245,245,0);
+  --border-black: border 1px solid #1C1E33; 
   /* Typography */
   --font-small-size: 0.82rem; /* 14px */
   --font-base-size: clamp(14px, 1.2vw, 40px); /* 16px */
