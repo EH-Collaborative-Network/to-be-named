@@ -6,30 +6,9 @@ import SEO from "../components/seo";
 import Layout from "../containers/layout";
 
 export const query = graphql`
-  query ProjectTemplateQuery($id: String!) {
-    sampleProject: sanityProject(id: { eq: $id }) {
+  query PageTemplateQuery($id: String!) {
+    samplePage: sanityPage(id: { eq: $id }) {
       id
-      mainImage {
-        crop {
-          _key
-          _type
-          top
-          bottom
-          left
-          right
-        }
-        hotspot {
-          _key
-          _type
-          x
-          y
-          height
-          width
-        }
-        asset {
-          _id
-        }
-      }
       slug {
         current
       }
@@ -39,7 +18,7 @@ export const query = graphql`
   }
 `;
 
-const ProjectTemplate = props => {
+const PageTemplate = props => {
   const { data, errors } = props;
   const project = data && data.sampleProject;
   return (
@@ -57,4 +36,4 @@ const ProjectTemplate = props => {
   );
 };
 
-export default ProjectTemplate;
+export default PageTemplate;

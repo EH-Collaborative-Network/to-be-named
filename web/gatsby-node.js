@@ -40,12 +40,12 @@ async function createProjectPages (graphql, actions) {
       })
     })
 }
-/* EVENT */
-async function createEventPages (graphql, actions) {
+/* Research Threads */
+async function createResearchThreadPages (graphql, actions) {
   const {createPage} = actions
   const result = await graphql(`
     {
-      allSanityEvent(filter: {slug: {current: {ne: null}}}) {
+      allSanityResearchThread(filter: {slug: {current: {ne: null}}}) {
         edges {
           node {
             id
@@ -60,17 +60,17 @@ async function createEventPages (graphql, actions) {
 
   if (result.errors) throw result.errors
 
-  const eventEdges = (result.data.allSanityEvent || {}).edges || []
+  const researchThreadEdges = (result.data.allSanityResearchThread || {}).edges || []
 
-  eventEdges
+  researchThreadEdges
     .forEach(edge => {
       const id = edge.node.id
       const slug = edge.node.slug.current
-      const path = `/event/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+      const path = `/researchThread/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
 
       createPage({
         path,
-        component: require.resolve('./src/templates/event.js'),
+        component: require.resolve('./src/templates/researchThread.js'),
         context: {id}
       })
     })
@@ -114,7 +114,7 @@ async function createDefaultPages (graphql, actions) {
 
 exports.createPages = async ({graphql, actions}) => {
   await createProjectPages(graphql, actions)
-  await createEventPages(graphql, actions)
+  await createResearchThreadPages(graphql, actions)
   await createDefaultPages(graphql, actions)
 }
 
