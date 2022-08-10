@@ -39,6 +39,22 @@ export default {
       of: [{type: 'translation'}],
     },
     {
+      name: 'medium',
+      type: 'array',
+      title: 'Keywords',
+      description: 'Add keywords that describe the medium this artist/author works in (optional)',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags'
+      }
+    },
+    {
+      name: 'locations', 
+      type: 'array', 
+      title: 'Location(s)', 
+      of:[{type:'reference', title:'Location', to: [{type: 'location'}]}]
+    },
+    {
         name: 'projects', 
         type: 'array', 
         title: 'Projects/articles', 

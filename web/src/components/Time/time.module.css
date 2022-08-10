@@ -29,6 +29,9 @@
 .eventWrapper{
     display: flex;
     width:100%;
+    @media (--media-min-medium) {
+        width:80%;
+    }
 }
 .eventBlock h2{
     margin-top:0;

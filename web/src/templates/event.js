@@ -6,7 +6,7 @@ import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import BlockContent from "../components/TranslationHelpers/block-content";
 import { useLocation } from '@reach/router';
-import Masonry from "../components/Masonry/masonry";
+import Masonry from "../components/Masonry/Masonry";
 import {Link} from "gatsby";
 import * as styles from "../components/Time/time.module.css"
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";

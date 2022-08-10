@@ -14,6 +14,7 @@ import siteSettings from './documents/siteSettings'
 import language from './documents/language'
 import event from './documents/event'
 import researchThread from './documents/researchThread'
+import location from './documents/location'
 // Object types
 import embed from './objects/embed'
 import figure from './objects/figure'
@@ -47,6 +48,7 @@ export default createSchema({
     // in the studio.
     embed,
     pdf,
+    location,
     figure,
     mediaItem,
     richText,
