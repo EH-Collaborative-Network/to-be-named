@@ -149,7 +149,7 @@ export const query = graphql`
 const ProjectTemplate = props => {
   const { data, errors } = props;
   const page = data && data.project;
-  const creator = data && data.artist.edges[0].node
+  const creator = data && data.artist?.edges[0]?.node
   const site = (data || {}).site;
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
@@ -157,7 +157,7 @@ const ProjectTemplate = props => {
   const location = useLocation();
   let preview = false;
   let next = false;
-  if(creator.projects.length > 1){
+  if(creator?.projects?.length > 1){
   for(let i = 0; i < creator.projects.length; i++){
       if(creator.projects[i].id == page.id){
         if(i == creator.projects.length - 1){
@@ -185,12 +185,14 @@ const ProjectTemplate = props => {
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
+        {creator &&
         <div className='top-title'>
           <Link to={"/creator/" + creator.slug.current }>{creator.name}</Link>
           {(next !== false) &&
             <Link to={"/project/" + creator.projects[next].slug.current }><TranslatedTitle translations={creator.projects[next].titles}/>→</Link>
           }
         </div>
+        }
         <h1 style={{"marginTop":"0"}}><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
         <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/></div>
         {page.media?.length > 0 &&
