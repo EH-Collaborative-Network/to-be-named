@@ -41,7 +41,7 @@ export default {
     {
       name: 'medium',
       type: 'array',
-      title: 'Keywords',
+      title: 'Medium(s)',
       description: 'Add keywords that describe the medium this artist/author works in (optional)',
       of: [{type: 'string'}],
       options: {
