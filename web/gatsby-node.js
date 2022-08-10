@@ -24,10 +24,9 @@ async function createProjectPages (graphql, actions) {
 
   if (result.errors) throw result.errors
 
-  const projectEdges = (result.data.allSanitySampleProject || {}).edges || []
+  const projectEdges = (result.data.allSanityProject || {}).edges || []
 
   projectEdges
-    .filter(edge => !isFuture(parseISO(edge.node.publishedAt)))
     .forEach(edge => {
       const id = edge.node.id
       const slug = edge.node.slug.current
@@ -101,11 +100,46 @@ async function createResearchThreadPages (graphql, actions) {
     .forEach(edge => {
       const id = edge.node.id
       const slug = edge.node.slug.current
-      const path = `/researchThread/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+      const path = `/thread/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
 
       createPage({
         path,
         component: require.resolve('./src/templates/researchThread.js'),
+        context: {id}
+      })
+    })
+}
+/* Events */
+async function createEventPages (graphql, actions) {
+  const {createPage} = actions
+  const result = await graphql(`
+    {
+      allSanityEvent(filter: {slug: {current: {ne: null}}}) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const eventEdges = (result.data.allSanityEvent || {}).edges || []
+
+  eventEdges
+    .forEach(edge => {
+      const id = edge.node.id
+      const slug = edge.node.slug.current
+      const path = `/event/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/event.js'),
         context: {id}
       })
     })
@@ -152,6 +186,8 @@ exports.createPages = async ({graphql, actions}) => {
   await createResearchThreadPages(graphql, actions)
   await createArtistAuthorPages(graphql, actions)
   await createDefaultPages(graphql, actions)
+  await createEventPages(graphql, actions)
+
 }
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {

@@ -14,16 +14,11 @@ const Masonry = ({ media }) => {
 
   return(
     <div className={styles.root}>
-        {(medias.length > 2) &&
-            <div className={`masonry-inner ${styles.inner} ${medias.length > 5 ? styles.three : styles.two}`}>
+
+            <div className={`masonry-inner ${styles.inner}`}>
                 {medias}
             </div>
-        }
-        {(medias.length <= 2) &&
-            <div className={`masonry-inner ${styles.inner} ${styles.one}`}>
-                {medias}
-            </div>
-        }
+
             <div className={styles.wrapper}></div>
     </div>
   ) 

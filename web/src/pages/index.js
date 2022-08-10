@@ -9,6 +9,8 @@ import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
+import { Link } from "gatsby";
+import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 
 export const query = graphql`
   query IndexPageQuery {
@@ -100,13 +102,7 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
-      <SEO title={site.title} description={site.description} keywords={site.keywords} />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        <h1>Hello World</h1>
-      </Container>
-    </Layout>
+    <Link to="/home/"><TranslatedPhrase translations={languagePhrases} phrase={"enter"}/>→</Link>
   );
 };
 

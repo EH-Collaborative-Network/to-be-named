@@ -37,6 +37,18 @@ export default {
         title: 'About The Edited Volume'
     },
     {
+        description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+        name:'inVolume',
+        type: 'string',
+        title: 'In The Edited Volume'
+    },
+    {
+        description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+        name:'inExhibition',
+        type: 'string',
+        title: 'In The Exhibition'
+    },
+    {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'exhibition',
       type: 'string',
@@ -71,6 +83,12 @@ export default {
       name:'availableIn',
       type: 'string',
       title: 'This text is also available in'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'enter',
+      type: 'string',
+      title: 'Enter'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
@@ -196,9 +214,9 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
-      name:'eventsByTimezone',
+      name:'timezone',
       type: 'string',
-      title: 'Display Events in',
+      title: 'Timezone',
       description: '(timezone)'
     },
     {

@@ -25,7 +25,9 @@ input[type='text']{
   background:transparent;
   border:1px solid var(--color-black);
 }
-
+a:link, a:visited{
+  color:inherit;
+}
 body {
   -webkit-font-smoothing: antialiased;
   background: var(--color-white);
@@ -51,6 +53,10 @@ h1{
   font-size: var(--font-large-size);
   margin:25px 0;
 }
+h2{
+  font-size: var(--font-medium-size);
+  margin:25px 0;
+}
 h1,h2,h3,h4,h5,h6{
   font-weight:normal;
 }
@@ -59,7 +65,7 @@ h5{
   margin-top:0;
 }
 h4{
-  text-transform:uppercase;
+  /* text-transform:uppercase; */
   font-size: var(--font-small-size);
 }
 .button{
@@ -174,6 +180,7 @@ input[type=text]{
 select:focus{
   border:none;
   outline:none;
+  background-color: var(--color-gray);
 }
 #light-box.show, .modal.show{
   z-index: 9;
@@ -304,5 +311,20 @@ li.alice-carousel__stage-item {
 }
 
 .hp-text p{
+  margin-top:0;
+}
+
+.top-title{
+  display: flex;
+  width:100%;
+  justify-content: space-between;
+}
+.top-title a:nth-child(1){
+  text-decoration: none;
+}
+.top-title a:nth-child(2){
+  font-style: italic;
+}
+.top-text + h1{
   margin-top:0;
 }

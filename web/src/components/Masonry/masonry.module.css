@@ -6,22 +6,12 @@
 }
 .inner{
     display:block;
-    column-gap:25px;
     position: relative;
 }
-.one{
-    column-count: 1;
+.inner > div:nth-child(2){
+    float:right;
 }
-.three{
-    @media (--media-min-medium) {
-        column-count: 3;
-    }
-}
-.two{
-    @media (--media-min-medium) {
-        column-count: 2;
-    }
-}
+
 .inner figure {
    width: 100%;
    margin:0;

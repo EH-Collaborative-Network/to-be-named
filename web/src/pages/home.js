@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useState}  from "react";
 import { graphql } from "gatsby";
+import { useLocation } from '@reach/router';
+import BlockContent from "../components/TranslationHelpers/block-content";
+import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
@@ -36,36 +39,26 @@ export const query = graphql`
         }
       }
     }
-    projects: allSanityProject(
-      limit: 6
-      filter: { slug: { current: { ne: null } } }
-    ) {
+    home: allSanityPage(filter: {slug: {current: {eq: "home"}}}) {
       edges {
         node {
           id
-          mainImage {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            hotspot {
-              _key
-              _type
-              x
-              y
-              height
-              width
-            }
-            asset {
-              _id
+          _id
+          titles{
+            text
+            language{
+              id
+              name
+              code
             }
           }
-          slug {
-            current
+          bodies{
+            _rawText(resolveReferences: { maxDepth: 20 })
+            language{
+              id
+              name
+              code
+            }
           }
         }
       }
@@ -75,28 +68,24 @@ export const query = graphql`
 
 const HomePage = props => {
   const { data, errors } = props;
-
-  if (errors) {
-    return (
-      <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages}>
-        <GraphQLErrorList errors={errors} />
-      </Layout>
-    );
-  }
-
+  const page = data && data.home.edges[0]?.node;
   const site = (data || {}).site;
-  const projectNodes = (data || {}).projects
-    ? mapEdgesToNodes(data.projects)
-        .filter(filterOutDocsWithoutSlugs)
-        .filter(filterOutDocsPublishedInTheFuture)
-    : [];
-    const globalLanguages = site.languages;
-    const languagePhrases = (data || {}).languagePhrases?.edges;
-
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    );
+  const globalLanguages = site.languages;
+  const languagePhrases = (data || {}).languagePhrases?.edges;
+  let previewQuery = '*[_id == "drafts.'+ page._id +'"]{ _id, titles[]{language->{code}, text}, bodies[]{language->{code}, text}, media[]{image{asset->, caption},embed,pdf{asset->, caption}}}'
+  const location = useLocation();
+  let preview = false;
+  const [previewData, setPreviewData] = useState(false)
+  if(location?.search){
+    preview = queryString.parse(location.search).preview;
+  }
+  if(preview && !previewData){
+    const fetchData = async () => {
+      setPreviewData(await client.fetch(previewQuery).then((data) => {
+        return(data[0]);
+      }))
+    }
+    fetchData()
   }
 
   return (
@@ -104,7 +93,8 @@ const HomePage = props => {
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        <h1>Hello World</h1>
+        {/* <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1> */}
+        <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/></div>
       </Container>
     </Layout>
   );

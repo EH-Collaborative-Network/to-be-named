@@ -16,6 +16,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
   function openHandler(){
     document.getElementById("navigation").style.display = "block"
   }
+  const url = typeof window !== 'undefined' ? window.location.href : '';
   const [language, setLanguage] = useState(defaultLang);
   return (
     <>
@@ -42,11 +43,11 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
       { theme => {
         return(
           <ul className={styles.menu}>
-              <li><Link to="/about/"><TranslatedPhrase translations={translations} phrase={"about"}/>→</Link></li>
-              <li><Link to="/researchthreads/"><TranslatedPhrase translations={translations} phrase={"researchThreads"}/>→</Link></li>
-              <li><Link to="/exhibition/"><TranslatedPhrase translations={translations} phrase={"exhibition"}/>→</Link></li>
-              <li><Link to="/volume"><TranslatedPhrase translations={translations} phrase={"volume"}/>→</Link></li>
-              <li><Link to="/calendar/"><TranslatedPhrase translations={translations} phrase={"upcomingEvents"}/>→</Link></li>
+              <li className={url.includes("about") ? styles.on: ""}><Link to="/about/"><TranslatedPhrase translations={translations} phrase={"about"}/>→</Link></li>
+              <li className={url.includes("research") ? styles.on: ""}><Link to="/researchthreads/"><TranslatedPhrase translations={translations} phrase={"researchThreads"}/>→</Link></li>
+              <li className={url.includes("exhibition") ? styles.on : ""}><Link to="/exhibition/"><TranslatedPhrase translations={translations} phrase={"exhibition"}/>→</Link></li>
+              <li className={url.includes("volume") ? styles.on : ""}><Link to="/volume"><TranslatedPhrase translations={translations} phrase={"volume"}/>→</Link></li>
+              <li className={url.includes("calendar") ? styles.on : ""}><Link to="/calendar/"><TranslatedPhrase translations={translations} phrase={"upcomingEvents"}/>→</Link></li>
           </ul>
           )
       }}

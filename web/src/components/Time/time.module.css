@@ -26,6 +26,24 @@
         font-size: var(--font-basic-size);
     }
 }
+.eventWrapper{
+    display: flex;
+    width:100%;
+}
+.eventBlock h2{
+    margin-top:0;
+    margin-bottom:0;
+}
+.eventBlock{
+    flex-basis:100%;
+    margin:0;
+    background-color: var(--color-gray);
+    padding:10px;
+    @media (--media-min-medium) {
+        /* margin-right:5px;
+        flex-basis:33%; */
+    }
+}
 .week{
     width: 100%;
     position:relative;
