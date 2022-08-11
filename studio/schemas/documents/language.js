@@ -128,6 +128,43 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'mediums',
+      type: 'string',
+      title: 'Mediums'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'allArtists',
+      type: 'string',
+      title: 'All Artists'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'allLocations',
+      type: 'string',
+      title: 'All Locations'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'traveling',
+      type: 'string',
+      title: 'Traveling Artists'
+    },
+
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'commissioned',
+      type: 'string',
+      title: 'Commissioned Artists'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'regional',
+      type: 'string',
+      title: 'Regional Artists'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'upcomingEvents',
       type: 'string',
       title: 'Upcoming Events'

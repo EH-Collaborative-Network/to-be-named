@@ -38,6 +38,10 @@ export default () =>
               .title('Timezones')
               .schemaType('timezone')
               .child(S.documentTypeList('timezone').title('Timezone')),
+              S.listItem()
+              .title('Locations')
+              .schemaType('location')
+              .child(S.documentTypeList('location').title('Location')),
            
             ])
             

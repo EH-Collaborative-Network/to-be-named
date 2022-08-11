@@ -26,6 +26,24 @@ export default {
                             .slice(0, 200)
      }
    },
+   {
+      name:'commissioned',
+      type: 'boolean',
+      title: 'Is this a commissioned artist/author?',
+      description: '',
+  },
+  {
+      name:'traveling',
+      type: 'boolean',
+      title: 'Is this a traveling artist/author?',
+      description: '',
+  },
+  {
+    name:'regional',
+    type: 'boolean',
+    title: 'Is this a regional artist/author?',
+    description: '',
+  },
     {
       name: 'image',
       title: 'Image',

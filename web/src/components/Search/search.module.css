@@ -11,6 +11,45 @@
 .searchWrapper input{
     width:90%;
 }
+.filterWrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.filter{
+    flex-basis:20%;
+}
+.filterWrapper > *:first-child{
+    flex-basis: 75%;
+}
+.checkBox{
+    opacity: 0;
+    display: none;
+}
+.checkBoxLabel{
+    cursor: pointer;
+}
+.checkBoxLabel::before{
+    content:"";
+    display: inline;
+    margin-right:3px;
+    border-left: 5px solid var(--color-gray);
+    height:100%;
+}
+.checkBox:checked +label{
+    background-color: var(--color-gray);
+    border-left: 4px solid var(--color-black);
+
+}
+.checkBox:hover +label{
+    border-left: 4px solid var(--color-black);
+
+}
+.filter label{
+    display: block;
+}
+.filterArtist{
+    width:100%;
+}
 .searchWrapper button{
     outline:none;
     border:none;
