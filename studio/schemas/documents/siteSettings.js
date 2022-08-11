@@ -28,6 +28,12 @@ export default {
       of:[{type:'reference', title:'Language', to: [{type: 'language'}]}]
     },
     {
+      name: 'projects', 
+      type: 'array', 
+      title: 'Featured Projects/articles', 
+      of:[{type:'reference', title:'Project/Article', to: [{type: 'project'}]}]
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',

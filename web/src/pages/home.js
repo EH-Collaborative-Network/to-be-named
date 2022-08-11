@@ -8,6 +8,7 @@ import {
   filterOutDocsWithoutSlugs,
   filterOutDocsPublishedInTheFuture
 } from "../lib/helpers";
+import Carousel from "../components/Carousel/carousel"
 import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
@@ -22,6 +23,41 @@ export const query = graphql`
       languages {
         name
         code
+      }
+      projects{
+        id
+        slug{
+          current
+        }
+        titles{
+          text
+          language{
+            id
+            name
+            code
+          }
+        }
+        mainImage {
+          crop {
+            _key
+            _type
+            top
+            bottom
+            left
+            right
+          }
+          hotspot {
+            _key
+            _type
+            x
+            y
+            height
+            width
+          }
+          asset {
+            _id
+          }
+        }
       }
     }
     languagePhrases: allSanityLanguage {
@@ -44,14 +80,6 @@ export const query = graphql`
         node {
           id
           _id
-          titles{
-            text
-            language{
-              id
-              name
-              code
-            }
-          }
           bodies{
             _rawText(resolveReferences: { maxDepth: 20 })
             language{
@@ -87,14 +115,26 @@ const HomePage = props => {
     }
     fetchData()
   }
+  let media = []
 
+  site.projects?.map(function(project,index){
+    let x = []
+    x.push(project.mainImage)
+    x.push(project.titles)
+    x.push("/project/"+project.slug.current)
+    media.push(x);
+  })
+ console.log(media)
   return (
     <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         {/* <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1> */}
-        <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/></div>
+        <div className="top-text one-column homepage-special-text"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/></div>
+      {media?.length > 0 &&
+           <Carousel imageOnly={true} media={(preview && previewData) ? previewData.media : media}/>
+        }
       </Container>
     </Layout>
   );

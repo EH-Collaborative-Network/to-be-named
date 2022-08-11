@@ -157,6 +157,14 @@
         font-size: var(--font-small-size);
     }
 }
+.menu:last-child li::before,.menu:last-child:hover li::before{
+    display:none;
+    background:transparent
+}
+.menu:last-child:hover li a{
+    background-color: transparent;
+}
+
 .close{
     display: inline;
     float:right;

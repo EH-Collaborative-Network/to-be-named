@@ -28,6 +28,27 @@ input[type='text']{
 a:link, a:visited{
   color:inherit;
 }
+.homepage-special-text{
+  font-size: var(--font-medium-size)
+}
+.top-text{
+  max-width: 80%;
+}
+.top-text a{
+  background-color: var(--color-gray);
+  
+}
+.top-text a:hover{
+  background-color: var(--color-gray);
+  padding-left:4px;
+}
+.top-text a:hover::before{
+  display:inline;
+  content:"";
+  left:-4px;
+  position:relative;
+  border-left:4px solid var(--color-black);
+}
 body {
   -webkit-font-smoothing: antialiased;
   background: var(--color-white);
@@ -302,6 +323,9 @@ li.alice-carousel__stage-item {
 @media(max-width:675px){
   .top-text.two-column{
     column-count:1;
+  }
+  .top-text{
+    max-width: 100%;
   }
   .main-link{
     top:-1em;

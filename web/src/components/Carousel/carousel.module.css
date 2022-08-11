@@ -4,6 +4,7 @@
 .root {
   background: var(--clear);
   position: relative;
+  margin-top:2em;
 }
 
 
@@ -23,24 +24,36 @@
 }
 
 .root h4{
-  bottom:-1em;
+  bottom:-1.5em;
   padding:0 5px;
   position: absolute;
   text-overflow: ellipsis;
   max-width: calc(100% - 20px);
   width: calc(100% - 20px);
-  padding-right:20px;
-  overflow: hidden;
+  padding:5px 10px;
   white-space: nowrap;
-  background-color: var(--color-light-blue);
-  box-shadow: 0px 0px 5px 5px var(--color-light-blue);
+  background-color: rgb(246, 244, 241,0.8);
   color:var(--color--black);
   text-decoration: none;
+  overflow: visible;
 }
 
 .root li > a{
   color:var(--color--black);
   text-decoration: none;
+}
+.root li:hover h4{
+  padding-left:14px;
+}
+.root li:hover h4::before{
+  display: inline-block;
+  content:"";
+  height:calc(var(--font-small-size) + 12px);
+  position:absolute;
+  left:5px;
+  top:0px;
+  border-left:4px solid var(--color-black);
+  
 }
 .figure{
   margin:0 5px;
