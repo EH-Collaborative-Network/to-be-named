@@ -7,8 +7,6 @@
   margin-top:2em;
 }
 
-
-
 .root:-webkit-scrollbar {    display: none;}
 .outer{
   overflow-x:auto;

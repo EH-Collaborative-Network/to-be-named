@@ -3,13 +3,13 @@ import LangContext from "../context/lang";
 import ReactHtmlParser from 'react-html-parser';
 
 const TranslatedPhrase = ({ translations, phrase, override }) => {
-
   return(
     <LangContext.Consumer>
     { theme => {
       let translation = []
 
       let lang = theme.lang;
+
       if(phrase == "availableIn" && override){
         lang = override;
       }
@@ -21,7 +21,7 @@ const TranslatedPhrase = ({ translations, phrase, override }) => {
             element = element.node
             if(element.code == lang){
               
-
+   
                 translation = element[phrase]
       
               

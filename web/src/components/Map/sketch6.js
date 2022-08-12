@@ -1,7 +1,7 @@
-import one from "./1.png"
+import two from "./2.png"
 import * as p5 from "p5";
 
-function sketch (p) {
+function sketch6 (p) {
     let img;
     let graphics;
     let num = 1;
@@ -17,14 +17,13 @@ function sketch (p) {
               c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
             }
         }
-        p.background(0)
+        p.background(0,255,0)
         p.noStroke();
         p.image(img,0,0,window.innerWidth,window.innerHeight)
-
     }
     
     p.preload = function() {
-        img = p.loadImage(one);
+        img = p.loadImage(two);
     }
 
     p.draw = function() {
@@ -44,6 +43,7 @@ function sketch (p) {
     p.mousePressed = function(){
         shouldDraw = true;
         //could be something like erase()
+        p.drawingContext.globalCompositeOperation = 'destination-out';
     }
     // p.mouseReleased = function(){
     //     // shouldDraw = false;
@@ -51,7 +51,7 @@ function sketch (p) {
     //     p.blendMode(p.BLEND);
     // }
     p.mouseMoved = function(){
-        if(p.random([true,false,false])){
+        if(p.random([true,false,fal5])){
             let x = p.random(p.mouseX - 10, p.mouseX + 10);
             let y = p.random(p.mouseY - 10, p.mouseY + 10);
             veins.push(new Vein(x,y))
@@ -86,7 +86,7 @@ function sketch (p) {
 
             
             p.rect(this.x,this.y, fw, fh);
-  
+
           }else if(this.count < 50 ){
             if(p.random([true,false,false])){
                 this.x = this.x + (fw * p.floor(p.random(-2,2)));
@@ -101,4 +101,4 @@ function sketch (p) {
   };
   
   
-  export default sketch
+  export default sketch6

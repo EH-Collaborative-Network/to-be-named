@@ -9,6 +9,7 @@ import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
+import Map from "../components/Map/map";
 import { Link } from "gatsby";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 
@@ -26,15 +27,9 @@ export const query = graphql`
     languagePhrases: allSanityLanguage {
       edges {
         node {
+          enter
           name
           code
-          about
-          volume
-          exhibition
-          upcomingEvents
-          researchThreads
-          availableIn
-          search
         }
       }
     }
@@ -102,7 +97,7 @@ const IndexPage = props => {
   }
 
   return (
-    <Link to="/home/"><TranslatedPhrase translations={languagePhrases} phrase={"enter"}/>→</Link>
+    <Map translations={languagePhrases} phrase={"enter"}/>
   );
 };
 

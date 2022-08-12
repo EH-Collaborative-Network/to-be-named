@@ -1,7 +1,7 @@
-import one from "./1.png"
+import three from "./3.png"
 import * as p5 from "p5";
 
-function sketch (p) {
+function sketch5 (p) {
     let img;
     let graphics;
     let num = 1;
@@ -17,14 +17,13 @@ function sketch (p) {
               c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
             }
         }
-        p.background(0)
+        p.background(0,255,0)
         p.noStroke();
         p.image(img,0,0,window.innerWidth,window.innerHeight)
-
     }
     
     p.preload = function() {
-        img = p.loadImage(one);
+        img = p.loadImage(three);
     }
 
     p.draw = function() {
@@ -44,6 +43,7 @@ function sketch (p) {
     p.mousePressed = function(){
         shouldDraw = true;
         //could be something like erase()
+        p.drawingContext.globalCompositeOperation = 'destination-out';
     }
     // p.mouseReleased = function(){
     //     // shouldDraw = false;
@@ -86,8 +86,8 @@ function sketch (p) {
 
             
             p.rect(this.x,this.y, fw, fh);
-  
-          }else if(this.count < 50 ){
+
+          }else if(this.count < 100 ){
             if(p.random([true,false,false])){
                 this.x = this.x + (fw * p.floor(p.random(-2,2)));
                 this.y = this.y + (fh * p.floor(p.random(-2,2)));
@@ -95,10 +95,11 @@ function sketch (p) {
             p.rect(this.x,this.y, fw, fh);
           }
           this.count = this.count + 1
+
         }
       }
 
   };
   
   
-  export default sketch
+  export default sketch5
