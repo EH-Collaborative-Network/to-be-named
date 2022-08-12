@@ -12,10 +12,12 @@ import TranslatedPhrase from "../TranslationHelpers/translatedPhrase";
 const Map = ({phrase, translations}) => {
   return (
       <div className={styles.root}>
-        <ReactP5Wrapper sketch={sketch} />
-        <ReactP5Wrapper sketch={sketch2} />
-        <ReactP5Wrapper sketch={sketch3} />
-        <ReactP5Wrapper sketch={sketch4} />
+        {(typeof window != `undefined`) &&
+            <ReactP5Wrapper sketch={sketch} />
+            <ReactP5Wrapper sketch={sketch2} />
+            <ReactP5Wrapper sketch={sketch3} />
+            <ReactP5Wrapper sketch={sketch4} />
+        }
         <img src={genesis}/>
         <div className={styles.enter}>
           <Link to="/home/"><h4><TranslatedPhrase translations={translations} phrase={phrase}/>→</h4></Link>

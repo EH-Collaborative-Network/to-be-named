@@ -73,6 +73,7 @@ function sketch (p) {
           this.count = 0;
         }
         show(){
+            if(typeof window != `undefined`){
             let fw = p.windowWidth/50;
             let fh = p.windowHeight/50;
             let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 50));
@@ -95,6 +96,7 @@ function sketch (p) {
             p.rect(this.x,this.y, fw, fh);
           }
           this.count = this.count + 1
+        }
         }
       }
 

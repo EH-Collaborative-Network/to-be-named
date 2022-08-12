@@ -73,25 +73,27 @@ function sketch2 (p) {
           this.count = 0;
         }
         show(){
-            let fw = p.windowWidth/50;
-            let fh = p.windowHeight/50;
-            let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 50));
-            let yf = p.floor(p.map(this.y,0, p.windowHeight, 0, 50));
-            xf = xf + p.floor(p.random(-2,2))
-            yf = yf + p.floor(p.random(-2,2))
-          if(this.count == 0){
-                this.x = fw * xf;
-                this.y = fh * yf;
-            
-            p.rect(this.x,this.y, fw, fh);
-          }else if(this.count < 50 ){
-            if(p.random([true,false,false])){
-                this.x = this.x + (fw * p.floor(p.random(-2,2)));
-                this.y = this.y + (fh * p.floor(p.random(-2,2)));
+            if(typeof window != `undefined`){
+                let fw = p.windowWidth/50;
+                let fh = p.windowHeight/50;
+                let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 50));
+                let yf = p.floor(p.map(this.y,0, p.windowHeight, 0, 50));
+                xf = xf + p.floor(p.random(-2,2))
+                yf = yf + p.floor(p.random(-2,2))
+            if(this.count == 0){
+                    this.x = fw * xf;
+                    this.y = fh * yf;
+                
+                p.rect(this.x,this.y, fw, fh);
+            }else if(this.count < 50 ){
+                if(p.random([true,false,false])){
+                    this.x = this.x + (fw * p.floor(p.random(-2,2)));
+                    this.y = this.y + (fh * p.floor(p.random(-2,2)));
+                }
+                p.rect(this.x,this.y, fw, fh);
             }
-            p.rect(this.x,this.y, fw, fh);
-          }
-          this.count = this.count + 1
+            this.count = this.count + 1
+            }
         }
       }
 

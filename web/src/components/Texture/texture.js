@@ -14,11 +14,13 @@ import TranslatedPhrase from "../TranslationHelpers/translatedPhrase";
 const Texture = () => {
   return (
       <div className={styles.root}>
+        {(typeof window != `undefined`) &&
         <ReactP5Wrapper sketch={sketch1} />
         <ReactP5Wrapper sketch={sketch2} />
         <ReactP5Wrapper sketch={sketch3} />
         <ReactP5Wrapper sketch={sketch4} />
         <ReactP5Wrapper sketch={sketch5} />
+        }
         <div className={styles.solid}><ReactP5Wrapper sketch={sketch6} /></div>
         <img src={genesis}/>
       </div>
