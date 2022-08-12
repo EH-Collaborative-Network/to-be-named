@@ -129,13 +129,10 @@
     position: relative;
     display: block;
     padding:20px;
-    background-color: var(--color-light-blue);
-    background: var(--blue-link-gradient);
+    background-color: var(--color-gray);
     /* box-shadow: 0px 0px 6px 6px var(--color-light-blue); */
     
 }
 .resultsWrapper > div > a:hover{
-    top:2px;
-    background: var(--light-blue-gradient);
-    left:2px;
+    border-left:4px solid var(--color-black)
 }

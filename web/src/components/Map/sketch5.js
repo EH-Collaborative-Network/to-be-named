@@ -64,7 +64,9 @@ function sketch5 (p) {
             p.resizeCanvas((window?.innerWidth), (window?.innerHeight));    
         }
         p.blendMode(p.BLEND);
-        p.background("#00fff")
+        p.background("#00fff");
+        p.image(img,0,0,window.innerWidth,window.innerHeight);
+
     }
     class Vein{
         constructor(x,y){
