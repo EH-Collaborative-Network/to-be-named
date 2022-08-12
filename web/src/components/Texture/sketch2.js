@@ -15,10 +15,11 @@ function sketch2 (p) {
             }else{
               c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
             }
+            p.background(255,0,0)
+            p.noStroke();
+            p.image(img,0,0,window.innerWidth,window.innerHeight)
         }
-        p.background(255,0,0)
-        p.noStroke();
-        p.image(img,0,0,window.innerWidth,window.innerHeight)
+       
     }
     
     p.preload = function() {
