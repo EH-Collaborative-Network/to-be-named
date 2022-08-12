@@ -13,10 +13,12 @@ const Map = ({phrase, translations}) => {
   return (
       <div className={styles.root}>
         {(typeof window != `undefined`) &&
+        <>
             <ReactP5Wrapper sketch={sketch} />
             <ReactP5Wrapper sketch={sketch2} />
             <ReactP5Wrapper sketch={sketch3} />
             <ReactP5Wrapper sketch={sketch4} />
+            </>
         }
         <img src={genesis}/>
         <div className={styles.enter}>
