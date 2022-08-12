@@ -1,6 +1,5 @@
-import one from "../Map/1.png"
 
-function sketch6 (p) {
+function sketchSix (p) {
     let img;
     let graphics;
     let num = 1;
@@ -105,4 +104,4 @@ function sketch6 (p) {
   };
   
   
-  export default sketch6
+  export default sketchSix

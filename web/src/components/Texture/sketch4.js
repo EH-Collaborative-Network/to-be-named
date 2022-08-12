@@ -1,4 +1,4 @@
-import three from "../Map/3.png"
+import three from "./3.png"
 
 function sketch4 (p) {
     let img;
