@@ -10,7 +10,6 @@ import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import Map from "../components/Map/map";
-import { Link } from "gatsby";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 
 export const query = graphql`

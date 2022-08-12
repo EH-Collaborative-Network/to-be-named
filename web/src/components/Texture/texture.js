@@ -5,7 +5,7 @@ import sketch4 from "./sketch4";
 import sketch5 from "./sketch5";
 import sketchSix from "./sketchSix";
 import genesis from "./genesis.gif";
-import ReactP5Wrapper from "react-p5-wrapper";
+import {ReactP5Wrapper} from "react-p5-wrapper";
 import React from "react";
 import * as styles from "./texture.module.css";
 

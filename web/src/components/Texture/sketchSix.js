@@ -21,7 +21,7 @@ function sketchSix (p) {
     }
     
     p.preload = function() {
-        img = p.loadImage(one);
+        // img = p.loadImage(one);
     }
 
     p.draw = function() {

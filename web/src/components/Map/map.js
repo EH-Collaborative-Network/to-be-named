@@ -3,7 +3,7 @@ import sketch2 from "./sketch2";
 import sketch3 from "./sketch3";
 import sketch4 from "./sketch4";
 import genesis from "./genesis.gif";
-import ReactP5Wrapper from "react-p5-wrapper";
+import {ReactP5Wrapper} from "react-p5-wrapper";
 import React from "react";
 import * as styles from "./map.module.css";
 import {Link} from "gatsby";
