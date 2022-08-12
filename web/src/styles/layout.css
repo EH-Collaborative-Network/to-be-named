@@ -188,7 +188,7 @@ select{
 	font-family: inherit;
 	color: var(--color-black);
 	border: 1px solid var(--color-black);
-	background: var(--color-white);
+	background: transparent;
 	padding: 2px 8px;
 	-webkit-appearance: menulist;
   margin:  10px 2px;

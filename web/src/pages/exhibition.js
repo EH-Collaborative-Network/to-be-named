@@ -310,7 +310,7 @@ const ExhibitionPage = props => {
             <LangContext.Consumer>
             {theme => {
               return(
-            <select style={{"marginTop":"25px"}} className={filterStyles.filterArtist} id="change-tz" onChange={handleLocation}>
+            <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-tz" onChange={handleLocation}>
               <option value={'all'}>{translate(languagePhrases, 'allLocations', theme)}</option>
               {locations.map(function(node, index){
                 return(<option value={node}>{node}</option>)

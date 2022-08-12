@@ -14,8 +14,8 @@
   top:0;
   left:0;
   z-index: -3;
-  width:100vw;
-  height:auto;
+  width:auto;
+  height:100vh;
   pointer-events: none;
   @media (--media-min-small) {
     width:auto;

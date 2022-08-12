@@ -61,6 +61,19 @@ function sketchSix (p) {
             
           }
     }
+    p.touchMoved = function(){
+        if(p.random([true,false,false])){
+                
+                let x = p.random(0, p.windowWidth/4);
+                let y = p.random(0, p.windowHeight);
+                if(p.random([true,false])){
+                    x = p.random((p.windowWidth/4 * 3), p.windowWidth);
+                }
+
+                veins.push(new Vein(x,y))
+            
+          }
+    }
     p.windowResized = function() {
         if(window?.innerWidth <= 768){
             p.resizeCanvas((window?.innerWidth), (window?.innerHeight));

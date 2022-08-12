@@ -8,13 +8,19 @@
     display:block;
     position: relative;
 }
-.inner > div:nth-child(2){
+.inner > div:nth-child(even) figure{
     float:right;
+}
+.inner figure div{
+    height:auto;
 }
 
 .inner figure {
    width: 100%;
    margin:0;
+   @media (--media-min-medium) {
+    width: 80%;
+  }
 }
 
 .inner img{

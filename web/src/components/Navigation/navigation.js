@@ -2,6 +2,7 @@ import { Link } from "gatsby";
 import React from "react";
 import { useState } from 'react';
 import logo from '../../assets/logo.png'; 
+import logoMobile from '../../assets/mobileLogo.png'; 
 import osun from '../../assets/ehcn.png';
 import * as styles from "./navigation.module.css";
 import LangContext from '../context/lang.js'
@@ -21,7 +22,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
   return (
     <>
     <div className={styles.mobileHeader}>
-      <div className={styles.logo}><Link to="/"><img alt={"EHCN's logo which has an abstracted 'E' with a grey 'H' inside of it. Alongside this, is the text Experimental Humanities Collaborative Network."} src={logo} /></Link></div>
+      <div className={styles.logo}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
         <div className={styles.close} onClick={openHandler}>
           <svg viewBox="0 0 75 55" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="73.4602" height="3.52472" rx="1.76236" transform="matrix(1 0 -0.0253564 0.999678 0.179688 25.8008)" fill="#333333"/>
@@ -31,7 +32,8 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         </div>
     </div>
     <div id="navigation" className={styles.header}>
-      <div className={styles.logo}><Link to="/home/"><img alt={"EHCN's logo which has an abstracted 'E' with a grey 'H' inside of it. Alongside this, is the text Experimental Humanities Collaborative Network."} src={logo} /></Link></div>
+      <div className={styles.logo + " " + styles.logoMobile}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
+      <div className={styles.logo + " " + styles.logoDesktop}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logo} /></Link></div>
       <div className={styles.close} onClick={closeHandler}>
         <svg  viewBox="0 0 54 57" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="73.4602" height="3.45354" rx="1.72677" transform="matrix(0.698084 0.716016 -0.698084 0.716016 2.61719 0.69043)" fill="#333333"/>

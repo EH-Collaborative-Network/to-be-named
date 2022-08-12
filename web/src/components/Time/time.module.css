@@ -275,14 +275,13 @@
     font-size: var(--font-small-size);
 }
 .selectWrapper{
-    position:absolute;
-    top:115px;
-    right:15px;
+    position:relative;
     display: flex;
     width: auto;
     align-items: center;
     @media (--media-min-medium) {
         top:50px;
+        position: absolute;
         right:50px;
     }
 }

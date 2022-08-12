@@ -9,11 +9,11 @@
     z-index: 9;
     height:100vh;
     display:none;
-    background: var(--color-light-blue);
+    background: var(--color-white);
     @media (--media-min-medium) {
         width: 18%;
         display:block;
-        background: var(--light-blue-gradient);
+        background: transparent;
     }
 
 }
@@ -40,16 +40,36 @@
     justify-content: space-between;
     height:55vh;
 }
-
+.logoDesktop{
+    display: none;
+    @media (--media-min-medium) {
+        display:block;
+    }
+}
+.logoMobile{
+    display: block;
+    @media (--media-min-medium) {
+        display:none;
+    }
+}
 .logo img{
-    width:10%;
-    margin-top:10px;
-    margin-left:14px;
+    width:30%;
+    margin-top:20px;
+    margin-bottom:20px;
+    border-left: 6px solid var(--color-black);
+    padding:3px 6px;
+    background-color: var(--color-gray);
+    padding-bottom:6px;
+    margin-left:10px;
     @media (--media-min-medium) {
         width: auto;
         height: 45vh;
+        background-color:transparent;
         margin-top:16px;
+        border:none;
         margin-left:20px;
+        padding:0;
+        padding-bottom:0;
     }
 }
 .osun{

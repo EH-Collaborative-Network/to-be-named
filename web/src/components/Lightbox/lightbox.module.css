@@ -59,6 +59,8 @@
 .root figure{
   max-width: 92vw;
   height: auto;
+  display: block;
+  margin:0 auto;
   @media(--media-min-medium){
     max-width: 60vw;
   }

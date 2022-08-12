@@ -78,7 +78,7 @@
   display:flex;
 }
 .root .pdf:hover{
-  filter:blur(3px);
+  border-left:4px solid var(--color--black);
 }
 .root .pdf iframe{
   pointer-events: none;
@@ -97,7 +97,7 @@
 .embed p{
   display: none;
 }
-.figure, .figure  div{
+.root .figure, .figure  div{
   height: 40vh;
   display: inline-block;
 }
@@ -114,13 +114,16 @@
 .figure img{
   height: 100%;
   width: auto;
-}
-.figure img:hover{
-  filter:blur(3px);
   cursor: pointer;
 }
+.figure img:hover{
+  border-left:4px solid var(--color--black);
+}
+.figure:hover{
+  border-left:4px solid var(--color--black);
+}
 .root .embed:hover{
-  filter:blur(3px);
+  border-left:4px solid var(--color--black);
   cursor: pointer;
 }
 .root figcaption{

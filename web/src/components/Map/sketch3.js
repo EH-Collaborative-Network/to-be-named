@@ -57,6 +57,13 @@ function sketch3 (p) {
             veins.push(new Vein(x,y))
           }
     }
+    p.touchMoved = function(){
+        if(p.random([true,false,false])){
+            let x = p.random(p.mouseX - 10, p.mouseX + 10);
+            let y = p.random(p.mouseY - 10, p.mouseY + 10);
+            veins.push(new Vein(x,y))
+          }
+    }
     p.windowResized = function() {
         if(window?.innerWidth <= 768){
             p.resizeCanvas((window?.innerWidth), (window?.innerHeight));
