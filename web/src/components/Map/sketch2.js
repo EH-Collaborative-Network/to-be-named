@@ -1,5 +1,4 @@
 import six from "./6.png"
-import * as p5 from "p5";
 
 function sketch2 (p) {
     let img;

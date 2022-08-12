@@ -1,5 +1,4 @@
 import four from "../Map/4.png"
-import * as p5 from "p5";
 
 function sketch3 (p) {
     let img;
