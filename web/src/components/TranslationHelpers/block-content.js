@@ -5,7 +5,6 @@ import { Figure } from "../Figure/figure";
 import MediaItem from "../MediaItem/mediaItem"
 import { Link } from "gatsby";
 import TranslatedPhrase from "./translatedPhrase.js";
-import Person from "../Person/person"
 import * as styles from "./block.module.css";
 
 const serializers = {
@@ -57,13 +56,6 @@ const components = {
           {children}
         </Link>
       )
-    },
-    person: ({ value, children }) => {
-      let person = {};
-      person.node = value.reference;
-      return (
-        <span className={styles.blockPerson}><Person blue={true} hideArrow={true} person={person} key={""}/></span>
-      );
     },
     media: ({ value, children }) => {
       

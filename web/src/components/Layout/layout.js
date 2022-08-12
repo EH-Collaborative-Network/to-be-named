@@ -4,19 +4,17 @@ import PropTypes from 'prop-types'
 import "../../styles/layout.css";
 import * as styles from "./layout.module.css";
 import Lightbox from "../Lightbox/lightbox";
-import Marquee from "../Marquee/marquee";
-const Layout = ({ children, siteTitle, navTranslations, globalLanguages, showMarquee, marqueeContent }) =>{
+import Texture from "../Texture/texture"
+const Layout = ({ children, siteTitle, navTranslations, globalLanguages }) =>{
 
   
   return(
     
 
       <>
+        <Texture/>
         <Navigation siteTitle={siteTitle} globalLanguages={globalLanguages} translations={navTranslations} />
         <div className={styles.content}>{children}</div>
-        {showMarquee &&
-          <Marquee marqueeContent={marqueeContent} languagePhrases={navTranslations} globalLanguages={globalLanguages}/>
-        }
         <Lightbox/>
       </>
 

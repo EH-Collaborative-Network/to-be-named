@@ -12,7 +12,6 @@ import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
-import Person from "../components/Person/person";
 import * as styles from "../components/Card/card.module.css";
 import { Link } from "@reach/router";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";

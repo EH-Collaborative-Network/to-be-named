@@ -12,8 +12,6 @@ import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
-import Person from "../components/Person/person";
-import * as styles from "../components/Modal/modal.module.css";
 import { Link } from "@reach/router";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import sanityClient from "@sanity/client";

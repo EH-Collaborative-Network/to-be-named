@@ -13,7 +13,6 @@ import Layout from "../containers/layout";
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
 import { Figure } from "../components/Figure/figure";
-import Person from "../components/Person/person";
 import * as styles from "../components/Time/time.module.css";
 import { Link } from "@reach/router";
 import LangContext from "../components/context/lang";
