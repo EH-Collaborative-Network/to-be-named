@@ -120,7 +120,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         <ul className={styles.menu}>
           <li><a className={styles.email} href="mailto:ehcn@opensocietyuniversitynetwork.org">ehcn@opensociety<br/>universitynetwork.org</a></li>
           <li><TranslatedPhrase translations={translations} phrase={"ehcnSupported"}/></li>
-          <li><img className={styles.osun} alt="dark green text reads Open Society University Network with red semicircles encircling 'open'" src={osun}/></li>
+          <li><a href='https://ehcn.bard.edu'><img className={styles.osun} alt="A grey H within three green lines suggesting the letter E." src={osun}/></a></li>
         </ul>
       </div>
     </div>
