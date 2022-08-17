@@ -51,11 +51,14 @@ function sketch2 (p) {
     //     p.blendMode(p.BLEND);
     // }
     p.mouseMoved = function(){
-        if(p.random([true,false,false])){
+        if(p.random([true,false,false, false])){
             let x = p.random(p.mouseX - 10, p.mouseX + 10);
             let y = p.random(p.mouseY - 10, p.mouseY + 10);
             veins.push(new Vein(x,y))
           }
+           if(p.random([true,false,false])){
+        veins.splice(p.floor(p.random(0,veins.length-1)), 1)
+        }
     }
     p.touchMoved = function(){
         if(p.random([true,false,false])){
@@ -63,6 +66,9 @@ function sketch2 (p) {
             let y = p.random(p.mouseY - 10, p.mouseY + 10);
             veins.push(new Vein(x,y))
           }
+          if(p.random([true,true,false])){
+            veins.splice(p.floor(p.random(0,veins.length-1)), 1)
+            }
     }
     p.windowResized = function() {
         if(window?.innerWidth <= 768){
@@ -94,7 +100,7 @@ function sketch2 (p) {
                 this.y = fh * yf;
             
             p.rect(this.x,this.y, fw, fh);
-          }else if(this.count < 50 ){
+          }else if(this.count < 100 ){
             if(p.random([true,false,false])){
                 this.x = this.x + (fw * p.floor(p.random(-2,2)));
                 this.y = this.y + (fh * p.floor(p.random(-2,2)));

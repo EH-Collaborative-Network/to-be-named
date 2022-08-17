@@ -16,7 +16,7 @@
   z-index: -1;
   pointer-events: none;
   width:auto;
-  opacity: 0.9;
+  opacity: 1;
   filter:saturate(150%);
   height:100vh;
   pointer-events: none;
@@ -30,8 +30,8 @@
   position:fixed;
   top:0;
   left:0;
-  mix-blend-mode: hard-light;
-  opacity: 0.9;
+  mix-blend-mode: normal;
+  opacity: 1;
   filter:saturate(150%);
   -webkit-user-select: none;
   -moz-user-select: none;
