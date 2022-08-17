@@ -13,6 +13,13 @@ export default {
       validation: Rule => Rule.required().error('name cannot be left blank')
     },
     {
+      name: 'locationDisplay',
+      title: 'Location(s) to Display',
+      type: 'array',
+      description:"select add item to add a title in any language (including English)",
+      of: [{type: 'titleTranslation'}],
+    },
+    {
       name:'slug',
       type: 'slug',
       title: 'Slug (what should the link to this page look like)',
@@ -69,7 +76,7 @@ export default {
     {
       name: 'locations', 
       type: 'array', 
-      title: 'Location(s)', 
+      title: 'Location(s). *This will be used for filtering on the exhibition & edition index pages, not displayed on the profile page.', 
       of:[{type:'reference', title:'Location', to: [{type: 'location'}]}]
     },
     {

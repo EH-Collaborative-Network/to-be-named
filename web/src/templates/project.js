@@ -137,6 +137,14 @@ export const query = graphql`
           code
         }
       }
+      subtitles{
+        text
+        language{
+          id
+          name
+          code
+        }
+      }
       slug {
         current
       }
@@ -194,6 +202,11 @@ const ProjectTemplate = props => {
         </div>
         }
         <h1 style={{"marginTop":"0"}}><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
+        {page.subtitles &&
+        <div className='top-title'>
+          <TranslatedTitle translations={(preview && previewData) ? previewData.subtitles : page.subtitles}/>
+        </div>
+        }
         <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/></div>
         {page.media?.length > 0 &&
            <Masonry media={(preview && previewData) ? previewData.media : page.media}/>

@@ -20,6 +20,13 @@ export default {
       of: [{type: 'titleTranslation'}],
     },
     {
+      name: 'subtitles',
+      title: 'Subtitles to Display',
+      type: 'array',
+      description:"select add item to add a title in any language (including English)",
+      of: [{type: 'titleTranslation'}],
+    },
+    {
       name: 'mainImage',
       title: 'Thumbnail Image',
       type: 'figure',

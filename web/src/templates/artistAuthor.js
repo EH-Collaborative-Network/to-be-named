@@ -73,6 +73,14 @@ export const query = graphql`
           code
         }
       }
+      locationDisplay{
+        text
+        language{
+          id
+          name
+          code
+        }
+      }
       projects{
         id
         slug{
@@ -157,6 +165,11 @@ const ArtistAuthorTemplate = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         <h1>{page.name}</h1>
+        {page.locationDisplay &&
+        <div className='top-title'>
+          <TranslatedTitle translations={(preview && previewData) ? previewData.locationDisplay : page.locationDisplay}/>
+        </div>
+        }
         <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.bios : page.bios}/></div>
         {(exhibitionWorks.length > 0) &&
         <>

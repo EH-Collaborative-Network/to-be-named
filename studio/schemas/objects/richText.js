@@ -9,7 +9,7 @@ export default {
     {
       title: 'Block',
       type: 'block',
-      styles: [{title: 'Normal', value: 'normal'}],
+      styles: [{title: 'Normal', value: 'normal'},{title: 'Heading 1', value: 'h1'}],
       lists: [
         { title: 'Bullet', value: 'bullet' },
         { title: 'Number', value: 'number' },
