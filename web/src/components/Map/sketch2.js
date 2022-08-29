@@ -23,6 +23,10 @@ function sketch2 (p) {
     }
     
     p.preload = function() {
+        if(typeof window != `undefined`){
+            let imgs = document.querySelectorAll(".src");
+            six = imgs[0].src
+          }
         img = p.loadImage(six);
     }
 

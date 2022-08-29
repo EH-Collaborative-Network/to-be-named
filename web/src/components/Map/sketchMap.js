@@ -6,6 +6,8 @@ function sketch (p) {
     let num = 1;
     let shouldDraw = true;
     let veins = []
+
+   
     p.setup = function() {
         let c;
         
@@ -24,6 +26,10 @@ function sketch (p) {
     }
     
     p.preload = function() {
+        if(typeof window != `undefined`){
+          let imgs = document.querySelectorAll(".src");
+          one = imgs[imgs.length-1].src
+        }
         img = p.loadImage(one);
     }
 
@@ -45,11 +51,7 @@ function sketch (p) {
         shouldDraw = true;
         //could be something like erase()
     }
-    // p.mouseReleased = function(){
-    //     // shouldDraw = false;
-    //     //could be something like noErase()
-    //     p.blendMode(p.BLEND);
-    // }
+
     p.mouseMoved = function(){
         if(p.random([true,false,false])){
             let x = p.random(p.mouseX - 10, p.mouseX + 10);

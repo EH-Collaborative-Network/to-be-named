@@ -356,3 +356,6 @@ li.alice-carousel__stage-item {
 .top-text + h1{
   margin-top:0;
 }
+.hidden.src{
+  opacity: 0;
+}

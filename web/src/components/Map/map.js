@@ -2,6 +2,10 @@ import sketch from "./sketchMap";
 import sketch2 from "./sketch2";
 import sketch3 from "./sketch3";
 import sketch4 from "./sketch4";
+import one from "./1.png"
+import six from "./6.png"
+import five from "./5.png"
+import four from "./4.png"
 import genesis from "./genesis.gif";
 import {ReactP5Wrapper} from "react-p5-wrapper";
 import React from "react";
@@ -27,16 +31,23 @@ const Map = ({phrase, translations}) => {
   
     return array;
   }
-  let maps = [sketch, sketch2, sketch3, sketch4];
+  let maps = [one, six, five, four];
   shuffle(maps)
+  if(maps[3] == six){
+    maps.push(maps.shift());
+  }
   return (
       <div className={styles.root}>
         {(typeof window != `undefined`) &&
             <>
-            <ReactP5Wrapper sketch={maps[0]} />
-            <ReactP5Wrapper sketch={maps[1]} />
-            <ReactP5Wrapper sketch={maps[2]} />
-            <ReactP5Wrapper sketch={maps[3]} />
+            <img className="hidden src" src={maps[0]} />
+            <img className="hidden src" src={maps[1]} />
+            <img className="hidden src" src={maps[2]} />
+            <img className="hidden src" src={maps[3]} />
+            <ReactP5Wrapper sketch={sketch2} />
+            <ReactP5Wrapper sketch={sketch3} />
+            <ReactP5Wrapper sketch={sketch4} />
+            <ReactP5Wrapper sketch={sketch} />
             </>
         }
         <img src={genesis}/>
