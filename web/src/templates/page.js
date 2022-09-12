@@ -86,7 +86,7 @@ const PageTemplate = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
-        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.bodies : page.bodies}/></div>
+        <div className="top-text about one-column"><BlockContent blocks={(preview && previewData) ? previewData.bodies : page.bodies}/></div>
         {/* {media?.length > 0 &&
            <Carousel media={(preview && previewData) ? previewData.media : researchThread.media}/>
         } */}

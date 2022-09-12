@@ -359,3 +359,11 @@ li.alice-carousel__stage-item {
 .hidden.src{
   opacity: 0;
 }
+.top-text.about .wrapper{
+  display: inline-block;
+  margin:12px;
+  pointer-events: none;
+}
+.top-text.about .wrapper *{
+  max-height: 80px !important;
+}
