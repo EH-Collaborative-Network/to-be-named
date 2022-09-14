@@ -16,9 +16,6 @@
   background-color: var(--color-light-blue);
   height:40vh;
   overflow: hidden;
-  /* height:40vh;
-  overflow: visible;
-  white-space:nowrap; */
 }
 
 .root h4{
@@ -122,6 +119,7 @@
 .figure:hover{
   border-left:4px solid var(--color--black);
 }
+
 .root .embed:hover{
   border-left:4px solid var(--color--black);
   cursor: pointer;

@@ -10,7 +10,15 @@ import Masonry from "../Masonry/Masonry";
 
 const Carousel = ({ media, imageOnly }) => {
   const [start, setStart] = useState([0,0]);
+  const [a, setA] = useState("")
   const handleDown = function(event){
+    let el = event.target;
+    if(!el.href){
+      el = el.closest("a").href
+    }else{
+      el = el.href
+    }
+    setA(el)
     setStart([event.pageX, event.pageY])
   }
   const handleUp = function(e){
@@ -18,10 +26,13 @@ const Carousel = ({ media, imageOnly }) => {
     let startY = start[1]
     const diffX = Math.abs(e.pageX - startX);
     const diffY = Math.abs(e.pageY - startY);
-    if(diffX > 10){
+    if(diffX > 20){
       e.preventDefault()
     }else{
-      window.location.href = e.target.href || e.target.closest("a").href
+      if(a){
+        window.location.href = a
+      }
+      
     }
   }
 
