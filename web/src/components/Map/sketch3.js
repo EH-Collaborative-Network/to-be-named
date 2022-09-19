@@ -55,12 +55,12 @@ function sketch3 (p) {
     //     p.blendMode(p.BLEND);
     // }
     p.mouseMoved = function(){
-        if(p.random([true,false, false, false])){
+        if(p.random([true,false, false])){
             let x = p.random(p.mouseX - 10, p.mouseX + 10);
             let y = p.random(p.mouseY - 10, p.mouseY + 10);
             veins.push(new Vein(x,y))
           }
-          if(p.random([true,true,false])){
+          if(p.random([false,true,false])){
             veins.splice(p.floor(p.random(0,veins.length-1)), 1)
             }
     }
@@ -70,7 +70,7 @@ function sketch3 (p) {
             let y = p.random(p.mouseY - 10, p.mouseY + 10);
             veins.push(new Vein(x,y))
           }
-          if(p.random([true,false,false])){
+          if(p.random([false,false,false])){
             veins.splice(p.floor(p.random(0,veins.length-1)), 1)
             }
     }
@@ -93,10 +93,10 @@ function sketch3 (p) {
         }
         show(){
             if(typeof window != `undefined`){
-            let fw = p.windowWidth/50;
-            let fh = p.windowHeight/50;
-            let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 50));
-            let yf = p.floor(p.map(this.y,0, p.windowHeight, 0, 50));
+            let fw = p.windowWidth/25;
+            let fh = p.windowHeight/25;
+            let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 25));
+            let yf = p.floor(p.map(this.y,0, p.windowHeight, 0, 25));
             xf = xf + p.floor(p.random(-2,2))
             yf = yf + p.floor(p.random(-2,2))
           if(this.count == 0){

@@ -91,10 +91,10 @@ function sketch (p) {
         }
         show(){
             if(typeof window != `undefined`){
-            let fw = p.windowWidth/50;
-            let fh = p.windowHeight/50;
-            let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 50));
-            let yf = p.floor(p.map(this.y,0, p.windowHeight, 0, 50));
+            let fw = p.windowWidth/25;
+            let fh = p.windowHeight/25;
+            let xf = p.floor(p.map(this.x,0, p.windowWidth, 0, 25));
+            let yf = p.floor(p.map(this.y,0, p.windowHeight, 0, 25));
             xf = xf + p.floor(p.random(-2,2))
             yf = yf + p.floor(p.random(-2,2))
           if(this.count == 0){
