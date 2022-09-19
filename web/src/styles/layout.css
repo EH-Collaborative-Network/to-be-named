@@ -379,3 +379,12 @@ li.alice-carousel__stage-item {
   right:0;
   left:auto;
 }
+
+.project-title{
+  margin: 10px 0;
+  max-width: auto;
+  @media(--media-min-medium){
+    max-width:80%;
+  }
+}
+

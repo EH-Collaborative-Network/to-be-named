@@ -201,7 +201,7 @@ const ProjectTemplate = props => {
           }
         </div>
         }
-        <h1 style={{"margin":"10px 0"}}><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
+        <h1 className="project-title"><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
         {page.subtitles &&
         <div className='top-title'>
           <TranslatedTitle translations={(preview && previewData) ? previewData.subtitles : page.subtitles}/>
