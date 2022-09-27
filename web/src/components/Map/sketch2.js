@@ -1,4 +1,4 @@
-import six from "./6.png"
+
 
 function sketch2 (p) {
     let img;
@@ -6,6 +6,7 @@ function sketch2 (p) {
     let num = 1;
     let shouldDraw = true;
     let veins = []
+    let six;
     p.setup = function() {
         let c;
         
@@ -18,6 +19,8 @@ function sketch2 (p) {
             p.background(255,0,0)
             p.noStroke();
             p.image(img,0,0,window.innerWidth,window.innerHeight)
+            let loader = document.getElementById('loader2');
+            loader.classList.add('off')
         }
         
     }
@@ -28,9 +31,11 @@ function sketch2 (p) {
             six = imgs[0].src
           }
         img = p.loadImage(six);
+        
     }
 
     p.draw = function() {
+     
         p.drawingContext.globalCompositeOperation = 'destination-out';
 
 

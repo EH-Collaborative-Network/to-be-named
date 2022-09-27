@@ -11,7 +11,9 @@ import Masonry from "../Masonry/Masonry";
 const Carousel = ({ media, imageOnly }) => {
   const [start, setStart] = useState([0,0]);
   const [a, setA] = useState("")
+  
   const handleDown = function(event){
+    event.preventDefault()
     let el = event.target;
     if(!el.href){
       el = el.closest("a").href
@@ -69,7 +71,7 @@ let resp = {
               :
     <div className={styles.root}>
         <div className={styles.inner}>
-            <AliceCarousel autoPlayStrategy={"default"} autoPlayInterval={0} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite keyboardNavigation responsive={resp} disableButtonsControls disableDotsControls mouseTracking items={medias}/>
+            <AliceCarousel autoPlayStrategy={"default"} autoPlayInterval={0} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite responsive={resp} disableButtonsControls disableDotsControls mouseTracking items={medias}/>
         </div>
       <div className={styles.wrapper}></div>
     </div>

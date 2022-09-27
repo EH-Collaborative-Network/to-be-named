@@ -38,12 +38,16 @@ const Map = ({phrase, translations}) => {
 
   return (
       <div className={styles.root}>
+        <div className={styles.loader} id='loader'><span>loading...</span></div>
+        <div className={styles.loader} id='loader2'><span>loading...</span></div>
+        <div className={styles.loader} id='loader3'><span>loading...</span></div>
+        <div className={styles.loader} id='loader4'><span>loading...</span></div>
         {(typeof window != `undefined`) &&
             <>
             <img className="hidden src" src={maps[0]} />
             <img className="hidden src" src={maps[1]} />
             <img className="hidden src" src={maps[2]} />
-            <img className="hidden src" src={maps[4]} />
+            <img className="hidden src" src={maps[3]} />
             <ReactP5Wrapper sketch={sketch2} />
             <ReactP5Wrapper sketch={sketch3} />
             <ReactP5Wrapper sketch={sketch4} />

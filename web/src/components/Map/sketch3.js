@@ -1,4 +1,4 @@
-import five from "./5.png"
+
 
 function sketch3 (p) {
     let img;
@@ -6,6 +6,7 @@ function sketch3 (p) {
     let num = 1;
     let shouldDraw = true;
     let veins = []
+    let five;
     p.setup = function() {
         let c;
         
@@ -18,6 +19,8 @@ function sketch3 (p) {
             p.background(0,255,255)
             p.noStroke();
             p.image(img,0,0,window.innerWidth,window.innerHeight)
+            let loader = document.getElementById('loader3');
+            loader.classList.add('off')
         }
         
     }
@@ -28,9 +31,11 @@ function sketch3 (p) {
         five = imgs[imgs.length-3].src
       }
         img = p.loadImage(five);
+        
     }
 
     p.draw = function() {
+      
         p.drawingContext.globalCompositeOperation = 'destination-out';
 
 

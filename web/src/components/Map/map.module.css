@@ -9,6 +9,24 @@
   }
 
 }
+.loader{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition:0.5s;
+  height: 100vh;
+  font-size: var(--font-base-size);
+  background-color: #f5f5f5;
+  z-index: 999;
+}
+
+
 .root img{
   position:fixed;
   top:0;

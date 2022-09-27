@@ -323,6 +323,11 @@ li.alice-carousel__stage-item {
   padding-left:0;
   margin-left:0;
 }
+
+#loader.off,#loader2.off,#loader3.off,#loader4.off{
+  opacity: 0;
+  pointer-events: none;
+}
 @media(max-width:675px){
   .top-text.two-column{
     column-count:1;

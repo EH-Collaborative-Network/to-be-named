@@ -1,4 +1,4 @@
-import four from "./4.png"
+
 
 function sketch4 (p) {
     let img;
@@ -6,6 +6,7 @@ function sketch4 (p) {
     let num = 1;
     let shouldDraw = true;
     let veins = []
+    let four;
     p.setup = function() {
         let c;
         
@@ -18,7 +19,10 @@ function sketch4 (p) {
             p.background(0,255,0)
             p.noStroke();
             p.image(img,0,0,window.innerWidth,window.innerHeight)
+            let loader = document.getElementById('loader4');
+            loader.classList.add('off')
         }
+
      
     }
     
@@ -28,10 +32,11 @@ function sketch4 (p) {
           four = imgs[imgs.length-2].src
         }
         img = p.loadImage(four);
+       
     }
 
     p.draw = function() {
-
+   
         p.drawingContext.globalCompositeOperation = 'destination-out';
 
         if(typeof window != `undefined`){

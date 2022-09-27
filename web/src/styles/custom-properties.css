@@ -9,7 +9,7 @@
   --clear: rgba(245,245,245,0);
   --border-black: border 1px solid #1C1E33; 
   /* Typography */
-  --font-small-size: 0.82rem; /* 14px */
+  --font-small-size: 0.92rem; /* 14px */
   --font-base-size: clamp(14px, 1.2vw, 40px); /* 16px */
   --font-base-letter-spacing: 0.03rem;
   --font-base-line-height: 1.5; /* 24px */

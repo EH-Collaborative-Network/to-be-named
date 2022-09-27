@@ -1,4 +1,4 @@
-import one from "./1.png"
+
 
 function sketch (p) {
     let img;
@@ -6,12 +6,13 @@ function sketch (p) {
     let num = 1;
     let shouldDraw = true;
     let veins = []
-
+    let one;
    
     p.setup = function() {
         let c;
         
         if(typeof window != `undefined`){
+        
             if(window.innerWidth <= 768){
               c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
             }else{
@@ -20,20 +21,29 @@ function sketch (p) {
             p.background(0)
             p.noStroke();
             p.image(img,0,0,window.innerWidth,window.innerHeight)
+
+            let loader = document.getElementById('loader');
+            loader.classList.add('off')
         }
         
 
     }
     
     p.preload = function() {
+
         if(typeof window != `undefined`){
           let imgs = document.querySelectorAll(".src");
           one = imgs[imgs.length-1].src
+       
         }
         img = p.loadImage(one);
+
+       
+        
     }
 
     p.draw = function() {
+     
         p.drawingContext.globalCompositeOperation = 'destination-out';
 
 
