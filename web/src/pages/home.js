@@ -20,6 +20,14 @@ export const query = graphql`
       title
       description
       keywords
+      credits{
+        _rawText(resolveReferences: { maxDepth: 20 })
+        language{
+          id
+          name
+          code
+        }
+      }
       languages {
         name
         code
@@ -135,6 +143,7 @@ const HomePage = props => {
       {media?.length > 0 &&
            <Carousel imageOnly={true} media={(preview && previewData) ? previewData.media : media}/>
         }
+        <div className="bottom-text"><br></br><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.credits : site.credits} globalLanguages={globalLanguages}/></div>
       </Container>
     </Layout>
   );
