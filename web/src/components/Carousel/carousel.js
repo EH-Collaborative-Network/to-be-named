@@ -70,8 +70,9 @@ let resp = {
       <Masonry media={media}/>
               :
     <div className={styles.root}>
+      
         <div className={styles.inner}>
-            <AliceCarousel autoPlayStrategy={"default"} autoPlayInterval={0} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite responsive={resp} disableButtonsControls disableDotsControls mouseTracking items={medias}/>
+            <AliceCarousel autoPlayStrategy={"default"} autoPlayInterval={0} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite responsive={resp} controlsStrategy={"alternate"} disableButtonsControls disableDotsControls mouseTracking items={medias}/>
         </div>
       <div className={styles.wrapper}></div>
     </div>

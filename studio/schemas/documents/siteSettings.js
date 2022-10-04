@@ -34,6 +34,13 @@ export default {
       of:[{type:'reference', title:'Project/Article', to: [{type: 'project'}]}]
     },
     {
+      name: 'credits',
+      title: 'Homepage Credits',
+      type: 'array',
+      description:"Credits for landing page artists",
+      of: [{type: 'translation'}],
+  },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',
