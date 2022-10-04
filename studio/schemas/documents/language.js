@@ -237,6 +237,12 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'studentWork',
+      type: 'string',
+      title: 'Student Work'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'eventsByLocation',
       type: 'string',
       title: 'Display Events Happening In',

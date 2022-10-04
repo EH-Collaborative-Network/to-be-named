@@ -51,6 +51,12 @@ export default {
     title: 'Is this a regional artist/author?',
     description: '',
   },
+  {
+    name:'studentWork',
+    type: 'boolean',
+    title: 'Is this a student?',
+    description: '',
+  },
     {
       name: 'image',
       title: 'Image',

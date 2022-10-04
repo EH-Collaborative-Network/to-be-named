@@ -291,6 +291,7 @@ const ExhibitionPage = props => {
                 <option value={'traveling'}>{translate(languagePhrases, 'traveling', theme)}</option>
                 <option value={'commissioned'}>{translate(languagePhrases, 'commissioned', theme)}</option>
                 <option value={'regional'}>{translate(languagePhrases, 'regional', theme)}</option>
+                <option value={'studentWork'}>{translate(languagePhrases, 'studentWork', theme)}</option>
               </select>
               )
             }}
