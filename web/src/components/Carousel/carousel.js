@@ -1,8 +1,6 @@
-import React, {useState}  from "react";
-import AliceCarousel from "react-alice-carousel";
+import React, {useState, useEffect}  from "react";
 import * as styles from "./carousel.module.css";
 import MediaItem from "../MediaItem/mediaItem";
-import 'react-alice-carousel/lib/alice-carousel.css';
 import { Figure } from "../Figure/figure";
 import TranslatedTitle from "../TranslationHelpers/translatedTitle";
 import { Link } from "@reach/router";
@@ -11,7 +9,50 @@ import Masonry from "../Masonry/Masonry";
 const Carousel = ({ media, imageOnly }) => {
   const [start, setStart] = useState([0,0]);
   const [a, setA] = useState("")
+  const [dir, setDir] = useState(0)
+  const [paused, setPaused] = useState(false)
   
+  useEffect(() => {
+    let track = document.getElementsByClassName(styles.slideTrack)[0];
+    let as = track.querySelectorAll('a');
+    let totalWidth = 0;
+    for(let i = 0; i < as.length; i++){
+      totalWidth = totalWidth + as[i].offsetWidth + 5;
+    }
+    // track.style.width = totalWidth + "px"
+    let interval = setInterval(() => {
+      let track = document.getElementsByClassName(styles.slideTrack)[0];
+      let inner = track.closest('.inner');
+      let t = track.style.transform;
+      t = t.split("%")[0];
+      t = t.split("(-")[1];
+      t = parseFloat(t)
+
+      if(track.classList.contains('paused')){
+        inner.scrollLeft += 0;
+      }else if(track.classList.contains('rtl') && inner.scrollLeft >= (inner.scrollWidth - inner.offsetWidth)){
+        inner.scrollLeft -= 1;
+        setDir(dir => 1);
+      }else if(track.classList.contains('ltr') && inner.scrollLeft <= 0){
+        inner.scrollLeft += 1;
+        setDir(dir => 0);
+      }else if(track.classList.contains('ltr')){
+        inner.scrollLeft -= 1;
+      }else{
+        inner.scrollLeft += 1;
+      }
+  
+    }, 10);
+
+    return () => clearInterval(interval);
+
+  }, []);
+  const handleOver = function(event){
+    setPaused(true)
+  }
+  const handleOut = function(event){
+    setPaused(false)
+  }
   const handleDown = function(event){
     event.preventDefault()
     let el = event.target;
@@ -71,8 +112,12 @@ let resp = {
               :
     <div className={styles.root}>
       
-        <div className={styles.inner}>
-            <AliceCarousel autoPlayStrategy={"default"} autoPlayInterval={0} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite responsive={resp} controlsStrategy={"alternate"} disableButtonsControls disableDotsControls mouseTracking items={medias}/>
+        <div className={styles.inner + " inner"}>
+
+          <div onMouseOver={handleOver} onMouseLeave={handleOut} className={`${dir ? 'ltr' : 'rtl'}` +" " + styles.slideTrack + " "+"slide-track " + `${paused ? 'paused' : ''}`}>
+            {medias}
+          </div>
+            {/* <AliceCarousel autoPlayStrategy={"default"} autoPlayDirection={"ltr"} autoPlayInterval={10} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite  disableButtonsControls disableDotsControls mouseTracking swipeDelta={50} items={medias}/> */}
         </div>
       <div className={styles.wrapper}></div>
     </div>

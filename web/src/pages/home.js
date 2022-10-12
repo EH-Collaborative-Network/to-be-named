@@ -132,7 +132,7 @@ const HomePage = props => {
     x.push("/project/"+project.slug.current)
     media.push(x);
   })
- console.log(media)
+
   return (
     <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
