@@ -54,6 +54,7 @@ export const query = graphql`
           allLocations
           mediums
           allArtists
+          studentWork
           traveling
           commissioned
           search

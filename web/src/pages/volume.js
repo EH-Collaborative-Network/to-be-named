@@ -51,6 +51,7 @@ export const query = graphql`
           researchThreads
           availableIn
           regional
+          studentWork
           allLocations
           mediums
           allArtists
