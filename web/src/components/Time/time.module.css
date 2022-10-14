@@ -28,6 +28,7 @@
 }
 .eventWrapper{
     display: flex;
+    flex-wrap: wrap;
     width:100%;
     @media (--media-min-medium) {
         width:80%;
