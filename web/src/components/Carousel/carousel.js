@@ -11,6 +11,9 @@ const Carousel = ({ media, imageOnly }) => {
   const [a, setA] = useState("")
   const [dir, setDir] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
   
   useEffect(() => {
     let track = document.getElementsByClassName(styles.slideTrack)[0];
@@ -55,6 +58,8 @@ const Carousel = ({ media, imageOnly }) => {
   }
   const handleDown = function(event){
     event.preventDefault()
+    let track = document.getElementsByClassName(styles.slideTrack)[0];
+    let inner = track.closest('.inner');
     let el = event.target;
     if(!el.href){
       el = el.closest("a").href
@@ -62,13 +67,27 @@ const Carousel = ({ media, imageOnly }) => {
       el = el.href
     }
     setA(el)
+    setStartX(event.pageX - inner.offsetLeft);
+    setIsDragging(true);
+    setScrollLeft(inner.scrollLeft)
     setStart([event.pageX, event.pageY])
+  }
+  const handleMove = function(e){
+    let track = document.getElementsByClassName(styles.slideTrack)[0];
+    let inner = track.closest('.inner');
+    let x = e.pageX - inner.offsetLeft;
+    let walk = (x - startX) * 3; //scroll-fast
+    if(isDragging){
+      inner.scrollLeft = scrollLeft - walk;
+    }
+
   }
   const handleUp = function(e){
     let startX = start[0]
     let startY = start[1]
     const diffX = Math.abs(e.pageX - startX);
     const diffY = Math.abs(e.pageY - startY);
+    setIsDragging(false)
     if(diffX > 20){
       e.preventDefault()
     }else{
@@ -114,7 +133,7 @@ let resp = {
       
         <div className={styles.inner + " inner"}>
 
-          <div onMouseOver={handleOver} onMouseLeave={handleOut} className={`${dir ? 'ltr' : 'rtl'}` +" " + styles.slideTrack + " "+"slide-track " + `${paused ? 'paused' : ''}`}>
+          <div onMouseMove={handleMove} onMouseOver={handleOver} onMouseLeave={handleOut} className={`${dir ? 'ltr' : 'rtl'}` +" " + styles.slideTrack + " "+"slide-track " + `${paused ? 'paused' : ''}`}>
             {medias}
           </div>
             {/* <AliceCarousel autoPlayStrategy={"default"} autoPlayDirection={"ltr"} autoPlayInterval={10} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite  disableButtonsControls disableDotsControls mouseTracking swipeDelta={50} items={medias}/> */}
