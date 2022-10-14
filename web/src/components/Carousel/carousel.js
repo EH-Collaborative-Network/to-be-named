@@ -34,15 +34,15 @@ const Carousel = ({ media, imageOnly }) => {
       if(track.classList.contains('paused')){
         inner.scrollLeft += 0;
       }else if(track.classList.contains('rtl') && inner.scrollLeft >= (inner.scrollWidth - inner.offsetWidth)){
-        inner.scrollLeft -= 1;
+        inner.scrollLeft -= 0.5;
         setDir(dir => 1);
       }else if(track.classList.contains('ltr') && inner.scrollLeft <= 0){
-        inner.scrollLeft += 1;
+        inner.scrollLeft += 0.5;
         setDir(dir => 0);
       }else if(track.classList.contains('ltr')){
-        inner.scrollLeft -= 1;
+        inner.scrollLeft -= 0.5;
       }else{
-        inner.scrollLeft += 1;
+        inner.scrollLeft += 0.5;
       }
   
     }, 10);
