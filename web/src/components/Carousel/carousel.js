@@ -10,6 +10,7 @@ const Carousel = ({ media, imageOnly }) => {
   const [start, setStart] = useState([0,0]);
   const [a, setA] = useState("")
   const [dir, setDir] = useState(0)
+  const [el, setEl] = useState("")
   const [paused, setPaused] = useState(false)
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
@@ -62,7 +63,10 @@ const Carousel = ({ media, imageOnly }) => {
     let inner = track.closest('.inner');
     let el = event.target;
     if(!el.href){
-      el = el.closest("a").href
+      el = el.closest("a")?.href
+      if(!imageOnly && !el){
+        setEl(event.target.closest(".slide-track > div"));
+      }
     }else{
       el = el.href
     }
@@ -72,6 +76,20 @@ const Carousel = ({ media, imageOnly }) => {
     setScrollLeft(inner.scrollLeft)
     setStart([event.pageX, event.pageY])
   }
+
+  function lightboxed(e){
+    let media = e.cloneNode(true);
+    if(!media){
+       media = e.closest(".masonry-inner > div")?.cloneNode(true);
+    }
+    if(!media){
+      media = e.closest(".wrapper")?.cloneNode(true);
+    }
+    document.querySelector("#light-box .inner").innerHTML = ""
+    document.querySelector("#light-box .inner").append(media)
+    document.getElementById("light-box").classList.add("show");
+  } 
+
   const handleMove = function(e){
     let track = document.getElementsByClassName(styles.slideTrack)[0];
     let inner = track.closest('.inner');
@@ -93,6 +111,8 @@ const Carousel = ({ media, imageOnly }) => {
     }else{
       if(a){
         window.location.href = a
+      }else if(el){
+        lightboxed(el)
       }
       
     }
@@ -133,7 +153,7 @@ let resp = {
       
         <div className={styles.inner + " inner"}>
 
-          <div onMouseMove={handleMove} onMouseOver={handleOver} onMouseLeave={handleOut} className={`${dir ? 'ltr' : 'rtl'}` +" " + styles.slideTrack + " "+"slide-track " + `${paused ? 'paused' : ''}`}>
+          <div onMouseDown={imageOnly ? null: handleDown} onMouseUp={imageOnly ? null :  handleUp}  onMouseMove={handleMove} onMouseOver={handleOver} onMouseLeave={handleOut} className={`${dir ? 'ltr' : 'rtl'}` +" " + styles.slideTrack + " "+"slide-track " + `${paused ? 'paused' : ''}`}>
             {medias}
           </div>
             {/* <AliceCarousel autoPlayStrategy={"default"} autoPlayDirection={"ltr"} autoPlayInterval={10} animationEasingFunction={"linear"} animationDuration={10000} autoPlay infinite  disableButtonsControls disableDotsControls mouseTracking swipeDelta={50} items={medias}/> */}

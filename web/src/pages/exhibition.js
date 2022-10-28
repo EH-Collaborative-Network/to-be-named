@@ -88,6 +88,7 @@ export const query = graphql`
           commissioned
           traveling
           regional
+          studentWork
           slug{
             current
           }
@@ -262,20 +263,21 @@ const ExhibitionPage = props => {
                 }
       
 
-              if((filter == "traveling" && !node.node.traveling) || (filter == "commissioned" && !node.node.commissioned) || (filter == "regional" && !node.node.regional)){
+              if((filter == "traveling" && !node.node.traveling) || (filter == "commissioned" && !node.node.commissioned) || (filter == "regional" && !node.node.regional) || (filter == "studentWork" && !node.node.studentWork)){
                 show = false
               }
               if(artistLocation !== "all"){
                 let includesLocation = false;
                 node.node.locations?.map(function(node,index){
                   if(node.name == artistLocation){
-                    includesLocation == true;
+                    includesLocation = true;
                   }
                 })
                 if(!includesLocation){
-                  show == false;
+                  show = false;
                 }
               }
+
               
               if(show && absolutelynoshow){             
                 projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )

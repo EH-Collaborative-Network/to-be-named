@@ -57,7 +57,7 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-.root a{
+.root a, .root .slide-track > *{
   text-decoration: none;
   width: -moz-max-content;
   width: max-content;
@@ -124,7 +124,7 @@
 .root .pdf iframe{
   pointer-events: none;
 }
-.embed > div{
+.root .embed > div{
   padding:0 !important;
 }
 .root .embed,.root .pdf,.root .figure, .root .embed *,.root .pdf *,.root .figure *, .root a{
