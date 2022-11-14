@@ -23,7 +23,7 @@ const Carousel = ({ media, imageOnly }) => {
     for(let i = 0; i < as.length; i++){
       totalWidth = totalWidth + as[i].offsetWidth + 5;
     }
-    // track.style.width = totalWidth + "px"
+    track.style.width = totalWidth + "px"
     let interval = setInterval(() => {
       let track = document.getElementsByClassName(styles.slideTrack)[0];
       let inner = track.closest('.inner');
@@ -31,22 +31,28 @@ const Carousel = ({ media, imageOnly }) => {
       t = t.split("%")[0];
       t = t.split("(-")[1];
       t = parseFloat(t)
-
+      let valToScroll = 0;
       if(track.classList.contains('paused')){
-        inner.scrollLeft += 0;
+        // inner.scrollLeft += 0;
+        
       }else if(track.classList.contains('rtl') && inner.scrollLeft >= (inner.scrollWidth - inner.offsetWidth)){
-        inner.scrollLeft -= 0.5;
+        // inner.scrollLeft -= 0.5;
+        valToScroll -= 3
         setDir(dir => 1);
       }else if(track.classList.contains('ltr') && inner.scrollLeft <= 0){
-        inner.scrollLeft += 0.5;
+        // inner.scrollLeft += 0.5;
+        valToScroll += 3
         setDir(dir => 0);
       }else if(track.classList.contains('ltr')){
-        inner.scrollLeft -= 0.5;
+        // inner.scrollLeft -= 0.5;
+        valToScroll -= 3
       }else{
-        inner.scrollLeft += 0.5;
+        // inner.scrollLeft += 0.5;
+        valToScroll += 3
       }
+      inner.scrollBy({left: valToScroll, behavior: "smooth"})
   
-    }, 10);
+    }, 50);
 
     return () => clearInterval(interval);
 
