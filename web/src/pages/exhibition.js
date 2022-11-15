@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { graphql } from "gatsby";
 import {
   mapEdgesToNodes,
@@ -54,6 +54,7 @@ export const query = graphql`
           allLocations
           mediums
           allArtists
+          noResults
           studentWork
           traveling
           commissioned
@@ -137,14 +138,35 @@ export const query = graphql`
 `;
 
 const ExhibitionPage = props => {
-  const { data, errors } = props;
+  const { data, errors, location } = props;
   const [filter, setFilter] = useState("all")
   const [artistMediums, setArtistMediums] = useState([])
+  let currentFilter = null;
+  let currentMediums = null;
+  let currentLocation = null;
   const [reset, setReset] = useState(false)
   const [artistLocation, setArtistLocation] = useState("all")
   let mediums = [];
   let locations = [];
-  
+  let params = [];
+  if(location?.search){
+    if(location.search.split("?").length > 1 ){
+      params = location.search.split("?")[1].split("&");
+    }
+    params.forEach((param) => {
+      let p = param.split("=")[0];
+      let v = param.split("=")[1];
+      if(p == "filter" && filter == "all"){
+        currentFilter = v
+      }else if(p == "medium" && artistMediums.length < 1){
+        currentMediums = v.split(',')
+      }else if(p == "location" && artistLocation == "all"){
+        let ve = v.split("%20").join(" ")
+        currentLocation = ve
+      }
+    })
+  }
+
   if (errors) {
     return (
       <Layout>
@@ -176,33 +198,147 @@ const ExhibitionPage = props => {
   })
   function handleFilter(e){
     let value = e.target.value;
-    setFilter(value);
+    if(currentFilter){
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "filter"){
+          let pfilter = node.split("=")[1]
+          if(value == "all"){
+            node = null
+          }else{
+           node = "filter="+ value
+          }
+     
+          
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    
+    }else{
+    let newParams;
+      if(location.search){
+        newParams = location.href + "&filter=" + value
+       }else{
+        newParams = location.href + "?filter=" + value
+       }
+  
+        if(typeof window != `undefined`) window.location.href = newParams
+          }
+   
   }
   function handleLocation(e){
     let value = e.target.value;
-    setArtistLocation(value);
+    if(currentLocation){
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "location"){
+          let pfilter = node.split("=")[1]
+          if(value == "all"){
+            node = null
+          }else{
+           node = "location="+ value
+          }
+          
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    
+    }else {
+      let newParams;
+      if(location.search){
+        newParams = location.href + "&location=" + value
+       }else{
+        newParams = location.href + "?location=" + value
+       }
+  
+        if(typeof window != `undefined`) window.location.href = newParams
+      
+    }
   }
   function handleMedium(e){
     let value = e.target.value;
-    if(e.target.checked){
+    if(artistMediums.includes(value)){
       setReset(false)
       setArtistMediums((prevArtistMediums) => [
         ...prevArtistMediums,
         value,
        ]);
+    }else if(currentMediums?.includes(value)){
+        let params = location.href.split("?")[1]
+        params = params.split("&");
+        let newParams =[]
+        
+        params.forEach((node) =>{
+          if(node.split("=")[0] == "medium"){
+            let mediums = node.split("=")[1]
+            mediums = mediums.split(',')
+            let idx = mediums.indexOf(value);
+            if (idx != -1) mediums.splice(idx, 1);
+            if(mediums.length == 0){
+              node = null
+            }else{
+             node = "medium="+ mediums.join(",") 
+            }
+            
+            
+          }
+          if(node) newParams.push(node)
+        })
+        newParams = newParams.join("&")
+        if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+      
+    }else if(currentMediums?.length > 0){
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "medium"){
+          let mediums = node.split("=")[1]
+          mediums = mediums.split(',')
+          mediums.push(value)
+          node = "medium="+ mediums.join(",")     
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    
     }else{
-      if(artistMediums.length == 1){
-        setReset(true)
-      }else{
-        setReset(false)
-      }
-      let newArr = artistMediums
-      let idx = newArr.indexOf(value);
-      if (idx != -1){
-        newArr.splice(idx, 1);
-      } 
-      setArtistMediums(newArr)
+      let newParams
+     if(location.search){
+      newParams = location.href + "&medium=" + value
+     }else{
+      newParams = location.href + "?medium=" + value
+     }
+
+      if(typeof window != `undefined`) window.location.href = newParams
+    
     }
+
+    // } else{
+    //   if(artistMediums.length == 1){
+    //     setReset(true)
+    //   }else{
+    //     setReset(false)
+    //   }
+    //   let newArr = artistMediums
+    //   let idx = newArr.indexOf(value);
+    //   if (idx != -1){
+    //     newArr.splice(idx, 1);
+    //   } 
+    //   setArtistMediums(newArr)
+    // }
     
   }
   locations = [...new Set(locations)];
@@ -213,6 +349,85 @@ const ExhibitionPage = props => {
     );
   }
 
+  let artistCards = []
+  artists.map(function(node, index){
+    let image;
+    let show = false;
+    let absolutelynoshow = true;
+
+    let projectLinks = node.node.projects?.map(function(node, index){
+      if(node.exhibition){
+        image = node.mainImage;
+        show = true;
+        return(
+          <Link key={index} className={styles.blockLink} to={"/project/"+node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
+        )
+      }
+    })
+    if(show == false){
+      absolutelynoshow = false;
+    }
+    
+
+      if(artistMediums.length > 0){
+        let includesMedium = false;
+        node.node.medium?.map(function(node,index){
+          if(artistMediums.includes(node)){
+            includesMedium = true;
+          }
+        })
+        if(!includesMedium){
+          show = false;
+        } 
+      } else if(currentMediums?.length > 0 ){
+        let includesMedium = false;
+        node.node.medium?.map(function(node,index){
+          if(currentMediums?.includes(node)){
+            includesMedium = true;
+          }
+        })
+        if(!includesMedium){
+          show = false;
+        }
+      }else{
+        show = true;
+      }
+      if(reset){
+        show = true
+      }
+
+
+    if(((filter == "traveling" || currentFilter == "traveling") && !node.node.traveling) || ((filter == "commissioned" || currentFilter == "commissioned") && !node.node.commissioned) || ((filter == "regional" || currentFilter == "regional") && !node.node.regional) || ((filter == "studentWork" || currentFilter == "student") && !node.node.studentWork)){
+      show = false
+    }
+    if(artistLocation !== "all"){
+      let includesLocation = false;
+      node.node.locations?.map(function(node,index){
+        if(node.name == artistLocation){
+          includesLocation = true;
+        }
+      })
+      if(!includesLocation){
+        show = false;
+      }
+    }else if(currentLocation){
+      let includesLocation = false;
+      node.node.locations?.map(function(node,index){
+        if(node.name == currentLocation){
+          includesLocation = true;
+        }
+      })
+      if(!includesLocation){
+        show = false;
+      }
+    }
+
+    
+    if(show && absolutelynoshow){             
+      projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
+      artistCards.push( <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+    } 
+  })
 
   return (
       <>  
@@ -225,65 +440,12 @@ const ExhibitionPage = props => {
           <br/>
           <div className={filterStyles.filterWrapper}>
           <div className={styles.oneColumn}>
-          {artists.map(function(node, index){
-              let image;
-              let show = false;
-              let absolutelynoshow = true;
-        
-              let projectLinks = node.node.projects?.map(function(node, index){
-                if(node.exhibition){
-                  image = node.mainImage;
-                  show = true;
-                  return(
-                    <Link className={styles.blockLink} to={"/project/"+node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
-                  )
-                }
-              })
-              if(show == false){
-                absolutelynoshow = false;
-              }
-              
-      
-                if(artistMediums.length > 0){
-                  let includesMedium = false;
-                  node.node.medium?.map(function(node,index){
-                    if(artistMediums.includes(node)){
-                      includesMedium = true;
-                    }
-                  })
-                  if(!includesMedium){
-                    show = false;
-                  } 
-                } else{
-                  show = true;
-                }
-                if(reset){
-                  console.log(reset)
-                  show = true
-                }
-      
 
-              if((filter == "traveling" && !node.node.traveling) || (filter == "commissioned" && !node.node.commissioned) || (filter == "regional" && !node.node.regional) || (filter == "studentWork" && !node.node.studentWork)){
-                show = false
-              }
-              if(artistLocation !== "all"){
-                let includesLocation = false;
-                node.node.locations?.map(function(node,index){
-                  if(node.name == artistLocation){
-                    includesLocation = true;
-                  }
-                })
-                if(!includesLocation){
-                  show = false;
-                }
-              }
-
-              
-              if(show && absolutelynoshow){             
-                projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
-                return <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> 
-              }
-            })}
+          {artistCards}
+          {artistCards.length < 1 &&
+            <TranslatedPhrase translations={languagePhrases} phrase={'noResults'}/>
+          }
+       
           </div>
           <div className={filterStyles.filter}>
           <LangContext.Consumer>
@@ -291,10 +453,10 @@ const ExhibitionPage = props => {
               return(
               <select className={filterStyles.filterArtist} id="change-tz" onChange={handleFilter}>
                 <option value={'all'}>{translate(languagePhrases, 'allArtists', theme)}</option>
-                <option value={'traveling'}>{translate(languagePhrases, 'traveling', theme)}</option>
-                <option value={'commissioned'}>{translate(languagePhrases, 'commissioned', theme)}</option>
-                <option value={'regional'}>{translate(languagePhrases, 'regional', theme)}</option>
-                <option value={'studentWork'}>{translate(languagePhrases, 'studentWork', theme)}</option>
+                <option value={'traveling'} selected={currentFilter == "traveling" ? true : false}>{translate(languagePhrases, 'traveling', theme)}</option>
+                <option value={'commissioned'} selected={currentFilter == "commissioned" ? true : false}>{translate(languagePhrases, 'commissioned', theme)}</option>
+                <option value={'regional'} selected={currentFilter == "regional" ? true : false}>{translate(languagePhrases, 'regional', theme)}</option>
+                <option value={'studentWork'} selected={currentFilter == "student" ? true : false}>{translate(languagePhrases, 'studentWork', theme)}</option>
               </select>
               )
             }}
@@ -304,9 +466,9 @@ const ExhibitionPage = props => {
             {mediums.map(function(node, index){
                 return(
                   <>
-                  <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox"/>
+                  <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox" checked={(currentMediums?.includes(node) && artistMediums.length < 1) ? true : ''}/>
                     <label className={filterStyles.checkBoxLabel} for={"check-"+index}>
-                    {node}</label>
+                    {node} </label>
                   </>
                   )
               })
@@ -314,10 +476,10 @@ const ExhibitionPage = props => {
             <LangContext.Consumer>
             {theme => {
               return(
-            <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-tz" onChange={handleLocation}>
+            <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-location" onChange={handleLocation}>
               <option value={'all'}>{translate(languagePhrases, 'allLocations', theme)}</option>
               {locations.map(function(node, index){
-                return(<option value={node}>{node}</option>)
+                return(<option value={node} selected={(currentLocation == node && artistLocation == "all") ? true : false}>{node}</option>)
               })}
             </select>
               )
