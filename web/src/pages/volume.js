@@ -1,17 +1,10 @@
 import React, {useState} from "react";
 import { graphql } from "gatsby";
-import {
-  mapEdgesToNodes,
-  filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from "../lib/helpers";
 import Container from "../components/Container/container";
 import BlockContent from "../components/TranslationHelpers/block-content";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
-import { useLocation } from '@reach/router';
-import queryString from 'query-string';
 import * as styles from "../components/Card/card.module.css";
 import * as filterStyles from "../components/Search/search.module.css";
 import LangContext from "../components/context/lang";
@@ -52,6 +45,7 @@ export const query = graphql`
           availableIn
           regional
           studentWork
+          noResults
           allLocations
           mediums
           allArtists
@@ -136,14 +130,13 @@ export const query = graphql`
 `;
 
 const VolumePage = props => {
-  const { data, errors } = props;
-  const [filter, setFilter] = useState("all")
-  const [artistMediums, setArtistMediums] = useState([])
-  const [reset, setReset] = useState(false)
-  const [artistLocation, setArtistLocation] = useState("all")
-  let mediums = [];
-  let locations = [];
-  
+  const { data, errors, location } = props;
+  const site = (data || {}).site;
+  const globalLanguages = site.languages;
+  const artists = (data || {}).creators.edges
+  const page = (data || {}).page.edges[0].node
+  const languagePhrases = (data || {}).languagePhrases?.edges;
+
   if (errors) {
     return (
       <Layout>
@@ -151,12 +144,40 @@ const VolumePage = props => {
       </Layout>
     );
   }
-  
-  const site = (data || {}).site;
-  const globalLanguages = site.languages;
-  const artists = (data || {}).creators.edges
-  const page = (data || {}).page.edges[0].node
-  const languagePhrases = (data || {}).languagePhrases?.edges;
+  if (!site) {
+    throw new Error(
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
+    );
+  }
+  /* Artist Type = currentFilter, Mediums = currentMediums, Location = currentLocation */
+  let currentFilter = null;
+  let currentMediums = null;
+  let currentLocation = null;
+  let params = [];
+  /* Set currentFilter, currentMediums, currentLocation based on url params */
+  if(location?.search){
+    if(location.search.split("?").length > 1 ){
+      params = location.search.split("?")[1].split("&");
+    }
+    params.forEach((param) => {
+      let p = param.split("=")[0];
+      let v = param.split("=")[1];
+      if(p == "filter"){
+        currentFilter = v
+      }else if(p == "medium" ){
+        let ve = v.split("%20").join(" ") //handle spaces
+        currentMediums = ve.split(',')
+      }else if(p == "location"){
+        let ve = v.split("%20").join(" ") //handle spaces
+        currentLocation = ve
+      }
+    })
+  }
+
+  /* Figure out possible mediums & locations */
+  let mediums = [];
+  let locations = [];
+  /* loop through all artists and collate different mediums and locations */
   artists.map(function(artist, index){
     let volume = false;
     artist.node.projects.map(function(project,index){
@@ -173,44 +194,194 @@ const VolumePage = props => {
       })
     }
   })
-  function handleFilter(e){
-    let value = e.target.value;
-    setFilter(value);
-  }
-  function handleLocation(e){
-    let value = e.target.value;
-    setArtistLocation(value);
-  }
-  function handleMedium(e){
-    let value = e.target.value;
-    if(e.target.checked){
-      setReset(false)
-      setArtistMediums((prevArtistMediums) => [
-        ...prevArtistMediums,
-        value,
-       ]);
-    }else{
-      if(artistMediums.length == 1){
-        setReset(true)
-      }else{
-        setReset(false)
-      }
-      let newArr = artistMediums
-      let idx = newArr.indexOf(value);
-      if (idx != -1){
-        newArr.splice(idx, 1);
-      } 
-      setArtistMediums(newArr)
-    }
-    
-  }
+
+  /* flatten arrays */
   locations = [...new Set(locations)];
   mediums = [...new Set(mediums)];
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    );
+
+
+  /******************************/
+  /* event handlers for filters */
+  /******************************/
+  
+  /* Filtering by artist type */
+  function handleFilter(e){
+    let value = e.target.value;
+    if(currentFilter){
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "filter"){
+          if(value == "all"){
+            node = null
+          }else{
+           node = "filter="+ value
+          } 
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    } else {
+      let newParams;
+      if(location.search){
+        newParams = location.href + "&filter=" + value
+       } else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "filter=" + value
+       } else {
+        newParams = location.href + "?filter=" + value
+       }
+      if(typeof window != `undefined`) window.location.href = newParams
+    }
   }
+  /* Filtering by artist location */
+  function handleLocation(e){
+    let value = e.target.value;
+    if(currentLocation){
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "location"){
+          let pfilter = node.split("=")[1]
+          if(value == "all"){
+            node = null
+          }else{
+           node = "location="+ value
+          }
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    }else {
+      let newParams;
+      if(location.search){
+        newParams = location.href + "&location=" + value
+       }else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "location=" + value
+       }else{
+        newParams = location.href + "?location=" + value
+       }
+      if(typeof window != `undefined`) window.location.href = newParams   
+    }
+  }
+  /* Filtering by artist medium */
+  function handleMedium(e){
+    let value = e.target.value;
+    if(currentMediums?.includes(value)){ //if deselecting the option
+        let params = location.href.split("?")[1]
+        params = params.split("&");
+        let newParams =[]
+        params.forEach((node) =>{
+          if(node.split("=")[0] == "medium"){
+            let mediums = node.split("=")[1]
+            mediums = mediums.split("%20").join(" ")
+            mediums = mediums.split(',')
+            let idx = mediums.indexOf(value);
+            if (idx != -1) mediums.splice(idx, 1);
+            if(mediums.length == 0){
+              node = null
+            }else{
+             node = "medium="+ mediums.join(",") 
+            }
+            
+            
+          }
+          if(node) newParams.push(node)
+        })
+        newParams = newParams.join("&")
+        if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+      
+    }else if(currentMediums?.length > 0){ //if selecting the option
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "medium"){
+          let mediums = node.split("=")[1]
+          mediums = mediums.split(',')
+          mediums.push(value)
+          node = "medium="+ mediums.join(",")     
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    
+    }else{
+      let newParams
+      if(location.search){
+        newParams = location.href + "&medium=" + value
+      }else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "medium=" + value
+      }else{
+        newParams = location.href + "?medium=" + value
+      }
+      if(typeof window != `undefined`) window.location.href = newParams
+    }   
+  }
+
+    /* Create artist cards based on current filters */
+
+
+  let artistCards = [];
+  artists.map(function(node, index){
+    let image;
+    let show = false;
+    let absolutelynoshow = true;
+
+    let projectLinks = node.node.projects?.map(function(node, index){
+      if(node.volume){
+        image = node.mainImage;
+        show = true;
+        return(
+          <Link className={styles.blockLink} to={"/project/"+node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
+        )
+      }
+    })
+    if(show == false){
+      absolutelynoshow = false;
+    }
+    
+
+    if(currentMediums?.length > 0 ){
+      let includesMedium = false;
+      node.node.medium?.map(function(node,index){
+        if(currentMediums?.includes(node)){
+          includesMedium = true;
+        }
+      })
+      if(!includesMedium){
+        show = false;
+      }
+    }else{
+      show = true;
+    }
+
+
+    if((currentFilter == "traveling" && !node.node.traveling) || (currentFilter == "commissioned" && !node.node.commissioned) || (currentFilter == "regional" && !node.node.regional)){
+      show = false
+    }
+    if(currentLocation){
+      let includesLocation = false;
+      node.node.locations?.map(function(node,index){
+        if(node.name == currentLocation){
+          includesLocation == true;
+        }
+      })
+      if(!includesLocation){
+        show == false;
+      }
+    }
+    
+    if(show && absolutelynoshow){             
+      projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
+      artistCards.push( <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+    }
+  })
 
 
   return (
@@ -224,64 +395,10 @@ const VolumePage = props => {
           <br/>
           <div className={filterStyles.filterWrapper}>
           <div className={styles.oneColumn}>
-          {artists.map(function(node, index){
-              let image;
-              let show = false;
-              let absolutelynoshow = true;
-        
-              let projectLinks = node.node.projects?.map(function(node, index){
-                if(node.volume){
-                  image = node.mainImage;
-                  show = true;
-                  return(
-                    <Link className={styles.blockLink} to={"/project/"+node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
-                  )
-                }
-              })
-              if(show == false){
-                absolutelynoshow = false;
-              }
-              
-      
-                if(artistMediums.length > 0){
-                  let includesMedium = false;
-                  node.node.medium?.map(function(node,index){
-                    if(artistMediums.includes(node)){
-                      includesMedium = true;
-                    }
-                  })
-                  if(!includesMedium){
-                    show = false;
-                  } 
-                } else{
-                  show = true;
-                }
-                if(reset){
-                  console.log(reset)
-                  show = true
-                }
-      
-
-              if((filter == "traveling" && !node.node.traveling) || (filter == "commissioned" && !node.node.commissioned) || (filter == "regional" && !node.node.regional)){
-                show = false
-              }
-              if(artistLocation !== "all"){
-                let includesLocation = false;
-                node.node.locations?.map(function(node,index){
-                  if(node.name == artistLocation){
-                    includesLocation == true;
-                  }
-                })
-                if(!includesLocation){
-                  show == false;
-                }
-              }
-              
-              if(show && absolutelynoshow){             
-                projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
-                return <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> 
-              }
-            })}
+            {artistCards}
+            {artistCards.length < 1 &&
+              <TranslatedPhrase translations={languagePhrases} phrase={'noResults'}/>
+            }
           </div>
           <div className={filterStyles.filter}>
           <LangContext.Consumer>
@@ -289,9 +406,9 @@ const VolumePage = props => {
               return(
               <select className={filterStyles.filterArtist} id="change-tz" onChange={handleFilter}>
                 <option value={'all'}>{translate(languagePhrases, 'allArtists', theme)}</option>
-                <option value={'traveling'}>{translate(languagePhrases, 'traveling', theme)}</option>
-                <option value={'commissioned'}>{translate(languagePhrases, 'commissioned', theme)}</option>
-                <option value={'regional'}>{translate(languagePhrases, 'regional', theme)}</option>
+                <option value={'traveling'} selected={currentFilter == "traveling" ? true : false}>{translate(languagePhrases, 'traveling', theme)}</option>
+                <option value={'commissioned'} selected={currentFilter == "commissioned" ? true : false}>{translate(languagePhrases, 'commissioned', theme)}</option>
+                <option value={'regional'} selected={currentFilter == "regional" ? true : false}>{translate(languagePhrases, 'regional', theme)}</option>
               </select>
               )
             }}
@@ -300,7 +417,7 @@ const VolumePage = props => {
             {mediums.map(function(node, index){
                 return(
                   <>
-                  <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox"/>
+                    <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox" checked={(currentMediums?.includes(node)) ? true : ''}/>
                     <label className={filterStyles.checkBoxLabel} for={"check-"+index}>
                     {node}</label>
                   </>
@@ -313,7 +430,7 @@ const VolumePage = props => {
             <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-tz" onChange={handleLocation}>
               <option value={'all'}>{translate(languagePhrases, 'allLocations', theme)}</option>
               {locations.map(function(node, index){
-                return(<option value={node}>{node}</option>)
+                return(<option value={node} selected={(currentLocation == node) ? true : false}>{node}</option>)
               })}
             </select>
               )

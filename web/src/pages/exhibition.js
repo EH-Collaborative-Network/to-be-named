@@ -1,17 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { graphql } from "gatsby";
-import {
-  mapEdgesToNodes,
-  filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from "../lib/helpers";
 import Container from "../components/Container/container";
 import BlockContent from "../components/TranslationHelpers/block-content";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
-import { useLocation } from '@reach/router';
-import queryString from 'query-string';
 import * as styles from "../components/Card/card.module.css";
 import * as filterStyles from "../components/Search/search.module.css";
 import LangContext from "../components/context/lang";
@@ -139,34 +132,11 @@ export const query = graphql`
 
 const ExhibitionPage = props => {
   const { data, errors, location } = props;
-  const [filter, setFilter] = useState("all")
-  const [artistMediums, setArtistMediums] = useState([])
-  let currentFilter = null;
-  let currentMediums = null;
-  let currentLocation = null;
-  const [reset, setReset] = useState(false)
-  const [artistLocation, setArtistLocation] = useState("all")
-  let mediums = [];
-  let locations = [];
-  let params = [];
-  if(location?.search){
-    if(location.search.split("?").length > 1 ){
-      params = location.search.split("?")[1].split("&");
-    }
-    params.forEach((param) => {
-      let p = param.split("=")[0];
-      let v = param.split("=")[1];
-      if(p == "filter" && filter == "all"){
-        currentFilter = v
-      }else if(p == "medium" && artistMediums.length < 1){
-        currentMediums = v.split(',')
-      }else if(p == "location" && artistLocation == "all"){
-        let ve = v.split("%20").join(" ")
-        currentLocation = ve
-      }
-    })
-  }
-
+  const site = (data || {}).site;
+  const globalLanguages = site.languages;
+  const artists = (data || {}).creators.edges
+  const page = (data || {}).page.edges[0].node
+  const languagePhrases = (data || {}).languagePhrases?.edges;
   if (errors) {
     return (
       <Layout>
@@ -174,12 +144,43 @@ const ExhibitionPage = props => {
       </Layout>
     );
   }
+  if (!site) {
+    throw new Error(
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
+    );
+  }
+  /* Artist Type = currentFilter, Mediums = currentMediums, Location = currentLocation */
+  let currentFilter = null;
+  let currentMediums = null;
+  let currentLocation = null;
+  let params = [];
+  /* Set currentFilter, currentMediums, currentLocation based on url params */
+  if(location?.search){
+    if(location.search.split("?").length > 1 ){
+      params = location.search.split("?")[1].split("&");
+    }
+    params.forEach((param) => {
+      let p = param.split("=")[0];
+      let v = param.split("=")[1];
+      if(p == "filter"){
+        currentFilter = v
+      }else if(p == "medium" ){
+        let ve = v.split("%20").join(" ") //handle spaces
+        currentMediums = ve.split(',')
+      }else if(p == "location"){
+        let ve = v.split("%20").join(" ") //handle spaces
+        currentLocation = ve
+      }
+    })
+  }
+
+
+  /* Figure out possible mediums & locations */
+
+  let mediums = [];
+  let locations = [];
   
-  const site = (data || {}).site;
-  const globalLanguages = site.languages;
-  const artists = (data || {}).creators.edges
-  const page = (data || {}).page.edges[0].node
-  const languagePhrases = (data || {}).languagePhrases?.edges;
+  /* loop through all artists and collate different mediums and locations */
   artists.map(function(artist, index){
     let exhibition = false;
     artist.node.projects.map(function(project,index){
@@ -196,48 +197,53 @@ const ExhibitionPage = props => {
       })
     }
   })
+  /* flatten arrays */
+  locations = [...new Set(locations)];
+  mediums = [...new Set(mediums)];
+
+  /******************************/
+  /* event handlers for filters */
+  /******************************/
+  
+  /* Filtering by artist type */
   function handleFilter(e){
     let value = e.target.value;
     if(currentFilter){
       let params = location.href.split("?")[1]
       params = params.split("&");
       let newParams =[]
-      
       params.forEach((node) =>{
         if(node.split("=")[0] == "filter"){
-          let pfilter = node.split("=")[1]
           if(value == "all"){
             node = null
           }else{
            node = "filter="+ value
-          }
-     
-          
+          } 
         }
         if(node) newParams.push(node)
       })
       newParams = newParams.join("&")
       if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
-    
-    }else{
-    let newParams;
+    } else {
+      let newParams;
       if(location.search){
         newParams = location.href + "&filter=" + value
-       }else{
+       } else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "filter=" + value
+       } else {
         newParams = location.href + "?filter=" + value
        }
-  
-        if(typeof window != `undefined`) window.location.href = newParams
-          }
+      if(typeof window != `undefined`) window.location.href = newParams
+    }
    
   }
+/* Filtering by artist location */
   function handleLocation(e){
     let value = e.target.value;
     if(currentLocation){
       let params = location.href.split("?")[1]
       params = params.split("&");
       let newParams =[]
-      
       params.forEach((node) =>{
         if(node.split("=")[0] == "location"){
           let pfilter = node.split("=")[1]
@@ -246,34 +252,27 @@ const ExhibitionPage = props => {
           }else{
            node = "location="+ value
           }
-          
         }
         if(node) newParams.push(node)
       })
       newParams = newParams.join("&")
       if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
-    
     }else {
       let newParams;
       if(location.search){
         newParams = location.href + "&location=" + value
+       }else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "location=" + value
        }else{
         newParams = location.href + "?location=" + value
        }
-  
-        if(typeof window != `undefined`) window.location.href = newParams
-      
+      if(typeof window != `undefined`) window.location.href = newParams   
     }
   }
+/* Filtering by artist medium */
   function handleMedium(e){
     let value = e.target.value;
-    if(artistMediums.includes(value)){
-      setReset(false)
-      setArtistMediums((prevArtistMediums) => [
-        ...prevArtistMediums,
-        value,
-       ]);
-    }else if(currentMediums?.includes(value)){
+    if(currentMediums?.includes(value)){ //if deselecting the option
         let params = location.href.split("?")[1]
         params = params.split("&");
         let newParams =[]
@@ -281,6 +280,7 @@ const ExhibitionPage = props => {
         params.forEach((node) =>{
           if(node.split("=")[0] == "medium"){
             let mediums = node.split("=")[1]
+            mediums = mediums.split("%20").join(" ")
             mediums = mediums.split(',')
             let idx = mediums.indexOf(value);
             if (idx != -1) mediums.splice(idx, 1);
@@ -297,7 +297,7 @@ const ExhibitionPage = props => {
         newParams = newParams.join("&")
         if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
       
-    }else if(currentMediums?.length > 0){
+    }else if(currentMediums?.length > 0){ //if selecting the option
       let params = location.href.split("?")[1]
       params = params.split("&");
       let newParams =[]
@@ -316,38 +316,18 @@ const ExhibitionPage = props => {
     
     }else{
       let newParams
-     if(location.search){
-      newParams = location.href + "&medium=" + value
-     }else{
-      newParams = location.href + "?medium=" + value
-     }
-
+      if(location.search){
+        newParams = location.href + "&medium=" + value
+      }else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "medium=" + value
+      }else{
+        newParams = location.href + "?medium=" + value
+      }
       if(typeof window != `undefined`) window.location.href = newParams
-    
     }
+  }
 
-    // } else{
-    //   if(artistMediums.length == 1){
-    //     setReset(true)
-    //   }else{
-    //     setReset(false)
-    //   }
-    //   let newArr = artistMediums
-    //   let idx = newArr.indexOf(value);
-    //   if (idx != -1){
-    //     newArr.splice(idx, 1);
-    //   } 
-    //   setArtistMediums(newArr)
-    // }
-    
-  }
-  locations = [...new Set(locations)];
-  mediums = [...new Set(mediums)];
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    );
-  }
+  /* Create artist cards based on current filters */
 
   let artistCards = []
   artists.map(function(node, index){
@@ -369,48 +349,26 @@ const ExhibitionPage = props => {
     }
     
 
-      if(artistMediums.length > 0){
-        let includesMedium = false;
-        node.node.medium?.map(function(node,index){
-          if(artistMediums.includes(node)){
-            includesMedium = true;
-          }
-        })
-        if(!includesMedium){
-          show = false;
-        } 
-      } else if(currentMediums?.length > 0 ){
-        let includesMedium = false;
-        node.node.medium?.map(function(node,index){
-          if(currentMediums?.includes(node)){
-            includesMedium = true;
-          }
-        })
-        if(!includesMedium){
-          show = false;
-        }
-      }else{
-        show = true;
-      }
-      if(reset){
-        show = true
-      }
-
-
-    if(((filter == "traveling" || currentFilter == "traveling") && !node.node.traveling) || ((filter == "commissioned" || currentFilter == "commissioned") && !node.node.commissioned) || ((filter == "regional" || currentFilter == "regional") && !node.node.regional) || ((filter == "studentWork" || currentFilter == "student") && !node.node.studentWork)){
-      show = false
-    }
-    if(artistLocation !== "all"){
-      let includesLocation = false;
-      node.node.locations?.map(function(node,index){
-        if(node.name == artistLocation){
-          includesLocation = true;
+    if(currentMediums?.length > 0 ){
+      let includesMedium = false;
+      node.node.medium?.map(function(node,index){
+        if(currentMediums?.includes(node)){
+          includesMedium = true;
         }
       })
-      if(!includesLocation){
+      if(!includesMedium){
         show = false;
       }
-    }else if(currentLocation){
+    }else{
+      show = true;
+    }
+      
+
+
+    if(((currentFilter == "traveling") && !node.node.traveling) || ((currentFilter == "commissioned") && !node.node.commissioned) || ((currentFilter == "regional") && !node.node.regional) || ((currentFilter == "student") && !node.node.studentWork)){
+      show = false
+    }
+    if(currentLocation){
       let includesLocation = false;
       node.node.locations?.map(function(node,index){
         if(node.name == currentLocation){
@@ -420,9 +378,7 @@ const ExhibitionPage = props => {
       if(!includesLocation){
         show = false;
       }
-    }
-
-    
+    }  
     if(show && absolutelynoshow){             
       projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
       artistCards.push( <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
@@ -466,7 +422,7 @@ const ExhibitionPage = props => {
             {mediums.map(function(node, index){
                 return(
                   <>
-                  <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox" checked={(currentMediums?.includes(node) && artistMediums.length < 1) ? true : ''}/>
+                  <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox" checked={(currentMediums?.includes(node)) ? true : ''}/>
                     <label className={filterStyles.checkBoxLabel} for={"check-"+index}>
                     {node} </label>
                   </>
@@ -479,7 +435,7 @@ const ExhibitionPage = props => {
             <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-location" onChange={handleLocation}>
               <option value={'all'}>{translate(languagePhrases, 'allLocations', theme)}</option>
               {locations.map(function(node, index){
-                return(<option value={node} selected={(currentLocation == node && artistLocation == "all") ? true : false}>{node}</option>)
+                return(<option value={node} selected={(currentLocation == node) ? true : false}>{node}</option>)
               })}
             </select>
               )
