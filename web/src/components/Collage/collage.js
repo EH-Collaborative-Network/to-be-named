@@ -11,7 +11,7 @@ import two from "./composite.jpg"
 import refusal from "./refusal_small.gif";
 import {ReactP5Wrapper} from "react-p5-wrapper";
 import React from "react";
-import * as styles from "./map.module.css";
+import * as styles from "./collage.module.css";
 import {Link} from "gatsby";
 import TranslatedPhrase from "../TranslationHelpers/translatedPhrase";
 
