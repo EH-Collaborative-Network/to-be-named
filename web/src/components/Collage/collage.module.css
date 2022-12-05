@@ -62,11 +62,12 @@
   background: var(--color-gray);
   padding:10px;
   display: inline-block;
-  
 }
 .enter a h4{
-  font-size: var(--font-large-size);
-  
+  font-size: var(--font-base-size);
+  @media (--media-min-small) {
+    font-size: var(--font-large-size);
+  }
 }
 .enter:hover{
   opacity: 0.9;

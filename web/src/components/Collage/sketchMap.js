@@ -20,7 +20,11 @@ function sketch (p) {
             }
             p.background(0)
             p.noStroke();
-            p.image(img,0,0,window.innerWidth,window.innerHeight)
+            if(window?.innerWidth <= 768){
+              p.image(img,(-1 * (((window.innerHeight * 1.2) - window.innerHeight)/2)),0,window.innerHeight * 1.2,window.innerHeight);
+            }else{
+              p.image(img,0,0,window.innerWidth,window.innerHeight);
+            }
 
             let loader = document.getElementById('loader');
             loader.classList.add('off')
@@ -90,8 +94,11 @@ function sketch (p) {
         }
         p.blendMode(p.BLEND);
         p.background("#00fff");
-        p.image(img,0,0,window.innerWidth,window.innerHeight);
-
+        if(window?.innerWidth <= 768){
+          p.image(img,(-1 * (((window.innerHeight * 1.2) - window.innerHeight)/2)),0,window.innerHeight * 1.2,window.innerHeight);
+        }else{
+          p.image(img,0,0,window.innerWidth,window.innerHeight);
+        }
     }
     class Vein{
         constructor(x,y){

@@ -18,8 +18,11 @@ function sketch2 (p) {
             }
             p.background(255,0,0)
             p.noStroke();
-            p.image(img,0,0,window.innerWidth,window.innerHeight)
-            let loader = document.getElementById('loader2');
+            if(window?.innerWidth <= 768){
+              p.image(img,(-1 * (((window.innerHeight * 1.2) - window.innerHeight)/2)),0,window.innerHeight * 1.2,window.innerHeight);
+            }else{
+              p.image(img,0,0,window.innerWidth,window.innerHeight);
+            }            let loader = document.getElementById('loader2');
             loader.classList.add('off')
         }
         
@@ -87,7 +90,11 @@ function sketch2 (p) {
         }
         p.blendMode(p.BLEND);
         p.background("#00fff");
-        p.image(img,0,0,window.innerWidth,window.innerHeight);
+        if(window?.innerWidth <= 768){
+          p.image(img,(-1 * (((window.innerHeight * 1.2) - window.innerHeight)/2)),0,window.innerHeight * 1.2,window.innerHeight);
+        }else{
+          p.image(img,0,0,window.innerWidth,window.innerHeight);
+        }
 
     }
     class Vein{
