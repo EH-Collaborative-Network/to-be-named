@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { graphql } from "gatsby";
 import Container from "../components/Container/container";
 import BlockContent from "../components/TranslationHelpers/block-content";
@@ -137,6 +137,8 @@ const ExhibitionPage = props => {
   const artists = (data || {}).creators.edges
   const page = (data || {}).page.edges[0].node
   const languagePhrases = (data || {}).languagePhrases?.edges;
+ 
+
   if (errors) {
     return (
       <Layout>
@@ -150,11 +152,16 @@ const ExhibitionPage = props => {
     );
   }
   /* Artist Type = currentFilter, Mediums = currentMediums, Location = currentLocation */
-  let currentFilter = null;
-  let currentMediums = null;
-  let currentLocation = null;
+  // let currentFilter = null;
+  // let currentMediums = null;
+  // let currentLocation = null;
+  const [currentFilter, setCurrentFilter] = useState(null);
+  const [currentMediums, setCurrentMediums] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   let params = [];
   /* Set currentFilter, currentMediums, currentLocation based on url params */
+    useEffect(() => {
+
   if(location?.search){
     if(location.search.split("?").length > 1 ){
       params = location.search.split("?")[1].split("&");
@@ -163,16 +170,20 @@ const ExhibitionPage = props => {
       let p = param.split("=")[0];
       let v = param.split("=")[1];
       if(p == "filter"){
-        currentFilter = v
+        // currentFilter = v
+        setCurrentFilter(v)
       }else if(p == "medium" ){
         let ve = v.split("%20").join(" ") //handle spaces
-        currentMediums = ve.split(',')
+        // currentMediums = ve.split(',')
+        setCurrentMediums(ve.split(','))
       }else if(p == "location"){
         let ve = v.split("%20").join(" ") //handle spaces
-        currentLocation = ve
+        setCurrentLocation(ve)
       }
     })
   }
+    }, []);
+
 
 
   /* Figure out possible mediums & locations */
