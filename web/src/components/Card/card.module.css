@@ -23,6 +23,10 @@
 }
 .oneColumn .root{
     position: relative;
+    @media (--media-min-medium) {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 .oneColumn figure, .oneColumn figure div, .oneColumn img{
     height: 30vh;
@@ -33,17 +37,15 @@
 .oneColumn .description{
     position:relative;
     @media (--media-min-medium) {
-        position:absolute;
+        max-width: 80%;
     }
 }
 .oneColumn figure{
     float:none;
-    position:relative;
     right:0;
     max-width: 100%;
     margin:0;
     @media (--media-min-medium) {
-        float:right;
         max-width: 50%;
     }
 }
