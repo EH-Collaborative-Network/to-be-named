@@ -84,6 +84,10 @@ export const query = graphql`
           _id
         }
       }
+      mainLink{
+        url
+        text
+      }
       media{
         embed{
           embed
@@ -119,6 +123,7 @@ export const query = graphql`
             _id
           }
           altText
+          caption
         }
       }
       descriptions{
@@ -202,10 +207,15 @@ const ProjectTemplate = props => {
         </div>
         }
         <h1 className="project-title"><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
-        {page.subtitles &&
+        {(page.subtitles || page.mainLink) &&
         <div className='top-title'>
+          {page.subtitles &&
           <TranslatedTitle translations={(preview && previewData) ? previewData.subtitles : page.subtitles}/>
-        </div>
+          }
+          { page.mainLink &&
+          <a href={page.mainLink.url}>{page.mainLink.text}</a>
+          }
+          </div>
         }
         <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/></div>
         {page.media?.length > 0 &&
