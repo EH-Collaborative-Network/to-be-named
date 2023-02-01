@@ -4,28 +4,28 @@ import Helmet from "react-helmet";
 
 
 function SEO({lang}) {
-  let keywords = ["EHCN", "The Experimental Humanities Collaborative Network", "Open Society University Network", "OSUN","Open Society"]
+  let keywords = ["EHCN", "The Experimental Humanities Collaborative Network", "Open Society University Network", "OSUN","Open Society", "To Be—Named", "To Be Named"]
   return (
           <Helmet
             htmlAttributes={{ lang }}
-            title={"EHCN"}
-            titleTemplate={"EHCN"}
+            title={"To Be—Named"}
+            titleTemplate={"To Be—Named"}
             meta={[
               {
                 name: "description",
-                content: "The Experimental Humanities Collaborative Network is a global network rethinking the humanities in the light of changing technologies, our increasingly connected planet, the ongoing ecological crisis, and the need to create more inclusive institutions."
+                content: "To Be—Named is a multi-site, new media art exhibition & edited volume focused on how names are created and used to shape, reshape, and sometimes mis-shape, our worlds and identities."
               },
               { 
                 name: "google-site-verification",
-                content: "zSNANb4AJmoBGphdqdjRqJTpXd7KqCVNRIxVPJPOfdw",
+                content: "z96MJDLw-1NyJ7b66Q5M3dx7qOg65JLp11aJBe0NxmY",
               }, 
               {
                 property: "og:title",
-                content: "The Experimental Humanities Collaborative Network"
+                content: "To Be—Named"
               },
               {
                 property: "og:description",
-                content: "The Experimental Humanities Collaborative Network is a global network rethinking the humanities in the light of changing technologies, our increasingly connected planet, the ongoing ecological crisis, and the need to create more inclusive institutions."
+                content: "To Be—Named is a multi-site, new media art exhibition & edited volume focused on how names are created and used to shape, reshape, and sometimes mis-shape, our worlds and identities."
               },
               {
                 property: "og:type",
@@ -33,11 +33,11 @@ function SEO({lang}) {
               },
               {
                 name: "twitter:title",
-                content: "EHCN"
+                content: "To Be—Named"
               },
               {
                 name: "twitter:description",
-                content: "The Experimental Humanities Collaborative Network is a global network rethinking the humanities in the light of changing technologies, our increasingly connected planet, the ongoing ecological crisis, and the need to create more inclusive institutions."
+                content: "To Be—Named is a multi-site, new media art exhibition & edited volume focused on how names are created and used to shape, reshape, and sometimes mis-shape, our worlds and identities."
               }
             ].concat(
                 keywords && keywords.length > 0
