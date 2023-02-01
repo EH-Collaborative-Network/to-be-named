@@ -54,7 +54,7 @@ const Map = ({phrase, translations}) => {
             <ReactP5Wrapper sketch={sketch} />
             </>
         }
-        <img src={refusal}/>
+        <img draggable="false" src={refusal}/>
         <div className={styles.enter}>
           <Link to="/home/"><h4><TranslatedPhrase translations={translations} phrase={phrase}/>→</h4></Link>
         </div>
