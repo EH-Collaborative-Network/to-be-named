@@ -369,6 +369,7 @@ li.alice-carousel__stage-item {
 }
 .top-text.about .wrapper *{
   max-height: 80px !important;
+  width: auto;
 }
 .alice-carousel__prev-btn, .alice-carousel__next-btn{
   position: absolute;
