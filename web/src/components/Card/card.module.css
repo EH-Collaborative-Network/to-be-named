@@ -8,6 +8,7 @@
     margin-bottom:15px;
     flex-basis:100%;
     min-height: 100px;
+    max-width: 900px;
 }
 .root a{
     overflow: hidden;
@@ -28,19 +29,20 @@
         justify-content: space-between;
     }
 }
+
 .oneColumn figure, .oneColumn figure div, .oneColumn img{
     height: 30vh;
     @media (--media-min-medium) {
         height: 20vh; 
     }
 }
-.oneColumn .description{
+.root > *:first-child{
     position:relative;
     @media (--media-min-medium) {
         max-width: 80%;
     }
 }
-.oneColumn figure{
+.root > *:last-child{
     float:none;
     right:0;
     max-width: 100%;

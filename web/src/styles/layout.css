@@ -32,7 +32,7 @@ a:link, a:visited{
   font-size: var(--font-medium-size)
 }
 .top-text{
-  max-width: 80%;
+  max-width: 900px;
 }
 .top-text a{
   background-color: var(--color-gray);
@@ -388,7 +388,7 @@ li.alice-carousel__stage-item {
   margin: 10px 0;
   max-width: auto;
   @media(--media-min-medium){
-    max-width:80%;
+    max-width:900px;
   }
 }
 

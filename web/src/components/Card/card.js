@@ -8,9 +8,10 @@ const Card = ({ titles, slug, image, descriptions,languagePhrases, globalLanguag
   return(
     <div className={styles.root + " " + extra}>
       {slug &&
+      <>
       <Link to={slug}>
         {titles &&
-          <h2><TranslatedTitle translations={titles}/>→</h2>
+          <h2><TranslatedTitle translations={titles}/>→</h2> 
         }
         
         {descriptions &&
@@ -18,10 +19,13 @@ const Card = ({ titles, slug, image, descriptions,languagePhrases, globalLanguag
             {descriptions}
           </div>
         }
+        </Link>
         {image &&
-          <Figure node={image} />
+          <Link to={slug}>
+            <Figure node={image} />
+          </Link>
         }
-      </Link>
+      </>
       }
       {!slug &&
       <>
