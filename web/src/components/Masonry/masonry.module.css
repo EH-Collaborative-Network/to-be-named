@@ -32,6 +32,9 @@
 .inner > div{
     margin-bottom:25px;
 }
+.inner > div > div > div{
+    margin-bottom:1em;
+}
 .inner iframe{
     pointer-events:none;
     width: 100%;
