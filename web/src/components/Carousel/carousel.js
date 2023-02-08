@@ -37,22 +37,24 @@ const Carousel = ({ media, imageOnly }) => {
         
       }else if(track.classList.contains('rtl') && inner.scrollLeft >= (inner.scrollWidth - inner.offsetWidth)){
         // inner.scrollLeft -= 0.5;
-        valToScroll -= 3
-        setDir(dir => 1);
+        valToScroll -= 2
+        track.classList.remove('rtl')
+        track.classList.add('ltr')
       }else if(track.classList.contains('ltr') && inner.scrollLeft <= 0){
         // inner.scrollLeft += 0.5;
-        valToScroll += 3
-        setDir(dir => 0);
+        valToScroll += 2
+        track.classList.remove('ltr')
+        track.classList.add('rtl')
       }else if(track.classList.contains('ltr')){
         // inner.scrollLeft -= 0.5;
-        valToScroll -= 3
+        valToScroll -= 2
       }else{
         // inner.scrollLeft += 0.5;
-        valToScroll += 3
+        valToScroll += 2
       }
       inner.scrollBy({left: valToScroll, behavior: "smooth"})
   
-    }, 50);
+    }, 30);
 
     return () => clearInterval(interval);
 
