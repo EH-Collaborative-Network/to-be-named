@@ -415,7 +415,7 @@ const VolumePage = props => {
               )
             }}
             </LangContext.Consumer>
-            <h4 style={{"marginBottom":"0"}}><TranslatedPhrase translations={languagePhrases} phrase={'mediums'}/>:</h4>
+            <h4><TranslatedPhrase translations={languagePhrases} phrase={'mediums'}/>:</h4>
             {mediums.map(function(node, index){
                 return(
                   <>

@@ -50,6 +50,10 @@
     margin-right:3px;
     border-left: 5px solid var(--color-gray);
     height:100%;
+    opacity: 0;
+    @media (--media-min-medium) {
+        opacity:1;
+    }
 }
 .checkBox:checked +label{
     background-color: var(--color-gray);
@@ -58,7 +62,12 @@
 }
 .checkBox + label{
     background-color: var(--color-gray);
-    margin-bottom:5px;
+    margin-bottom:10px;
+    padding:5px;
+    @media (--media-min-medium) {
+        margin-bottom:5px; 
+        padding:0;
+    }
 }
 .checkBox:hover +label{
     border-left: 4px solid var(--color-black);
@@ -67,7 +76,12 @@
 .filter label{
     display: block;
 }
-
+.filter > h4{
+    margin-bottom:5px;
+    @media (--media-min-medium) {
+        margin-bottom:0;
+    }
+}
 .filterArtist{
     background-color: transparent;
     width:100%;
