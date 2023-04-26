@@ -379,6 +379,7 @@ const ExhibitionPage = props => {
     if(((currentFilter == "traveling") && !node.node.traveling) || ((currentFilter == "commissioned") && !node.node.commissioned) || ((currentFilter == "regional") && !node.node.regional) || ((currentFilter == "student") && !node.node.studentWork)){
       show = false
     }
+    
     if(currentLocation){
       let includesLocation = false;
       node.node.locations?.map(function(node,index){
@@ -390,8 +391,15 @@ const ExhibitionPage = props => {
         show = false;
       }
     }  
-    if(show && absolutelynoshow){             
+    if(show && absolutelynoshow){   
+      if((currentFilter == "regional") && node.node.regional){
+        projectLinks.unshift(<em>{node.node.locations?.map(function(node,index){
+          return (node.name)
+      })}</em>)
+      }          
+     
       projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
+      
       artistCards.push( <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
     } 
   })
