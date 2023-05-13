@@ -219,6 +219,36 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'artworkIndex',
+      type: 'string',
+      title: 'Artwork Index'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'contact',
+      type: 'string',
+      title: 'Contact'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'peopleAndPartners',
+      type: 'string',
+      title: 'People & Partners'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'seeAllExhibitionLocations',
+      type: 'string',
+      title: 'See All Exhibition Locations'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'seeAllArtworks',
+      type: 'string',
+      title: 'See All Artworks'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'selectCat',
       type: 'string',
       title: 'Select a category'

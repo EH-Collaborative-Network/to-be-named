@@ -43,18 +43,22 @@
 }
 .checkBoxLabel{
     cursor: pointer;
+
 }
-.checkBoxLabel::before{
+/* .checkBoxLabel::before{
     content:"";
-    display: inline;
+    display: inline-block;
     margin-right:3px;
-    border-left: 5px solid var(--color-gray);
     height:100%;
     opacity: 0;
     @media (--media-min-medium) {
         opacity:1;
     }
+} */
+.checkBoxLabel:hover{
+    border-left: 4px solid var(--color-gray);
 }
+
 .checkBox:checked +label{
     background-color: var(--color-gray);
     border-left: 4px solid var(--color-black);
@@ -64,9 +68,11 @@
     background-color: var(--color-gray);
     margin-bottom:10px;
     padding:5px;
+    font-size: 0.8rem;
     @media (--media-min-medium) {
         margin-bottom:5px; 
         padding:0;
+        padding-left: 8px;
     }
 }
 .checkBox:hover +label{

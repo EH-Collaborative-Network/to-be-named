@@ -12,11 +12,9 @@ import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
-import * as styles from "../components/Card/card.module.css";
 import { Link } from "@reach/router";
-import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
+import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import sanityClient from "@sanity/client";
-import Card from "../components/Card/card"
 const client = sanityClient({
   projectId: '46orb7yp',
   dataset: 'production',
@@ -25,7 +23,7 @@ const client = sanityClient({
   useCdn: true, // `false` if you want to ensure fresh data
 })
 export const query = graphql`
-  query ResearchThreadsPageQuery {
+  query ContactPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
@@ -35,22 +33,6 @@ export const query = graphql`
         code
       }
     }
-    page: allSanityPage(filter: {slug: {current: {eq: "exhibition"}}}) {
-      edges {
-        node {
-          id
-          _id
-          bodies{
-            _rawText(resolveReferences: { maxDepth: 20 })
-            language{
-              id
-              name
-              code
-            }
-          }
-        }
-      }
-    }
     languagePhrases: allSanityLanguage {
       edges {
         node {
@@ -58,7 +40,10 @@ export const query = graphql`
           code
           about
           volume
+          contact
+          artworkIndex
           exhibition
+          peopleAndPartners
           upcomingEvents
           researchThreads
           availableIn
@@ -66,14 +51,11 @@ export const query = graphql`
         }
       }
     }
-    threads: allSanityResearchThread {
+    ap: allSanityPage(filter: {slug: {current: {eq: "contact"}}}) {
       edges {
         node {
           id
           _id
-          slug {
-            current
-          }
           titles{
             text
             language{
@@ -82,21 +64,7 @@ export const query = graphql`
               code
             }
           }
-          mainImage {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            asset {
-              _id
-            }
-            altText
-          }
-          descriptions{
+          bodies{
             _rawText(resolveReferences: { maxDepth: 20 })
             language{
               id
@@ -110,7 +78,7 @@ export const query = graphql`
   }
 `;
 
-const ResearchThreadsPage = props => {
+const ContactPage = props => {
   const { data, errors } = props;
 
   if (errors) {
@@ -123,9 +91,26 @@ const ResearchThreadsPage = props => {
 
   const site = (data || {}).site;
   const globalLanguages = site.languages;
-  const threads = (data || {}).threads.edges
+  const ap = (data || {}).ap.edges[0]?.node?.bodies;
+  let previewQuery = '*[_id == "drafts.'+ (data || {}).ap.edges[0]?.node?._id +'"]{ _id, titles[]{language->{code}, text}, bodies[]{language->{code}, text}}'
+  const location = useLocation();
+  let preview = false;
+  const [previewData, setPreviewData] = useState(false)
+  if(location?.search){
+    preview = queryString.parse(location.search).preview;
+  }
+  if(preview && !previewData){
+    const fetchData = async () => {
+      setPreviewData(await client.fetch(previewQuery).then((data) => {
+        return(data[0]);
+      }))
+    }
+    fetchData()
+  }
+  const titles = (data || {}).ap.edges[0]?.node?.titles;
   const languagePhrases = (data || {}).languagePhrases?.edges;
-  const page = (data || {}).page.edges[0].node;
+
+
 
 
 
@@ -142,24 +127,14 @@ const ResearchThreadsPage = props => {
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Container>
           <h1 hidden>Welcome to {site.title}</h1>
-          <h1><TranslatedPhrase translations={languagePhrases} phrase={'researchThreads'}/></h1>
-          <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
+          <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : titles}/></h1>
+          <div className="top-text two-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : ap} globalLanguages={globalLanguages}/></div>
           <br/>
-          <div className={styles.cardWrapper}>
-          {threads.map(function(node, index){
-            return <Card image={node.node.mainImage} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} slug={"/thread/"+node.node.slug.current} key={index}/> 
-          })}
-          </div>
         </Container>
       </Layout>
       
     </>
   );
-
-
-
-
-
 };
 
-export default ResearchThreadsPage;
+export default ContactPage;

@@ -3,7 +3,7 @@ import { MdPerson } from "react-icons/md";
 export default {
   name: 'person',
   type: 'document',
-  title: 'Person/Organization/Collaborator',
+  title: 'Person',
   icon: MdPerson,
   fields: [
     {
@@ -23,9 +23,7 @@ export default {
       type: 'array',
       description:"select add item to add a bio in any language (including English)",
       of: [{type: 'translation'}],
-  }
-        
-    
+    }    
   ],
   preview: {
     select: {

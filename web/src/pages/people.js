@@ -40,7 +40,10 @@ export const query = graphql`
           code
           about
           volume
+          contact
+          artworkIndex
           exhibition
+          peopleAndPartners
           upcomingEvents
           researchThreads
           availableIn
@@ -48,7 +51,7 @@ export const query = graphql`
         }
       }
     }
-    ap: allSanityPage(filter: {slug: {current: {eq: "exhibition"}}}) {
+    ap: allSanityPage(filter: {slug: {current: {eq: "people-and-partners"}}}) {
       edges {
         node {
           id

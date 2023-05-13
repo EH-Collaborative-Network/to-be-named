@@ -8,12 +8,17 @@ import BlockContent from "../components/TranslationHelpers/block-content";
 import { useLocation } from '@reach/router';
 import Masonry from "../components/Masonry/Masonry";
 import {Link} from "gatsby";
+import * as styles from "../components/Time/time.module.css"
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
+import createDateTime from "../components/Time/createDateTime";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import { id } from "date-fns/locale";
+import TimeZoneList from "../components/Time/timeZoneList";
+import LangContext from "../components/context/lang";
+import translateTime from "../components/Time/translateTime";
 
 export const query = graphql`
-  query ProjectQuery($id: String!) {
+  query ExhibitionQuery($id: String!) {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
@@ -29,12 +34,13 @@ export const query = graphql`
           name
           code
           about
+          seeAllExhibitionLocations
           volume
+          timezone
           exhibition
           contact
           artworkIndex
           peopleAndPartners
-          seeAllArtworks
           upcomingEvents
           researchThreads
           availableIn
@@ -42,9 +48,10 @@ export const query = graphql`
         }
       }
     }
-    project: sanityProject(id: { eq: $id }) {
+  
+    exhibition: sanityExhibition(id: { eq: $id }) {
       id
-      mainImage {
+      image {
         crop {
           _key
           _type
@@ -64,10 +71,6 @@ export const query = graphql`
         asset {
           _id
         }
-      }
-      mainLink{
-        url
-        text
       }
       media{
         embed{
@@ -104,10 +107,17 @@ export const query = graphql`
             _id
           }
           altText
-          caption
         }
       }
-      descriptions{
+      statement{
+        _rawText(resolveReferences: { maxDepth: 20 })
+        language{
+          id
+          name
+          code
+        }
+      }
+      dates{
         _rawText(resolveReferences: { maxDepth: 20 })
         language{
           id
@@ -116,14 +126,6 @@ export const query = graphql`
         }
       }
       titles{
-        text
-        language{
-          id
-          name
-          code
-        }
-      }
-      subtitles{
         text
         language{
           id
@@ -140,74 +142,33 @@ export const query = graphql`
   }
 `;
 
-const ProjectTemplate = props => {
+const ExhibitionTemplate = props => {
   const { data, errors } = props;
-  const page = data && data.project;
-  const creator = data && data.artist?.edges[0]?.node
+  const page = data && data.exhibition;
   const site = (data || {}).site;
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
-  let previewQuery = '*[_id == "drafts.'+ page._id +'"]{ _id, titles[]{language->{code}, text}, bodies[]{language->{code}, text}, media[]{image{asset->, caption},embed,pdf{asset->, caption}}}'
   const location = useLocation();
-  let preview = false;
-  let next = false;
-  if(creator?.projects?.length > 1){
-  for(let i = 0; i < creator.projects.length; i++){
-      if(creator.projects[i].id == page.id){
-        if(i == creator.projects.length - 1){
-          next = 0;
-        }else{
-          next = i + 1;
-        }
-      }
-    }
-  }
-  const [previewData, setPreviewData] = useState(false)
-  if(location?.search){
-    preview = queryString.parse(location.search).preview;
-  }
-  if(preview && !previewData){
-    const fetchData = async () => {
-      setPreviewData(await client.fetch(previewQuery).then((data) => {
-        return(data[0]);
-      }))
-    }
-    fetchData()
-  }
+ 
   return (
     <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {creator &&
-        <div className='top-title'>
-          <Link to={"/creator/" + creator.slug.current }>{creator.name}</Link>
-          {(next !== false) &&
-            <Link to={"/project/" + creator.projects[next].slug.current }><TranslatedTitle translations={creator.projects[next].titles}/>→</Link>
-          }
-          <div className='breadcrumb'><TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></div>
+        <div className="top-title">
+        <div className='breadcrumb'><TranslatedPhrase translations={languagePhrases} phrase={'seeAllExhibitionLocations'}/></div>
         </div>
-        }
-        <h1 className="project-title"><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
-        {(page.subtitles || page.mainLink) &&
-        <div className='top-title'>
-          {page.subtitles &&
-          <TranslatedTitle translations={(preview && previewData) ? previewData.subtitles : page.subtitles}/>
-          }
-          { page.mainLink &&
-          <a href={page.mainLink.url}>{page.mainLink.text}</a>
-          }
-                    <div className='breadcrumb'><TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></div>
-
-          </div>
-        }
-        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/></div>
+        <h1><TranslatedTitle translations={page.titles}/></h1>
+        <div className="top-title">
+          <BlockContent blocks={ page.dates}/>
+        </div>
+        <div className="top-text one-column"><BlockContent blocks={ page.statement}/></div>
         {page.media?.length > 0 &&
-           <Masonry media={(preview && previewData) ? previewData.media : page.media}/>
+           <Masonry media={ page.media}/>
         }
       </Container>
     </Layout>
   );
 };
 
-export default ProjectTemplate;
+export default ExhibitionTemplate;

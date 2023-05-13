@@ -22,7 +22,7 @@ const client = sanityClient({
   useCdn: true, // `false` if you want to ensure fresh data
 })
 export const query = graphql`
-  query VolumePageQuery {
+  query ArtworkIndexPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
@@ -58,7 +58,7 @@ export const query = graphql`
         }
       }
     }
-    page: allSanityPage(filter: {slug: {current: {eq: "volume"}}}) {
+    page: allSanityPage(filter: {slug: {current: {eq: "artwork-index"}}}) {
       edges {
         node {
           id
@@ -108,7 +108,6 @@ export const query = graphql`
                 current
               }
               exhibition
-              volume
               commissioned
               traveling
               regional
@@ -150,7 +149,7 @@ export const query = graphql`
   }
 `;
 
-const VolumePage = props => {
+const ArtworkIndexPage = props => {
   const { data, errors, location } = props;
   const site = (data || {}).site;
   const globalLanguages = site.languages;
@@ -201,6 +200,9 @@ const VolumePage = props => {
         let ve = v.split("%20").join(" ") //handle spaces
         // currentMediums = ve.split(',')
         setCurrentThreads(ve.split(','))
+      }else if(p == "location"){
+        let ve = v.split("%20").join(" ") //handle spaces
+        setCurrentLocation(ve)
       }
     })
   }
@@ -217,9 +219,10 @@ const VolumePage = props => {
   projects.map(function(project, index){
     let exhibition = false;
 
-      if(project.node.volume){
+      if(project.node.exhibition){
         exhibition = true;
       }
+
     if(exhibition){
       // project.node.medium.map(function(node, index){
       //     mediums.push(node)
@@ -431,9 +434,7 @@ const VolumePage = props => {
     let show = false;
     let absolutelynoshow = true;
     let projectLinks = []
-
-
-      if(node.node.volume){
+      if(node.node.exhibition){
         image = node.node.mainImage;
         show = true;
         projectLinks.push(
@@ -494,7 +495,7 @@ const VolumePage = props => {
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Container>
           <h1 hidden>Welcome to {site.title}</h1>
-          <h1><TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></h1>
+          <h1><TranslatedPhrase translations={languagePhrases} phrase={'exhibition'}/></h1>
           <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
           <br/>
           <div className={filterStyles.filterWrapper}>
@@ -507,7 +508,19 @@ const VolumePage = props => {
        
           </div>
           <div className={filterStyles.filter}>
-          
+          <LangContext.Consumer>
+            {theme => {
+              return(
+              <select className={filterStyles.filterArtist} id="change-tz" onChange={handleFilter}>
+                <option value={'all'}>{translate(languagePhrases, 'allArtists', theme)}</option>
+                <option value={'traveling'} selected={currentFilter == "traveling" ? true : false}>{translate(languagePhrases, 'traveling', theme)}</option>
+                <option value={'commissioned'} selected={currentFilter == "commissioned" ? true : false}>{translate(languagePhrases, 'commissioned', theme)}</option>
+                <option value={'regional'} selected={currentFilter == "regional" ? true : false}>{translate(languagePhrases, 'regional', theme)}</option>
+                <option value={'student'} selected={currentFilter == "student" ? true : false}>{translate(languagePhrases, 'studentWork', theme)}</option>
+              </select>
+              )
+            }}
+            </LangContext.Consumer>
 
             <>
             <h4><TranslatedPhrase translations={languagePhrases} phrase={'researchThreads'}/>:</h4>
@@ -525,7 +538,7 @@ const VolumePage = props => {
               })
             }
             </>
-            {/* <LangContext.Consumer>
+            <LangContext.Consumer>
             {theme => {
               return(
             <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-location" onChange={handleLocation}>
@@ -536,7 +549,7 @@ const VolumePage = props => {
             </select>
               )
             }}
-            </LangContext.Consumer> */}
+            </LangContext.Consumer>
           </div>
           </div>
           
@@ -547,4 +560,4 @@ const VolumePage = props => {
   );
 };
 
-export default VolumePage;
+export default ArtworkIndexPage;

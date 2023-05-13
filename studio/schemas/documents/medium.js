@@ -1,10 +1,10 @@
-import { MdAutoAwesome } from "react-icons/md";
+import { MdPattern } from "react-icons/md";
 
 export default {
-  name: 'researchThread',
+  name: 'medium',
   type: 'document',
-  title: 'Research Thread',
-  icon: MdAutoAwesome,
+  title: 'Medium',
+  icon: MdPattern,
   fields: [
     {
       name: 'name',

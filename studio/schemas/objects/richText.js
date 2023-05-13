@@ -48,7 +48,7 @@ export default {
           {
             name: 'person',
             type: 'object',
-            title: 'EHCN Personnel',
+            title: 'Person',
             blockEditor: {
               icon: () => '👤'
             },
@@ -78,8 +78,7 @@ export default {
                 to: [
                   { type: 'page' },
                   { type: 'project' },
-                  { type: 'researchThread' },
-                  { type: 'event' },
+                  { type: 'exhibition' },
                 ]
               }
             ]

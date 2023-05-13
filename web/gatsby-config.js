@@ -37,7 +37,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: 'src/assets/images/favicon.png',
+        icon: 'src/assets/images/favicon-32x32.png',
       }
     },
     {
@@ -61,32 +61,6 @@ module.exports = {
         // required.
         query: `
           {
-            allSanityEvent {
-              edges {
-                node {
-                  descriptions {
-                    _rawText(resolveReferences: {maxDepth: 10})
-                    language {
-                      code
-                      name
-                    }
-                  }
-                  id
-                  keywords
-                  name
-                  titles {
-                    text
-                    language {
-                      code
-                      name
-                    }
-                  }
-                  slug {
-                    current
-                  }
-                }
-              }
-            }
             allSanityPage {
               edges {
                 node {
@@ -139,10 +113,10 @@ module.exports = {
                 }
               }
             }
-            allSanityResearchThread {
+            allSanityExhibition {
               edges {
                 node {
-                  descriptions {
+                  statements {
                     _rawText(resolveReferences: {maxDepth: 10})
                     language {
                       code
@@ -164,7 +138,7 @@ module.exports = {
                 }
               }
             }
-            allSanityArtistAuthor{
+            allSanityPerson{
               edges {
                 node {
                   bios {
@@ -176,9 +150,6 @@ module.exports = {
                   }
                   id
                   name
-                  slug {
-                    current
-                  }
                 }
               }
             }
@@ -206,13 +177,7 @@ module.exports = {
         // field above (default: 'id'). This is required.
         normalizer: ({ data }) => {
 
-          let events = data.allSanityEvent.edges.map((edge) => ({
-            id: edge.node.id,
-            descriptions:  edge.node.descriptions,
-            titles: edge.node.titles,
-            slug:edge.node.slug,
-            type: "event"
-          }))
+        
 
           let pages = data.allSanityPage.edges.map((edge) => ({
             id: edge.node.id,
@@ -231,23 +196,22 @@ module.exports = {
             type: "project"
           }))
 
-          let artistAuthors = data.allSanityArtistAuthor.edges.map((edge) => ({
+          let persons = data.allSanityPerson.edges.map((edge) => ({
             id: edge.node.id,
             descriptions:  edge.node.bios,
             name: edge.node.name,
-            slug: edge.node.slug,
-            type: "artistAuthor"
+            type: "person"
           }))
 
-          let threads = data.allSanityResearchThread.edges.map((edge) => ({
+          let exhibitions = data.allSanityExhibition.edges.map((edge) => ({
             id: edge.node.id,
             descriptions:  edge.node.descriptions,
             titles: edge.node.titles,
             slug: edge.node.slug,
-            type: "thread"
+            type: "exhibition"
           }))
 
-          let finalArray = events.concat( projects, threads, pages, artistAuthors)
+          let finalArray = events.concat( projects, exhibitions, pages, persons)
           return(finalArray.flat(1))
         },
       },
