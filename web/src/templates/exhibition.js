@@ -156,7 +156,7 @@ const ExhibitionTemplate = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         <div className="top-title">
-        <div className='breadcrumb'><TranslatedPhrase translations={languagePhrases} phrase={'seeAllExhibitionLocations'}/></div>
+        <Link to="/exhibition" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllExhibitionLocations'}/></Link>
         </div>
         <h1><TranslatedTitle translations={page.titles}/></h1>
         <div className="top-title">

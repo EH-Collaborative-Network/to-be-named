@@ -11,6 +11,7 @@ import LangContext from "../components/context/lang";
 import { Link } from "@reach/router";
 import Card from "../components/Card/card"
 import sanityClient from "@sanity/client";
+import Map from "../components/Map/map";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 import translate from "../components/TranslationHelpers/translate";
@@ -237,8 +238,9 @@ const ExhibitionPage = props => {
           <h1 hidden>Welcome to {site.title}</h1>
           <h1><TranslatedPhrase translations={languagePhrases} phrase={'exhibition'}/></h1>
           <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
+          <Map></Map>
           <br/>
-          <div className={filterStyles.filterWrapper}>
+          <div>
           <div className={styles.oneColumn}>
 
           {exhibitionCards}

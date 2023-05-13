@@ -498,7 +498,7 @@ const VolumePage = props => {
           <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
           <br/>
           <div className={filterStyles.filterWrapper}>
-          <div className={styles.oneColumn}>
+          <div className={styles.cardWrapper}>
 
           {projectCards}
           {projectCards.length < 1 &&

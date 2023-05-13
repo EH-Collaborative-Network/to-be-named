@@ -11,7 +11,7 @@ import {Link} from "gatsby";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import { id } from "date-fns/locale";
-
+import Person from "../components/Person/Person"
 export const query = graphql`
   query ProjectQuery($id: String!) {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -44,6 +44,19 @@ export const query = graphql`
     }
     project: sanityProject(id: { eq: $id }) {
       id
+      artists {
+        id
+          _id
+          name
+          bios{
+            _rawText(resolveReferences: { maxDepth: 20 })
+            language{
+              id
+              name
+              code
+            }
+          }
+      }
       mainImage {
         crop {
           _key
@@ -144,6 +157,7 @@ const ProjectTemplate = props => {
   const { data, errors } = props;
   const page = data && data.project;
   const creator = data && data.artist?.edges[0]?.node
+  const people = data && data.project?.artists
   const site = (data || {}).site;
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
@@ -151,6 +165,7 @@ const ProjectTemplate = props => {
   const location = useLocation();
   let preview = false;
   let next = false;
+  console.log(page)
   if(creator?.projects?.length > 1){
   for(let i = 0; i < creator.projects.length; i++){
       if(creator.projects[i].id == page.id){
@@ -179,13 +194,12 @@ const ProjectTemplate = props => {
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {creator &&
+        {people &&
         <div className='top-title'>
-          <Link to={"/creator/" + creator.slug.current }>{creator.name}</Link>
-          {(next !== false) &&
-            <Link to={"/project/" + creator.projects[next].slug.current }><TranslatedTitle translations={creator.projects[next].titles}/>→</Link>
-          }
-          <div className='breadcrumb'><TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></div>
+          {people.map(function(node, index){
+                return <a key={index}><Person person={node}></Person></a>;
+            })}
+          <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></Link>
         </div>
         }
         <h1 className="project-title"><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
@@ -194,15 +208,15 @@ const ProjectTemplate = props => {
           {page.subtitles &&
           <TranslatedTitle translations={(preview && previewData) ? previewData.subtitles : page.subtitles}/>
           }
-          { page.mainLink &&
-          <a href={page.mainLink.url}>{page.mainLink.text}</a>
-          }
-                    <div className='breadcrumb'><TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></div>
+         
 
           </div>
         }
-        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/></div>
-        {page.media?.length > 0 &&
+        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/> { page.mainLink &&
+          <a style={{"text-decoration":"none"}} href={page.mainLink.url}>{page.mainLink.text}</a>
+          }</div>
+       
+       {page.media?.length > 0 &&
            <Masonry media={(preview && previewData) ? previewData.media : page.media}/>
         }
       </Container>

@@ -8,7 +8,7 @@
     margin-bottom:15px;
     flex-basis:100%;
     min-height: 100px;
-    max-width: 900px;
+    max-width: 1000px;
 }
 .root a{
     overflow: hidden;
@@ -16,15 +16,18 @@
 }
 .root em{
     position: relative;
-    top:-1em;
+    top:0em;
     display: inline-block;
+}
+.root p{
+    margin:0;
 }
 
 .cardWrapper .root{
     flex-basis:100%;
     margin-right:0;
     @media (--media-min-medium) {
-        flex-basis: calc(33% - 15px);
+        flex-basis: calc(50% - 35px);
         margin-right:15px;
     }
 }
@@ -42,13 +45,13 @@
         height: 20vh; 
     }
 }
-.root > *:first-child{
+.oneColumn .root > *:first-child{
     position:relative;
     @media (--media-min-medium) {
         max-width: 80%;
     }
 }
-.root > *:last-child{
+.oneColumn .root > *:last-child{
     float:none;
     right:0;
     max-width: 100%;
@@ -102,6 +105,6 @@
     margin-bottom:0;
     text-decoration: none;
     @media (--media-min-medium) {
-        margin-bottom:15px;
+        margin-bottom:0px;
     }
 }

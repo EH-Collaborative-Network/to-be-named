@@ -34,15 +34,15 @@ a:link, a:visited{
 .top-text{
   max-width: 900px;
 }
-.top-text a{
+.top-text a,.top-title a{
   background-color: var(--color-gray);
   
 }
-.top-text a:hover{
+.top-text a:hover,.top-title a:hover{
   background-color: var(--color-gray);
   padding-left:4px;
 }
-.top-text a:hover::before{
+.top-text a:hover::before, .top-title a:hover::before{
   display:inline;
   content:"";
   left:-4px;
@@ -392,3 +392,19 @@ li.alice-carousel__stage-item {
   }
 }
 
+.breadcrumb{
+  text-decoration: none;
+}
+
+.exhibition-map h5 .hidden-message{
+  display: none;
+}
+.exhibition-map h5:hover .hidden-message{
+  display: inline;
+}
+.exhibition-map .on{
+    opacity: 1;
+    line-height: 24px;
+    font-weight: bold;
+    /* color:lime */
+}

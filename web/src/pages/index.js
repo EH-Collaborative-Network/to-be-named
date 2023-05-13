@@ -9,7 +9,7 @@ import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
-import Map from "../components/Collage/collage";
+import Collage from "../components/Collage/collage";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 
 export const query = graphql`
@@ -96,7 +96,7 @@ const IndexPage = props => {
   }
 
   return (
-    <Map translations={languagePhrases} phrase={"enter"}/>
+    <Collage translations={languagePhrases} phrase={"enter"}/>
   );
 };
 

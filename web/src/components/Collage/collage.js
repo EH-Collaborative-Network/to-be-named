@@ -15,7 +15,7 @@ import * as styles from "./collage.module.css";
 import {Link} from "gatsby";
 import TranslatedPhrase from "../TranslationHelpers/translatedPhrase";
 
-const Map = ({phrase, translations}) => {
+const Collage = ({phrase, translations}) => {
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
   
@@ -62,6 +62,6 @@ const Map = ({phrase, translations}) => {
   )
 };
 
-export default Map;
+export default Collage;
 
 
