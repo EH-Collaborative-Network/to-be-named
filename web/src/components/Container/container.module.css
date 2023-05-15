@@ -30,7 +30,7 @@
 .root p a{
   position:relative;
   display: inline-block;
-  z-index: 0;
+  /* z-index: 0; */
 }
 .root p a:hover::after{
   opacity: 1;

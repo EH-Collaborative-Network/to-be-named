@@ -3,11 +3,14 @@ import { graphql } from "gatsby";
 import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
+import Card from "../components/Card/card";
 import Layout from "../containers/layout";
 import BlockContent from "../components/TranslationHelpers/block-content";
 import { useLocation } from '@reach/router';
 import Masonry from "../components/Masonry/Masonry";
+import Carousel from "../components/Carousel/carousel";
 import {Link} from "gatsby";
+import * as cardStyles from "../components/Card/card.module.css"
 import * as styles from "../components/Time/time.module.css"
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 import createDateTime from "../components/Time/createDateTime";
@@ -48,7 +51,42 @@ export const query = graphql`
         }
       }
     }
-  
+    projects: allSanityProject (filter: {exhibitions: {elemMatch: {id:{eq: $id}} }}){
+      edges{
+        node {
+          titles{
+            text
+            language{
+              id
+              name
+              code
+            }
+          }
+          artists {
+            id
+              _id
+              name
+          }
+          mainImage {
+            crop {
+              _key
+              _type
+              top
+              bottom
+              left
+              right
+            }
+            asset {
+              _id
+            }
+            altText
+          }
+          slug {
+            current
+          }     
+        }
+      }
+    }
     exhibition: sanityExhibition(id: { eq: $id }) {
       id
       image {
@@ -145,11 +183,33 @@ export const query = graphql`
 const ExhibitionTemplate = props => {
   const { data, errors } = props;
   const page = data && data.exhibition;
+  const projects = data && data.projects?.edges;
   const site = (data || {}).site;
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
   const location = useLocation();
- 
+
+    /* Create artist cards based on current filters */
+  let projectCards = []
+  projects.map(function(node, index){
+    let image;
+    let projectLinks = []
+    image = node.node.mainImage;
+    projectLinks.push(
+      <Link key={index} className={styles.blockLink} to={"/project/"+node.node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
+    )  
+    
+    node.node.artists?.map(function(node,index){
+      projectLinks.push(<em>{node.name}</em>)
+    })
+
+    
+    projectCards.push( <Card slug={"/project/"+node.node.slug.current} image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+
+  })
+  let media = []
+  console.log(page.media)
+  
   return (
     <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
@@ -164,8 +224,12 @@ const ExhibitionTemplate = props => {
         </div>
         <div className="top-text one-column"><BlockContent blocks={ page.statement}/></div>
         {page.media?.length > 0 &&
-           <Masonry media={ page.media}/>
+          <Carousel imageOnly={false} media={page.media}/>
         }
+        <div className={cardStyles.cardWrapper}>
+          {projectCards}
+        </div>
+        
       </Container>
     </Layout>
   );
