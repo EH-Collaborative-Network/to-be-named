@@ -19,6 +19,9 @@ const Carousel = ({ media, imageOnly }) => {
   useEffect(() => {
     let track = document.getElementsByClassName(styles.slideTrack)[0];
     let as = track.querySelectorAll('a');
+    if(as.length == 0){
+      as = track.querySelectorAll('.media-item');
+    }
     let totalWidth = 0;
     for(let i = 0; i < as.length; i++){
       totalWidth = totalWidth + as[i].offsetWidth + 5;

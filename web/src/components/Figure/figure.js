@@ -15,7 +15,7 @@ export function Figure({ node, simple }) {
 
   return (
     <figure className={simple ? styles.simpleImage : styles.figure}>
-      <GatsbyImage image={imageData} alt={node.altText} />
+      <GatsbyImage image={imageData} alt={node.altText || ""} />
       {node.caption && <figcaption>{node.caption}</figcaption>}
     </figure>
   );

@@ -10,6 +10,7 @@ import { useLocation } from '@reach/router';
 import Masonry from "../components/Masonry/Masonry";
 import Carousel from "../components/Carousel/carousel";
 import {Link} from "gatsby";
+import * as carouselStyles from "../components/Carousel/carousel.module.css"
 import * as cardStyles from "../components/Card/card.module.css"
 import * as styles from "../components/Time/time.module.css"
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
@@ -209,6 +210,7 @@ const ExhibitionTemplate = props => {
   })
   let media = []
   console.log(page.media)
+
   
   return (
     <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
@@ -224,8 +226,12 @@ const ExhibitionTemplate = props => {
         </div>
         <div className="top-text one-column"><BlockContent blocks={ page.statement}/></div>
         {page.media?.length > 0 &&
-          <Carousel imageOnly={false} media={page.media}/>
+           <div className={carouselStyles.special}>
+            <Carousel imageOnly={false} media={page.media}/>
+           </div> 
         }
+        <br></br><br></br>
+        <TranslatedPhrase translations={languagePhrases} phrase={'worksOnDisplay'}/>
         <div className={cardStyles.cardWrapper}>
           {projectCards}
         </div>
