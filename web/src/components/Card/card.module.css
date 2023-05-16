@@ -45,7 +45,7 @@
         height: 20vh; 
     }
 }
-.oneColumn .root > *:first-child{
+.oneColumn .root > *:first-child, .oneColumn .banner + *{
     position:relative;
     @media (--media-min-medium) {
         max-width: 80%;
@@ -110,3 +110,21 @@
     }
 }
 
+.oneColumn .root .banner{
+    height:calc(100% - 0px);
+    max-width: 25px;
+    margin-right:10px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    font-size: 0.8em;
+    position:absolute;
+    width: 25px;
+    left: -20px;
+    top: 0;
+}
+.banner span{
+    text-align: center;
+    transform: rotate(-90deg) translateY(-20px) translateX(-100%);
+    display: inline-block;
+    transform-origin: center;
+}

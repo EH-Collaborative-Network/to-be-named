@@ -106,10 +106,13 @@ function sketch (p) {
         }
         p.frameRate(10)
         /* make labels */
+        let traveling = p.createElement('h5', "<a href='/exhibition/traveling'>Traveling Works<br><span>(works that will move throughout the exhibition sites)</span><span class='hidden-message'><br>more info→</span></a>");
+        let fw = p.width/25;
+        let fh = p.height/25;
+        traveling.position(1 * fw , 23 * fh - fh);
+
         for(let i = 0; i < indeces.length; i++){
             let h5 = p.createElement('h5', locations[i]);
-            let fw = p.width/25;
-            let fh = p.height/25;
             let x = blocks[indeces[i]][0]
             let y = blocks[indeces[i]][1]
             if(i == 0){

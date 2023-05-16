@@ -23,7 +23,9 @@
   cursor: pointer;
 }
 
-
+.modal figure{
+  margin-bottom:1em;
+}
 .modal{
   background: #e7e5e4fb;
   height: 94vh;
@@ -31,7 +33,7 @@
   left:5vw;
   opacity: 0;
   top:3vh;
-  overflow: scroll;
+  overflow: hidden;
   position:fixed;
   z-index: -2;
   box-shadow: 0 0 5px 15px #e7e5e4fb;
@@ -41,6 +43,9 @@
     left:20vw;
     top:15vh;
   }
+}
+.modal{
+
 }
 .close{
   text-align: right;
@@ -58,11 +63,11 @@
   width: 100%;
 }
 .inner{
-  padding:20px 20px;
+  padding:20px 20px 30px;
   overflow:scroll;
   height: 90vh;
   @media (--media-min-medium) {
-    height: 70vh;
+    height: 65vh;
   }
 }
 .inner h4{

@@ -183,6 +183,12 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'current',
+      type: 'string',
+      title: 'current'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'partners',
       type: 'string',
       title: 'Partner Institutions'

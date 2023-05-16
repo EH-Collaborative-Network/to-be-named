@@ -193,6 +193,7 @@ const ExhibitionTemplate = props => {
 
     /* Create artist cards based on current filters */
   let projectCards = []
+  let projectCardsTraveling = []
   projects.map(function(node, index){
     let image;
     let projectLinks = []
@@ -205,12 +206,17 @@ const ExhibitionTemplate = props => {
       projectLinks.push(<em>{node.name}</em>)
     })
 
-    
-    projectCards.push( <Card slug={"/project/"+node.node.slug.current} image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+    if(node.node.traveling){
+      projectCardsTraveling.push( <Card slug={"/project/"+node.node.slug.current} image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+
+    }else{
+          projectCards.push( <Card slug={"/project/"+node.node.slug.current} image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+
+    }
 
   })
   let media = []
-  console.log(page.media)
+
 
   
   return (
@@ -235,6 +241,7 @@ const ExhibitionTemplate = props => {
         <TranslatedPhrase translations={languagePhrases} phrase={'worksOnDisplay'}/>
         <div className={cardStyles.cardWrapper}>
           {projectCards}
+          {projectCardsTraveling}
         </div>
         
       </Container>

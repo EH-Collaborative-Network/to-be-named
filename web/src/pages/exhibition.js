@@ -41,6 +41,7 @@ export const query = graphql`
           about
           volume
           exhibition
+          current
           contact
           artworkIndex
           peopleAndPartners
@@ -225,8 +226,13 @@ const ExhibitionPage = props => {
 
     let projectLinks = []
 
-      projectLinks.push(<BlockContent blocks={ node.node.dates}/>)
+    projectLinks.push(<BlockContent blocks={ node.node.dates}/>)
+    if(node.node.current){
+      exhibitionCards.push( <Card languagePhrases={languagePhrases} globalLanguages={globalLanguages} slug={"/exhibition/"+node.node.slug.current} image={node.node.image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index} banner={true} /> )
+
+    }else{
       exhibitionCards.push( <Card slug={"/exhibition/"+node.node.slug.current} image={node.node.image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+    }
 
   })
 
