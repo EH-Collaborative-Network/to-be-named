@@ -105,7 +105,7 @@ const ContactPage = props => {
 
         return () => {
             // cancel pending fetch request on component unmount
-            abortController.abort(); 
+            // abortController.abort(); 
         };
     }, [])
   if (errors) {
