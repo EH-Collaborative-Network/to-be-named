@@ -42,6 +42,7 @@ export const query = graphql`
           volume
           timezone
           exhibition
+          worksOnDisplay
           contact
           artworkIndex
           peopleAndPartners

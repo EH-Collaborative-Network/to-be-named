@@ -495,7 +495,7 @@ const ArtworkIndexPage = props => {
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Container>
           <h1 hidden>Welcome to {site.title}</h1>
-          <h1><TranslatedPhrase translations={languagePhrases} phrase={'exhibition'}/></h1>
+          <h1><TranslatedPhrase translations={languagePhrases} phrase={'artworkIndex'}/></h1>
           <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
           <br/>
           <div className={filterStyles.filterWrapper}>

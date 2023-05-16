@@ -49,6 +49,7 @@
     position:relative;
     @media (--media-min-medium) {
         max-width: 80%;
+        width: 75%;
     }
 }
 .oneColumn .root > *:last-child{

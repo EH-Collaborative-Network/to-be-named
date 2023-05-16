@@ -68,7 +68,7 @@ body > div > div {
   height: 100%;
 }
 strong{
-  font-family: var(--font-family-bold);
+  font-family: var(--font-family-semibold);
 }
 h1{
   font-size: var(--font-large-size);

@@ -2,7 +2,7 @@
 .root{
     position: relative;
     height: 400px;
-    @media (--media-min-small) {
+    @media (--media-min-medium) {
         height: 700px;
       }
 }
@@ -34,7 +34,7 @@
     left:0;
     position:absolute;
     z-index: -1;
-    @media (--media-min-small) {
+    @media (--media-min-medium) {
         width:calc(100vw/1.38);
       }
 }
