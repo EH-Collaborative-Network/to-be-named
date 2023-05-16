@@ -46,6 +46,27 @@ export default {
             }
           },
           {
+            name: 'imageLink',
+            type: 'object',
+            title: 'Image Link',
+            blockEditor: {
+              icon: () => '🌠+🔗',
+              render: mediaRender
+            },
+            fields: [
+              {
+                title: 'URL',
+                name: 'href',
+                type: 'url'
+              },
+              {
+                title: 'image',
+                name: 'image',
+                type: 'mediaItem'
+              }
+            ]
+          },
+          {
             name: 'person',
             type: 'object',
             title: 'Person',

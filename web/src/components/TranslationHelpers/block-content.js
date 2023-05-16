@@ -58,6 +58,14 @@ const components = {
         </Link>
       )
     },
+    imageLink: ({ value, children }) => {
+      
+      return (
+        <Link className="image-link" to={value?.href}>
+          <div className="wrapper"><MediaItem media={value?.image}/></div>
+        </Link>
+      )
+    },
     person: ({ value, children }) => {
       let person = {};
       person.node = value.reference;
