@@ -15,6 +15,11 @@ export default {
       title: 'Title'
     },
     {
+      name: 'instagram',
+      type: 'string',
+      title: 'Instagram Token'
+    },
+    {
       name: 'description',
       type: 'text',
       title: 'Description',

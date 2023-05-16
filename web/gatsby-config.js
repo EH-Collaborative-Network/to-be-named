@@ -35,6 +35,11 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-source-instagram-all`,
+      options: {
+             access_token: process.env.INSTAGRAM_TOKEN }
+    },
+    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         icon: 'src/assets/images/favicon-32x32.png',

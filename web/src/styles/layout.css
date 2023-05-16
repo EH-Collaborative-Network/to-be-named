@@ -430,3 +430,8 @@ li.alice-carousel__stage-item {
   display: none;
   opacity: 0;
 }
+#instagram-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}

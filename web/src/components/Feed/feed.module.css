@@ -1,0 +1,10 @@
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
+.root{
+    flex-basis: calc(30% - 20px);
+    width: 30%;
+    margin-right: 10px;
+    margin-bottom:10px;
+    align-self: self-start;
+}

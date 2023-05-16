@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { graphql } from "gatsby";
 import {
   mapEdgesToNodes,
@@ -13,15 +13,17 @@ import Layout from "../containers/layout";
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
 import { Link } from "@reach/router";
+import Feed from "../components/Feed/feed";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import sanityClient from "@sanity/client";
 const client = sanityClient({
   projectId: '46orb7yp',
   dataset: 'production',
   apiVersion: '2022-03-25', // use current UTC date - see "specifying API version"!
-  token: 'skyfnkmqWJbwvihHkx2GQByHOktPsJB6ztzSRAfi7mZWaQegg23IaNrgFXjSxrBvL5Tli1zygeDqnUMr8QSXOZLNyjjhab5HTPsgD6QnBBxcNBOUwzGyiI69x7lpMKYhxZ94dpxLwIuVRBB1Hn47wR4rPtCpf17JGCYehmiLgCpMZrX1rzZW', // or leave blank for unauthenticated usage
+  token: process.env.SANITY_TOKEN, // or leave blank for unauthenticated usage
   useCdn: true, // `false` if you want to ensure fresh data
 })
+
 export const query = graphql`
   query ContactPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -80,7 +82,32 @@ export const query = graphql`
 
 const ContactPage = props => {
   const { data, errors } = props;
+  const [feeds, setFeedsData] = useState([])
+  let token = process.env?.INSTAGRAM_TOKEN 
 
+
+  useEffect(() => {
+    // this is to avoid memory leaks
+    
+    async function fetchInstagramPost () {
+          await fetch('https://graph.instagram.com/me/media?fields=id,media_type,media_url,caption&access_token='+ token,{}
+          ).then(response => response.json())
+          .then(data => {
+            setFeedsData(data.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        }
+        
+        // manually call the fecth function 
+        fetchInstagramPost();
+
+        return () => {
+            // cancel pending fetch request on component unmount
+            abortController.abort(); 
+        };
+    }, [])
   if (errors) {
     return (
       <Layout>
@@ -107,12 +134,13 @@ const ContactPage = props => {
     }
     fetchData()
   }
+
+ 
+  
   const titles = (data || {}).ap.edges[0]?.node?.titles;
   const languagePhrases = (data || {}).languagePhrases?.edges;
 
-
-
-
+  
 
   if (!site) {
     throw new Error(
@@ -128,8 +156,13 @@ const ContactPage = props => {
         <Container>
           <h1 hidden>Welcome to {site.title}</h1>
           <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : titles}/></h1>
-          <div className="top-text two-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : ap} globalLanguages={globalLanguages}/></div>
+          <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : ap} globalLanguages={globalLanguages}/></div>
           <br/>
+          <div id='instagram-wrapper'>
+          {feeds.map((feed) => (
+                <Feed key={feed.id} feed={feed} />
+            ))}
+          </div>
         </Container>
       </Layout>
       

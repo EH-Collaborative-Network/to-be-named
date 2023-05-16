@@ -18,7 +18,7 @@ const client = sanityClient({
   projectId: '46orb7yp',
   dataset: 'production',
   apiVersion: '2022-03-25', // use current UTC date - see "specifying API version"!
-  token: 'skyfnkmqWJbwvihHkx2GQByHOktPsJB6ztzSRAfi7mZWaQegg23IaNrgFXjSxrBvL5Tli1zygeDqnUMr8QSXOZLNyjjhab5HTPsgD6QnBBxcNBOUwzGyiI69x7lpMKYhxZ94dpxLwIuVRBB1Hn47wR4rPtCpf17JGCYehmiLgCpMZrX1rzZW', // or leave blank for unauthenticated usage
+  token: process.env.SANITY_TOKEN, // or leave blank for unauthenticated usage
   useCdn: true, // `false` if you want to ensure fresh data
 })
 export const query = graphql`
