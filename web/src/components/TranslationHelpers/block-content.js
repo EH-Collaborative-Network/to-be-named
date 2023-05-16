@@ -61,9 +61,9 @@ const components = {
     imageLink: ({ value, children }) => {
       
       return (
-        <Link className="image-link" to={value?.href}>
+        <a className="image-link" href={value?.href}>
           <div className="wrapper"><MediaItem media={value?.image}/></div>
-        </Link>
+        </a>
       )
     },
     person: ({ value, children }) => {
