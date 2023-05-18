@@ -213,6 +213,7 @@ const VolumePage = props => {
   let mediums = [];
   let locations = [];
   let threads = [];
+  let threadCount = [];
   /* loop through all artists and collate different mediums and locations */
   projects.map(function(project, index){
     let exhibition = false;
@@ -226,10 +227,12 @@ const VolumePage = props => {
       // })
 
       project.node.researchThreads?.map(function(node, index){
-        threads.push(node)
+        if(!threadCount.includes(node.name)){
+          threadCount.push(node.name)
+          threads.push(node)
+        }
       })
       project.node.exhibitions?.map(function(node, index){
-        console.log(node)
           locations.push(node.name) 
       })
     }
@@ -237,6 +240,7 @@ const VolumePage = props => {
   /* flatten arrays */
   locations = [...new Set(locations)];
  // mediums = [...new Set(mediums)];
+
   threads = [...new Set(threads)];
 
   /******************************/
@@ -497,7 +501,7 @@ const VolumePage = props => {
           <h1><TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></h1>
           <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
           <br/>
-          <div className={filterStyles.filterWrapper}>
+          {/* <div className={filterStyles.filterWrapper}>
           <div className={styles.cardWrapper}>
 
           {projectCards}
@@ -513,8 +517,6 @@ const VolumePage = props => {
             <h4><TranslatedPhrase translations={languagePhrases} phrase={'researchThreads'}/>:</h4>
             {
             threads.map(function(node, index){
-              console.log('+++')
-              console.log(node)
                 return(
                   <>
                   <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleThread} value={node.name} type="checkbox" checked={(currentThreads?.includes(node.name)) ? true : ''}/>
@@ -525,20 +527,9 @@ const VolumePage = props => {
               })
             }
             </>
-            {/* <LangContext.Consumer>
-            {theme => {
-              return(
-            <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-location" onChange={handleLocation}>
-              <option value={'all'}>{translate(languagePhrases, 'allLocations', theme)}</option>
-              {locations.map(function(node, index){
-                return(<option value={node} selected={(currentLocation == node) ? true : false}>{node}</option>)
-              })}
-            </select>
-              )
-            }}
-            </LangContext.Consumer> */}
+
           </div>
-          </div>
+          </div> */}
           
         </Container>
       </Layout>

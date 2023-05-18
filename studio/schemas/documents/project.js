@@ -94,6 +94,12 @@ export default {
       description: '',
     },
     {
+      name:'websiteContributor',
+      type: 'boolean',
+      title: 'Is a website contributor?',
+      description: '',
+    },
+    {
         name: 'mainLink',
         title: 'Link to project website (if any)',
         type: 'link'

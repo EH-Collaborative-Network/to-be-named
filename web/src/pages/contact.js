@@ -83,7 +83,7 @@ export const query = graphql`
 const ContactPage = props => {
   const { data, errors } = props;
   const [feeds, setFeedsData] = useState([])
-  let token = process.env?.INSTAGRAM_TOKEN 
+  let token = process.env?.INSTAGRAM_TOKEN || "IGQVJVTnBmSi16SjRFUXYzSE1jTk9SQ1VMeGNoNDJqbVUzYXhaWjRlcmdxTWc0blhSZAkg1dXZAVbDZAneHhybk1GRFVxM2NZAV0dxNmFvY20yLXBkTHhPaVRtWVZABMVJOdDFYdmotYzlLUGNLenNta2RnRgZDZD"
 
 
   useEffect(() => {

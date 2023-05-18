@@ -188,7 +188,7 @@ const ProjectTemplate = props => {
   const location = useLocation();
   let preview = false;
   let next = false;
-  console.log(page)
+
   if(creator?.projects?.length > 1){
   for(let i = 0; i < creator.projects.length; i++){
       if(creator.projects[i].id == page.id){
@@ -222,7 +222,11 @@ const ProjectTemplate = props => {
           {people.map(function(node, index){
                 return <a key={index}><Person person={node}></Person></a>;
             })}
-          <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></Link>
+            {page.volume ?
+                <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></Link>
+              : 
+                <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></Link>
+              }
         </div>
         }
         <h1 className="project-title"><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>

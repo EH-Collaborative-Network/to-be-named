@@ -52,6 +52,7 @@ export const query = graphql`
           allArtists
           noResults
           studentWork
+          websiteContributors
           traveling
           commissioned
           search
@@ -215,6 +216,7 @@ const ArtworkIndexPage = props => {
   let mediums = [];
   let locations = [];
   let threads = [];
+  let threadCount = [];
   /* loop through all artists and collate different mediums and locations */
   projects.map(function(project, index){
     let exhibition = false;
@@ -229,10 +231,13 @@ const ArtworkIndexPage = props => {
       // })
 
       project.node.researchThreads?.map(function(node, index){
-        threads.push(node)
+        if(!threadCount.includes(node.name)){
+          threadCount.push(node.name)
+          threads.push(node)
+        }
+        
       })
       project.node.exhibitions?.map(function(node, index){
-        console.log(node)
           locations.push(node.name) 
       })
     }
@@ -434,7 +439,7 @@ const ArtworkIndexPage = props => {
     let show = false;
     let absolutelynoshow = true;
     let projectLinks = []
-      if(node.node.exhibition){
+      if(node.node.exhibition || node.node.volume){
         image = node.node.mainImage;
         show = true;
         projectLinks.push(
@@ -447,7 +452,7 @@ const ArtworkIndexPage = props => {
     }
 
 
-    if(((currentFilter == "traveling") && !node.node.traveling) || ((currentFilter == "commissioned") && !node.node.commissioned) || ((currentFilter == "regional") && !node.node.regional) || ((currentFilter == "student") && !node.node.studentWork)){
+    if(((currentFilter == "traveling") && !node.node.traveling) || ((currentFilter == "commissioned") && !node.node.commissioned) || ((currentFilter == "regional") && !node.node.regional) || ((currentFilter == "student") && !node.node.studentWork) || ((currentFilter == "websiteContributors") && !node.node.websiteContributor)){
       show = false
     }
     if(currentThreads?.length > 0){
@@ -517,6 +522,7 @@ const ArtworkIndexPage = props => {
                 <option value={'commissioned'} selected={currentFilter == "commissioned" ? true : false}>{translate(languagePhrases, 'commissioned', theme)}</option>
                 <option value={'regional'} selected={currentFilter == "regional" ? true : false}>{translate(languagePhrases, 'regional', theme)}</option>
                 <option value={'student'} selected={currentFilter == "student" ? true : false}>{translate(languagePhrases, 'studentWork', theme)}</option>
+                <option value={'websiteContributors'} selected={currentFilter == "websiteContributors" ? true : false}>{translate(languagePhrases, 'websiteContributors', theme)}</option>
               </select>
               )
             }}

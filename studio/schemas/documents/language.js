@@ -183,6 +183,18 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'websiteContributors',
+      type: 'string',
+      title: 'Website Contributors'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'editedVolumeContributors',
+      type: 'string',
+      title: 'Edited Volume Contributors'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'current',
       type: 'string',
       title: 'current'
