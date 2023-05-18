@@ -43,6 +43,8 @@ export const query = graphql`
           timezone
           exhibition
           worksOnDisplay
+          traveling
+          regional
           contact
           artworkIndex
           peopleAndPartners
@@ -56,6 +58,7 @@ export const query = graphql`
     projects: allSanityProject (filter: {exhibitions: {elemMatch: {id:{eq: $id}} }}){
       edges{
         node {
+          traveling
           titles{
             text
             language{
@@ -190,6 +193,7 @@ const ExhibitionTemplate = props => {
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
   const location = useLocation();
+  // projects.sort((a,b) => a.node.artists[0].name - b.node.artists[0].name); // b - a for reverse sort
 
     /* Create artist cards based on current filters */
   let projectCards = []
@@ -211,7 +215,6 @@ const ExhibitionTemplate = props => {
 
     }else{
           projectCards.push( <Card slug={"/project/"+node.node.slug.current} image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
-
     }
 
   })
@@ -238,9 +241,14 @@ const ExhibitionTemplate = props => {
            </div> 
         }
         <br></br><br></br>
-        <TranslatedPhrase translations={languagePhrases} phrase={'worksOnDisplay'}/>
+        {/* <h2 style={{'text-transform':'uppercase'}}><strong><TranslatedPhrase translations={languagePhrases} phrase={'worksOnDisplay'}/></strong></h2> */}
+        
+        <h2 style={{'text-transform':'uppercase'}}><strong><TranslatedPhrase translations={languagePhrases} phrase={'regional'}/></strong></h2>
         <div className={cardStyles.cardWrapper}>
           {projectCards}
+        </div>
+        <h2 style={{'text-transform':'uppercase'}}><strong><TranslatedPhrase translations={languagePhrases} phrase={'traveling'}/></strong></h2>
+        <div className={cardStyles.cardWrapper}>
           {projectCardsTraveling}
         </div>
         

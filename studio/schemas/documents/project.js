@@ -33,6 +33,12 @@ export default {
       of:[{type:'reference', title:'Artist/Author', to: [{type: 'person'}]}]
   },
   {
+    name:'sortLetter',
+    type: 'string',
+    title: 'Last name of the first artist/author',
+    description: 'this is used for sorting purposes',
+  },
+  {
       name: 'exhibitions', 
       type: 'array', 
       title: 'Exhibition(s)', 

@@ -219,9 +219,13 @@ const ProjectTemplate = props => {
         <h1 hidden>Welcome to {site.title}</h1>
         {people &&
         <div className='top-title'>
+          <div>
           {people.map(function(node, index){
-                return <a key={index}><Person person={node}></Person></a>;
+                return (
+                  <a key={index}><Person person={node}></Person><br></br></a>
+                );
             })}
+            </div>
             {page.volume ?
                 <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></Link>
               : 
