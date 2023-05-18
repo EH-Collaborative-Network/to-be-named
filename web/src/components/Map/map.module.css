@@ -28,15 +28,26 @@
     z-index: 1;
 }
 .root img{
-    width:calc(100vw/1.2);
+    width:calc(100vw/1.2 - 2px);
     height:100%;
     top:0;
     left:0;
     position:absolute;
     z-index: -1;
     @media (--media-min-medium) {
-        width:calc(100vw/1.38);
+        width:calc(100vw/1.38 - 1px);
       }
+}
+.root h5:nth-child(1)::after{
+    content: 'current';
+    background-color: var(--color-black);
+    color:var(--color-white);
+    display: block;
+    width: 5em;
+    padding:2px;
+    line-height:1;
+    text-align: left;
+    font-size:0.7em;
 }
 .root h5{
     position: absolute;

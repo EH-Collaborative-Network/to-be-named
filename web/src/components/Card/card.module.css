@@ -111,20 +111,31 @@
 }
 
 .oneColumn .root .banner{
-    height:calc(100% - 0px);
-    max-width: 25px;
+    height:25px;
+    max-width: 10000px;
     margin-right:10px;
     background-color: var(--color-black);
     color: var(--color-white);
     font-size: 0.8em;
     position:absolute;
-    width: 25px;
-    left: -20px;
-    top: 0;
+    width: 100%;
+    top: -20px;
+    left: 0;
+    @media (--media-min-medium) {
+        width: 25px;
+        left: -20px;
+        top: 0;
+        height:calc(100% - 0px);
+        max-width: 25px;
+    }
 }
 .banner span{
     text-align: center;
-    transform: rotate(-90deg) translateY(-20px) translateX(-100%);
     display: inline-block;
+    width:100%;
     transform-origin: center;
+    @media (--media-min-medium) {
+        width:auto;
+        transform: rotate(-90deg) translateY(-20px) translateX(-117%);
+    }
 }

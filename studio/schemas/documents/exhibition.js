@@ -72,6 +72,13 @@ export default {
       of: [{type: 'translation'}],
     },
     {
+      name: 'cardDates',
+      title: 'Dates (no links)',
+      type: 'array',
+      description:"select add item to add a date in any language (including English)",
+      of: [{type: 'translation'}],
+    },
+    {
         name: 'media',
         title: 'Media',
         type: 'array',

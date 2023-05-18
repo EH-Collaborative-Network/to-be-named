@@ -6,6 +6,7 @@ import * as styles from "./card.module.css";
 import { Link } from "gatsby";
 
 const Card = ({ titles, slug, image, descriptions,languagePhrases, globalLanguages, extra, banner }) => {
+  console.log(descriptions)
   return(
     <div className={styles.root + " " + extra}>
       {slug &&
@@ -20,9 +21,9 @@ const Card = ({ titles, slug, image, descriptions,languagePhrases, globalLanguag
         }
         
         {descriptions &&
-          <div className={styles.description}>
+          <span className={styles.description}>
             {descriptions}
-          </div>
+          </span>
         }
         </Link>
         {image &&

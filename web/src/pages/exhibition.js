@@ -103,7 +103,7 @@ export const query = graphql`
                 }
                 altText
               }
-              dates{
+              cardDates{
                 _rawText(resolveReferences: { maxDepth: 20 })
                 language{
                   id
@@ -226,7 +226,7 @@ const ExhibitionPage = props => {
 
     let projectLinks = []
 
-    projectLinks.push(<BlockContent blocks={ node.node.dates}/>)
+    projectLinks.push(<BlockContent blocks={ node.node.cardDates}/>)
     if(node.node.current){
       exhibitionCards.push( <Card languagePhrases={languagePhrases} globalLanguages={globalLanguages} slug={"/exhibition/"+node.node.slug.current} image={node.node.image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index} banner={true} /> )
 

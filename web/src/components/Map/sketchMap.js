@@ -106,10 +106,10 @@ function sketch (p) {
         }
         p.frameRate(10)
         /* make labels */
-        let traveling = p.createElement('h5', "<a href='/exhibition/traveling'>Traveling Works<br><span>(works that will move throughout the exhibition sites)</span><span class='hidden-message'><br>more info→</span></a>");
+        let traveling = p.createElement('h5', "<a href='/exhibition/traveling'>See Traveling Works<br><span>(works that will move throughout the exhibition sites)</span><span class='hidden-message'><br>more info→</span></a>");
         let fw = p.width/25;
         let fh = p.height/25;
-        traveling.position(1 * fw , 23 * fh - fh);
+        traveling.position(2.3 * fw , 23.5 * fh - fh);
 
         for(let i = 0; i < indeces.length; i++){
             let h5 = p.createElement('h5', locations[i]);
@@ -198,6 +198,7 @@ function sketch (p) {
     function drawBlocks(){
         let fw = p.width/25;
         let fh = p.height/25;
+        
         for(let i = 0; i < blocks.length; i++){
             let x = blocks[i][0]
             let y = blocks[i][1]
@@ -251,16 +252,50 @@ function sketch (p) {
                     p.stroke(248,248,248)
                     p.fill(248,248,248)
                 }
+          
+                
             }
-            
+           
+
             p.rect(x * fw,y *fh, fw, fh);
             
         }
         
-    
+        let miniExtras = []
+        let miniOpacities = []
+        let rx = 1;
+        let ry = 22;
+        miniExtras.push([rx,ry])
+        miniOpacities.push(p.color(248,248,248,200))
+        if(p.random([true,false])){
+            let mini1 = p.floor(p.random(-1,1))
+            let mini2 = p.floor(p.random(-1,1))
+            miniExtras.push([rx + mini1,ry + mini2])
+            miniOpacities.push(p.floor(p.random(225,235)))
+            if(p.random([true,false])){
+                let mini12 = p.floor(p.random(-1,1))
+                let mini22 = p.floor(p.random(-1,1))
+                miniExtras.push([mini1 + mini12,mini2 + mini22])
+                miniOpacities.push(p.floor(p.random(225,235)))
+                if(p.random([true,false])){
+                    let mini123 = p.floor(p.random(-1,1))
+                    let mini223 = p.floor(p.random(-1,1))
+                    miniExtras.push([mini12 + mini123,mini22 + mini223])
+                    miniOpacities.push(p.floor(p.random(225,235)))
+                }
+            }
+        }
+        for(let i = 0; i < miniExtras.length; i++){
+            p.stroke(miniOpacities[i])
+            p.fill(miniOpacities[i])
+            p.rect(miniExtras[i][0] * fw, miniExtras[i][1] * fh, fw, fh)
+        }
+        
         for(let i = 0; i < 25; i++){
             for(let j = 0; j < 25; j++){
-                if(!isArrayInArray(blocks, [i,j]) && !isArrayInArray(extras, [i,j])){
+                
+
+                if(!isArrayInArray(blocks, [i,j]) && !isArrayInArray(extras, [i,j]) && !isArrayInArray(miniExtras, [i,j])){
                     p.stroke(245,245,245);
                     p.fill(245,245,245);
                     p.rect(i * fw, j * fh, fw, fh);
