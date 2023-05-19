@@ -205,7 +205,7 @@ module.exports = {
             type: "exhibition"
           }))
 
-          let finalArray = events.concat( projects, exhibitions, pages)
+          let finalArray = pages.concat( projects, exhibitions)
           return(finalArray.flat(1))
         },
       },
