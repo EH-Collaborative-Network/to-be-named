@@ -116,7 +116,7 @@ module.exports = {
             allSanityExhibition {
               edges {
                 node {
-                  statements {
+                  statement {
                     _rawText(resolveReferences: {maxDepth: 10})
                     language {
                       code
