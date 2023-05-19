@@ -11,7 +11,7 @@ import {Link} from "gatsby";
 import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import { id } from "date-fns/locale";
-import Person from "../components/Person/Person"
+import Person from "../components/Person"
 export const query = graphql`
   query ProjectQuery($id: String!) {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
