@@ -6,15 +6,14 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
 import person from './documents/person'
-import artistAuthor from './documents/artistAuthor'
 import page from './documents/page'
 import project from './documents/project'
 import timeZone from './documents/timeZone'
 import siteSettings from './documents/siteSettings'
 import language from './documents/language'
-import event from './documents/event'
 import researchThread from './documents/researchThread'
-import location from './documents/location'
+import exhibition from './documents/exhibition'
+import medium from './documents/medium'
 // Object types
 import embed from './objects/embed'
 import figure from './objects/figure'
@@ -40,15 +39,14 @@ export default createSchema({
     timeZone,
     siteSettings,
     language,
-    event,
     project,
+    exhibition,
     researchThread,
-    artistAuthor,
+    medium,
     // The following are document types which will appear
     // in the studio.
     embed,
     pdf,
-    location,
     figure,
     mediaItem,
     richText,

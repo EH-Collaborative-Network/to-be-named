@@ -17,6 +17,12 @@
     transform: translateX(calc(-250px * 7));
   }
 }
+.special .root .mediaItem{
+  position: relative;
+}
+/* .root figure{
+  display: inline;
+} */
 .slide-track {
   overflow: hidden;
   display: inline-flex;
@@ -57,7 +63,7 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-.root a, .root .slide-track > *{
+.root a, .root .slide-track > *,.special .root .mediaItem{
   text-decoration: none;
   width: -moz-max-content;
   width: max-content;

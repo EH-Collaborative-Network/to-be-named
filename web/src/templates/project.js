@@ -8,9 +8,10 @@ import BlockContent from "../components/TranslationHelpers/block-content";
 import { useLocation } from '@reach/router';
 import Masonry from "../components/Masonry/Masonry";
 import {Link} from "gatsby";
+import TranslatedPhrase from "../components/TranslationHelpers/translatedPhrase";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import { id } from "date-fns/locale";
-
+import Person from "../components/Person/Person"
 export const query = graphql`
   query ProjectQuery($id: String!) {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -30,6 +31,10 @@ export const query = graphql`
           about
           volume
           exhibition
+          contact
+          artworkIndex
+          peopleAndPartners
+          seeAllArtworks
           upcomingEvents
           researchThreads
           availableIn
@@ -37,32 +42,44 @@ export const query = graphql`
         }
       }
     }
-    artist: allSanityArtistAuthor(filter: {projects: {elemMatch: {id:{eq: $id}} }}){
-      edges{
-        node{
-          name
-          slug{
-            current
-          }
-          projects{
-            id
-            slug{
-              current
-            }
-            titles{
-              text
-              language{
-                id
-                name
-                code
-              }
-            }
-          }
-        }
-      }
-    }
     project: sanityProject(id: { eq: $id }) {
       id
+      artists {
+        id
+          _id
+          name
+          image{
+            crop {
+              _key
+              _type
+              top
+              bottom
+              left
+              right
+            }
+            hotspot {
+              _key
+              _type
+              x
+              y
+              height
+              width
+            }
+            asset {
+              _id
+            }
+            altText
+            caption
+          }
+          bios{
+            _rawText(resolveReferences: { maxDepth: 20 })
+            language{
+              id
+              name
+              code
+            }
+          }
+      }
       mainImage {
         crop {
           _key
@@ -163,6 +180,7 @@ const ProjectTemplate = props => {
   const { data, errors } = props;
   const page = data && data.project;
   const creator = data && data.artist?.edges[0]?.node
+  const people = data && data.project?.artists
   const site = (data || {}).site;
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
@@ -170,6 +188,7 @@ const ProjectTemplate = props => {
   const location = useLocation();
   let preview = false;
   let next = false;
+
   if(creator?.projects?.length > 1){
   for(let i = 0; i < creator.projects.length; i++){
       if(creator.projects[i].id == page.id){
@@ -198,12 +217,20 @@ const ProjectTemplate = props => {
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {creator &&
+        {people &&
         <div className='top-title'>
-          <Link to={"/creator/" + creator.slug.current }>{creator.name}</Link>
-          {(next !== false) &&
-            <Link to={"/project/" + creator.projects[next].slug.current }><TranslatedTitle translations={creator.projects[next].titles}/>→</Link>
-          }
+          <div>
+          {people.map(function(node, index){
+                return (
+                  <a key={index}><Person person={node}></Person><br></br></a>
+                );
+            })}
+            </div>
+            {page.volume ?
+                <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></Link>
+              : 
+                <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></Link>
+              }
         </div>
         }
         <h1 className="project-title"><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1>
@@ -212,13 +239,15 @@ const ProjectTemplate = props => {
           {page.subtitles &&
           <TranslatedTitle translations={(preview && previewData) ? previewData.subtitles : page.subtitles}/>
           }
-          { page.mainLink &&
-          <a href={page.mainLink.url}>{page.mainLink.text}</a>
-          }
+         
+
           </div>
         }
-        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/></div>
-        {page.media?.length > 0 &&
+        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/> { page.mainLink &&
+          <a style={{"text-decoration":"none"}} href={page.mainLink.url}>{page.mainLink.text}</a>
+          }</div>
+       
+       {page.media?.length > 0 &&
            <Masonry media={(preview && previewData) ? previewData.media : page.media}/>
         }
       </Container>

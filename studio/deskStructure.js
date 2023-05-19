@@ -2,7 +2,7 @@ import S from '@sanity/desk-tool/structure-builder'
 import { MdSettings, MdLock } from "react-icons/md";
 
 const hiddenDocTypes = listItem =>
-  ![ 'person', 'siteSettings','researchThread', 'language', 'page','timezone', 'location'].includes(listItem.getId())
+  ![ 'siteSettings', 'language', 'page','timezone'].includes(listItem.getId())
 
 export default () =>
   S.list()
@@ -31,18 +31,9 @@ export default () =>
               .schemaType('page')
               .child(S.documentTypeList('page').title('Page')),
               S.listItem()
-              .title('Research Threads')
-              .schemaType('researchThread')
-              .child(S.documentTypeList('researchThread').title('Research Thread')),
-              S.listItem()
               .title('Timezones')
               .schemaType('timezone')
               .child(S.documentTypeList('timezone').title('Timezone')),
-              S.listItem()
-              .title('Locations')
-              .schemaType('location')
-              .child(S.documentTypeList('location').title('Location')),
-           
             ])
             
           )

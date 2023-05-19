@@ -17,8 +17,13 @@
   }
 
 }
-.inner > div > div > div > div{
+.inner > div > div > div > div, .inner > div > div{
   padding:0 !important;
+}
+.inner > div > img {
+  width: calc(80% - 50px) !important;
+  min-width: none !important;
+  height: auto !important;
 }
 .close{
     text-align: right;

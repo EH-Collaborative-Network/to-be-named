@@ -27,6 +27,24 @@ export default {
       of: [{type: 'titleTranslation'}],
     },
     {
+      name: 'artists', 
+      type: 'array', 
+      title: 'Artist/Author(s)', 
+      of:[{type:'reference', title:'Artist/Author', to: [{type: 'person'}]}]
+  },
+  {
+    name:'sortLetter',
+    type: 'string',
+    title: 'Last name of the first artist/author',
+    description: 'this is used for sorting purposes',
+  },
+  {
+      name: 'exhibitions', 
+      type: 'array', 
+      title: 'Exhibition(s)', 
+      of:[{type:'reference', title:'Exhibition', to: [{type: 'exhibition'}]}]
+  },
+    {
       name: 'mainImage',
       title: 'Thumbnail Image',
       type: 'figure',
@@ -58,6 +76,36 @@ export default {
         description: '',
     },
     {
+        name:'studentWork',
+        type: 'boolean',
+        title: 'Is this student work?',
+        description: '',
+    },
+    {
+        name:'commissioned',
+        type: 'boolean',
+        title: 'Is this a commissioned work?',
+        description: '',
+    },
+      {
+        name:'regional',
+        type: 'boolean',
+        title: 'Is this a regional work?',
+        description: '',
+    },
+    {
+      name:'traveling',
+      type: 'boolean',
+      title: 'Is this a traveling work?',
+      description: '',
+    },
+    {
+      name:'websiteContributor',
+      type: 'boolean',
+      title: 'Is a website contributor?',
+      description: '',
+    },
+    {
         name: 'mainLink',
         title: 'Link to project website (if any)',
         type: 'link'
@@ -70,18 +118,23 @@ export default {
         of: [{type: 'translation'}],
     },
     {
-        name: 'people',
-        type: 'array',
-        description: 'EHCN Personnel associated with this project (if any)',
-        title: 'EHCN Personnel',
-        of:[{type:'reference', title:'Associated EHCN Personnel', to: [{type: 'person'}]}]
-    },
-    {
         name: 'media',
         title: 'Media',
         type: 'array',
         options: {layout: 'grid'},
         of: [{type: 'mediaItem'}],
+    },
+    {
+      name: 'researchThreads', 
+      type: 'array', 
+      title: 'Research Thread(s). *This will be used for filtering on the exhibition & edition index pages, not displayed on the profile page.', 
+      of:[{type:'reference', title:'Research Thread', to: [{type: 'researchThread'}]}]
+    },
+    {
+      name: 'mediums', 
+      type: 'array', 
+      title: 'Medium(s)', 
+      of:[{type:'reference', title:'Medium', to: [{type: 'medium'}]}]
     },
     {
         name: 'keywords',

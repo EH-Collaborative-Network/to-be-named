@@ -3,7 +3,8 @@ import React from "react";
 import { useState } from 'react';
 import logo from '../../assets/logo.png'; 
 import logoMobile from '../../assets/mobileLogo.png'; 
-import osun from '../../assets/ehcn.png';
+import ehcn from '../../assets/ehcn.png';
+import rv from '../../assets/RVoices_Logo.png';
 import * as styles from "./navigation.module.css";
 import LangContext from '../context/lang.js'
 import TranslatedPhrase from "../TranslationHelpers/translatedPhrase";
@@ -46,10 +47,11 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         return(
           <ul className={styles.menu}>
               <li className={url.includes("about") ? styles.on: ""}><Link to="/about/"><TranslatedPhrase translations={translations} phrase={"about"}/>→</Link></li>
-              <li className={url.includes("research") ? styles.on: ""}><Link to="/researchthreads/"><TranslatedPhrase translations={translations} phrase={"researchThreads"}/>→</Link></li>
+              <li className={url.includes("artwork-index") ? styles.on: ""}><Link to="/artwork-index/"><TranslatedPhrase translations={translations} phrase={"artworkIndex"}/>→</Link></li>
               <li className={url.includes("exhibition") ? styles.on : ""}><Link to="/exhibition/"><TranslatedPhrase translations={translations} phrase={"exhibition"}/>→</Link></li>
               <li className={url.includes("volume") ? styles.on : ""}><Link to="/volume"><TranslatedPhrase translations={translations} phrase={"volume"}/>→</Link></li>
-              <li className={url.includes("calendar") ? styles.on : ""}><Link to="/calendar/"><TranslatedPhrase translations={translations} phrase={"upcomingEvents"}/>→</Link></li>
+              <li className={url.includes("people-and-partners") ? styles.on : ""}><Link to="/people-and-partners/"><TranslatedPhrase translations={translations} phrase={"peopleAndPartners"}/>→</Link></li>
+              <li className={url.includes("contact") ? styles.on : ""}><Link to="/contact/"><TranslatedPhrase translations={translations} phrase={"contact"}/>→</Link></li>
           </ul>
           )
       }}
@@ -118,9 +120,10 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
       )}}
      </LangContext.Consumer>
         <ul className={styles.menu}>
-          <li><a className={styles.email} href="mailto:ehcn@bard.edu">ehcn@bard.edu</a></li>
           {/* <li><TranslatedPhrase translations={translations} phrase={"ehcnSupported"}/></li> */}
-          <li><a href='https://ehcn.bard.edu'><img className={styles.osun} alt="A grey H within three green lines suggesting the letter E." src={osun}/></a></li>
+          <li><a href='https://ehcn.bard.edu'><img className={styles.ehcn} alt="A grey H within three green lines suggesting the letter E." src={ehcn}/></a></li>
+          <li><a href='https://ehcn.bard.edu'><img className={styles.rv} alt="Recovering is written in gold and Voices is written in orange." src={rv}/></a></li>
+
         </ul>
       </div>
     </div>

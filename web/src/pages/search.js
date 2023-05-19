@@ -35,6 +35,9 @@ export const query = graphql`
                 code
                 about
                 volume
+                contact
+                peopleAndPartners
+                artworkIndex
                 exhibition
                 upcomingEvents
                 researchThreads

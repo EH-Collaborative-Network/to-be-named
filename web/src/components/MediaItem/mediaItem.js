@@ -19,7 +19,7 @@ if(embed?.embed?.length > 1){
   }
 }
 function lightboxed(e){
-  let media = e.target.closest(".alice-carousel__stage-item > div")?.cloneNode(true);
+  let media = e.target?.cloneNode(true);
   if(!media){
      media = e.target.closest(".masonry-inner > div")?.cloneNode(true);
   }
@@ -31,7 +31,7 @@ function lightboxed(e){
   document.getElementById("light-box").classList.add("show");
 } 
   return(
-    <div onClick={lightboxed}>
+    <div className={'media-item'} onClick={lightboxed}>
         {image &&
             <Figure node={image} />
         }

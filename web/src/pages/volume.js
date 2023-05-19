@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { graphql } from "gatsby";
 import Container from "../components/Container/container";
 import BlockContent from "../components/TranslationHelpers/block-content";
@@ -18,7 +18,7 @@ const client = sanityClient({
   projectId: '46orb7yp',
   dataset: 'production',
   apiVersion: '2022-03-25', // use current UTC date - see "specifying API version"!
-  token: 'skyfnkmqWJbwvihHkx2GQByHOktPsJB6ztzSRAfi7mZWaQegg23IaNrgFXjSxrBvL5Tli1zygeDqnUMr8QSXOZLNyjjhab5HTPsgD6QnBBxcNBOUwzGyiI69x7lpMKYhxZ94dpxLwIuVRBB1Hn47wR4rPtCpf17JGCYehmiLgCpMZrX1rzZW', // or leave blank for unauthenticated usage
+  token: process.env.SANITY_TOKEN, // or leave blank for unauthenticated usage
   useCdn: true, // `false` if you want to ensure fresh data
 })
 export const query = graphql`
@@ -39,16 +39,19 @@ export const query = graphql`
           code
           about
           volume
+          peopleAndPartners
+          contact
+          artworkIndex
           exhibition
           upcomingEvents
           researchThreads
           availableIn
           regional
-          studentWork
-          noResults
           allLocations
           mediums
           allArtists
+          noResults
+          studentWork
           traveling
           commissioned
           search
@@ -71,23 +74,9 @@ export const query = graphql`
         }
       }
     }
-    creators: allSanityArtistAuthor{
+    projects: allSanityProject{
       edges {
         node {
-          name
-          locations{
-            name
-          }
-          medium
-          commissioned
-          traveling
-          regional
-          slug{
-            current
-          }
-          projects {
-            id
-              _id
               titles{
                 text
                 language{
@@ -95,6 +84,11 @@ export const query = graphql`
                   name
                   code
                 }
+              }
+              artists {
+                id
+                  _id
+                  name
               }
               mainImage {
                 crop {
@@ -113,7 +107,34 @@ export const query = graphql`
               slug {
                 current
               }
+              exhibition
               volume
+              commissioned
+              traveling
+              regional
+              studentWork
+              exhibitions{
+                titles{
+                  text
+                  language{
+                    id
+                    name
+                    code
+                  }
+                }
+                name
+              }
+              researchThreads{
+                titles{
+                  text
+                  language{
+                    id
+                    name
+                    code
+                  }
+                }
+                name
+              }
               descriptions{
                 _rawText(resolveReferences: { maxDepth: 20 })
                 language{
@@ -122,7 +143,7 @@ export const query = graphql`
                   code
                 }
               }
-          }
+          
         }
       }
     }
@@ -133,12 +154,19 @@ const VolumePage = props => {
   const { data, errors, location } = props;
   const site = (data || {}).site;
   const globalLanguages = site.languages;
-  const artists = (data || {}).creators.edges
+  const projects = (data || {}).projects.edges
   const page = (data || {}).page.edges[0].node
   const languagePhrases = (data || {}).languagePhrases?.edges;
-  const [currentFilter, setCurrentFilter] = useState(null);
-  const [currentMediums, setCurrentMediums] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
+  projects.sort(function (a, b) {
+    if (a.node.sortLetter < b.node.sortLetter) {
+      return -1;
+    }
+    if (a.node.sortLetter > b.node.sortLetter) {
+      return 1;
+    }
+    return 0;
+  });
+
   if (errors) {
     return (
       <Layout>
@@ -152,9 +180,17 @@ const VolumePage = props => {
     );
   }
   /* Artist Type = currentFilter, Mediums = currentMediums, Location = currentLocation */
+  // let currentFilter = null;
+  // let currentMediums = null;
+  // let currentLocation = null;
+  const [currentFilter, setCurrentFilter] = useState(null);
+  const [currentMediums, setCurrentMediums] = useState(null);
+  const [currentThreads, setCurrentThreads] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   let params = [];
   /* Set currentFilter, currentMediums, currentLocation based on url params */
-  useEffect(() => {
+    useEffect(() => {
+
   if(location?.search){
     if(location.search.split("?").length > 1 ){
       params = location.search.split("?")[1].split("&");
@@ -167,40 +203,53 @@ const VolumePage = props => {
         setCurrentFilter(v)
       }else if(p == "medium" ){
         let ve = v.split("%20").join(" ") //handle spaces
-       // currentMediums = ve.split(',')
-       setCurrentMediums(ve.split(','))
-      }else if(p == "location"){
+        // currentMediums = ve.split(',')
+        setCurrentMediums(ve.split(','))
+      }else if(p == "thread" ){
         let ve = v.split("%20").join(" ") //handle spaces
-        setCurrentLocation(ve)
+        // currentMediums = ve.split(',')
+        setCurrentThreads(ve.split(','))
       }
     })
   }
-}, []);
+    }, []);
+
+
+
   /* Figure out possible mediums & locations */
+
   let mediums = [];
   let locations = [];
+  let threads = [];
+  let threadCount = [];
   /* loop through all artists and collate different mediums and locations */
-  artists.map(function(artist, index){
-    let volume = false;
-    artist.node.projects.map(function(project,index){
-      if(project.volume){
-        volume = true;
+  projects.map(function(project, index){
+    let exhibition = false;
+
+      if(project.node.volume){
+        exhibition = true;
       }
-    })
-    if(volume){
-      artist.node.medium.map(function(node, index){
-          mediums.push(node)
+    if(exhibition){
+      // project.node.medium.map(function(node, index){
+      //     mediums.push(node)
+      // })
+
+      project.node.researchThreads?.map(function(node, index){
+        if(!threadCount.includes(node.name)){
+          threadCount.push(node.name)
+          threads.push(node)
+        }
       })
-      artist.node.locations?.map(function(node, index){
+      project.node.exhibitions?.map(function(node, index){
           locations.push(node.name) 
       })
     }
   })
-
   /* flatten arrays */
   locations = [...new Set(locations)];
-  mediums = [...new Set(mediums)];
+ // mediums = [...new Set(mediums)];
 
+  threads = [...new Set(threads)];
 
   /******************************/
   /* event handlers for filters */
@@ -236,8 +285,9 @@ const VolumePage = props => {
        }
       if(typeof window != `undefined`) window.location.href = newParams
     }
+   
   }
-  /* Filtering by artist location */
+/* Filtering by artist location */
   function handleLocation(e){
     let value = e.target.value;
     if(currentLocation){
@@ -269,13 +319,14 @@ const VolumePage = props => {
       if(typeof window != `undefined`) window.location.href = newParams   
     }
   }
-  /* Filtering by artist medium */
+/* Filtering by artist medium */
   function handleMedium(e){
     let value = e.target.value;
     if(currentMediums?.includes(value)){ //if deselecting the option
         let params = location.href.split("?")[1]
         params = params.split("&");
         let newParams =[]
+        
         params.forEach((node) =>{
           if(node.split("=")[0] == "medium"){
             let mediums = node.split("=")[1]
@@ -323,68 +374,131 @@ const VolumePage = props => {
         newParams = location.href + "?medium=" + value
       }
       if(typeof window != `undefined`) window.location.href = newParams
-    }   
+    }
   }
 
-    /* Create artist cards based on current filters */
+  /* Filtering by theme/thread */
+  function handleThread(e){
+    let value = e.target.value;
+    if(currentThreads?.includes(value)){ //if deselecting the option
+        let params = location.href.split("?")[1]
+        params = params.split("&");
+        let newParams =[]
+        
+        params.forEach((node) =>{
+          if(node.split("=")[0] == "thread"){
+            let threads = node.split("=")[1]
+            threads = threads.split("%20").join(" ")
+            threads = threads.split(',')
+            let idx = threads.indexOf(value);
+            if (idx != -1) threads.splice(idx, 1);
+            if(threads.length == 0){
+              node = null
+            }else{
+             node = "thread="+ threads.join(",") 
+            }
+            
+            
+          }
+          if(node) newParams.push(node)
+        })
+        newParams = newParams.join("&")
+        if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+      
+    }else if(currentThreads?.length > 0){ //if selecting the option
+      let params = location.href.split("?")[1]
+      params = params.split("&");
+      let newParams =[]
+      
+      params.forEach((node) =>{
+        if(node.split("=")[0] == "thread"){
+          let threads = node.split("=")[1]
+          threads = threads.split(',')
+          threads.push(value)
+          node = "thread="+ threads.join(",")     
+        }
+        if(node) newParams.push(node)
+      })
+      newParams = newParams.join("&")
+      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
+    
+    }else{
+      let newParams
+      if(location.search){
+        newParams = location.href + "&thread=" + value
+      }else if(location.href[location.href.length -1] == "?"){
+        newParams = location.href + "thread=" + value
+      }else{
+        newParams = location.href + "?thread=" + value
+      }
+      if(typeof window != `undefined`) window.location.href = newParams
+    }
+  }
 
+  /* Create artist cards based on current filters */
 
-  let artistCards = [];
-  artists.map(function(node, index){
+  let projectCards = []
+  projects.map(function(node, index){
     let image;
     let show = false;
     let absolutelynoshow = true;
+    let projectLinks = []
 
-    let projectLinks = node.node.projects?.map(function(node, index){
-      if(node.volume){
-        image = node.mainImage;
+
+      if(node.node.volume){
+        image = node.node.mainImage;
         show = true;
-        return(
-          <Link className={styles.blockLink} to={"/project/"+node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
+        projectLinks.push(
+          <Link key={index} className={styles.blockLink} to={"/project/"+node.node.slug.current}><TranslatedTitle translations={node.titles}/></Link>
         )
       }
-    })
+
     if(show == false){
       absolutelynoshow = false;
     }
-    
-
-    if(currentMediums?.length > 0 ){
-      let includesMedium = false;
-      node.node.medium?.map(function(node,index){
-        if(currentMediums?.includes(node)){
-          includesMedium = true;
-        }
-      })
-      if(!includesMedium){
-        show = false;
-      }
-    }else{
-      show = true;
-    }
 
 
-    if((currentFilter == "traveling" && !node.node.traveling) || (currentFilter == "commissioned" && !node.node.commissioned) || (currentFilter == "regional" && !node.node.regional)){
+    if(((currentFilter == "traveling") && !node.node.traveling) || ((currentFilter == "commissioned") && !node.node.commissioned) || ((currentFilter == "regional") && !node.node.regional) || ((currentFilter == "student") && !node.node.studentWork)){
       show = false
     }
+    if(currentThreads?.length > 0){
+      let showThread = false;
+      node.node.researchThreads?.map(function(node,index){
+        if(currentThreads.includes(node.name)){
+          showThread = true;
+        }
+      })
+      if(!showThread){
+        show = false
+      }
+    }
+    
     if(currentLocation){
       let includesLocation = false;
-      node.node.locations?.map(function(node,index){
+      node.node.exhibitions?.map(function(node,index){
         if(node.name == currentLocation){
-          includesLocation == true;
+          includesLocation = true;
         }
       })
       if(!includesLocation){
-        show == false;
+        show = false;
       }
-    }
+    }  
     
-    if(show && absolutelynoshow){             
-      projectLinks.unshift(<Link to={"/creator/"+node.node.slug.current}><h2>{node.node.name}→</h2></Link> )
-      artistCards.push( <Card image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
-    }
-  })
+    node.node.artists?.map(function(node,index){
+      projectLinks.push(<em>{node.name}</em>)
+    })
 
+    
+    if(show && absolutelynoshow){   
+      if((currentFilter == "regional") && node.node.regional){
+        projectLinks.unshift(<em>{node.node.exhibitions?.map(function(node,index){
+          return (node.name)
+      })}</em>)
+      }  
+      projectCards.push( <Card slug={"/project/"+node.node.slug.current} image={image} descriptions={projectLinks} titles={node.node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index}/> )
+    } 
+  })
 
   return (
       <>  
@@ -395,51 +509,35 @@ const VolumePage = props => {
           <h1><TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></h1>
           <div className="top-text one-column"><BlockContent blocks={page.bodies} languagePhrases={languagePhrases} globalLanguages={globalLanguages}/></div>
           <br/>
-          <div className={filterStyles.filterWrapper}>
-          <div className={styles.oneColumn}>
-            {artistCards}
-            {artistCards.length < 1 &&
-              <TranslatedPhrase translations={languagePhrases} phrase={'noResults'}/>
-            }
+          {/* <div className={filterStyles.filterWrapper}>
+          <div className={styles.cardWrapper}>
+
+          {projectCards}
+          {projectCards.length < 1 &&
+            <TranslatedPhrase translations={languagePhrases} phrase={'noResults'}/>
+          }
+       
           </div>
           <div className={filterStyles.filter}>
-          <LangContext.Consumer>
-            {theme => {
-              return(
-              <select className={filterStyles.filterArtist} id="change-tz" onChange={handleFilter}>
-                <option value={'all'}>{translate(languagePhrases, 'allArtists', theme)}</option>
-                <option value={'traveling'} selected={currentFilter == "traveling" ? true : false}>{translate(languagePhrases, 'traveling', theme)}</option>
-                <option value={'commissioned'} selected={currentFilter == "commissioned" ? true : false}>{translate(languagePhrases, 'commissioned', theme)}</option>
-                <option value={'regional'} selected={currentFilter == "regional" ? true : false}>{translate(languagePhrases, 'regional', theme)}</option>
-              </select>
-              )
-            }}
-            </LangContext.Consumer>
-            <h4><TranslatedPhrase translations={languagePhrases} phrase={'mediums'}/>:</h4>
-            {mediums.map(function(node, index){
+          
+
+            <>
+            <h4><TranslatedPhrase translations={languagePhrases} phrase={'researchThreads'}/>:</h4>
+            {
+            threads.map(function(node, index){
                 return(
                   <>
-                    <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleMedium} value={node} type="checkbox" checked={(currentMediums?.includes(node)) ? true : ''}/>
+                  <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleThread} value={node.name} type="checkbox" checked={(currentThreads?.includes(node.name)) ? true : ''}/>
                     <label className={filterStyles.checkBoxLabel} for={"check-"+index}>
-                    {node}</label>
+                    <TranslatedTitle translations={node.titles}/> </label>
                   </>
                   )
               })
             }
-            <LangContext.Consumer>
-            {theme => {
-              return(
-            <select className={filterStyles.filterArtist + " " + filterStyles.filterLocation} id="change-tz" onChange={handleLocation}>
-              <option value={'all'}>{translate(languagePhrases, 'allLocations', theme)}</option>
-              {locations.map(function(node, index){
-                return(<option value={node} selected={(currentLocation == node) ? true : false}>{node}</option>)
-              })}
-            </select>
-              )
-            }}
-            </LangContext.Consumer>
+            </>
+
           </div>
-          </div>
+          </div> */}
           
         </Container>
       </Layout>

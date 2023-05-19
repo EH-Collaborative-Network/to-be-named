@@ -75,18 +75,30 @@
         padding-bottom:0;
     }
 }
-.osun{
-    width: 45%;
+.ehcn{
+    width: 40%;
     left:-2%;
     position: relative;
     @media (--media-min-medium) {
-       height: 7.5vh;
+       height: 6.5vh;
+       width:auto;
+    }
+}
+
+.rv{
+    width: 35%;
+    left:-2%;
+    top:-1vh;
+    position: relative;
+    @media (--media-min-medium) {
+       height: 4.0vh;
        width:auto;
     }
 }
 .searchWrapper{
     position:relative;
     width: 70%;
+    margin-top:5px;
 }
 .searchWrapper input{
     width:calc(100% - 18px);

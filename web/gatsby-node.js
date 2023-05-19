@@ -39,12 +39,13 @@ async function createProjectPages (graphql, actions) {
       })
     })
 }
-/* Artist Authors  */
-async function createArtistAuthorPages (graphql, actions) {
+
+/* Exhibitions */
+async function createExhibitionPages (graphql, actions) {
   const {createPage} = actions
   const result = await graphql(`
     {
-      allSanityArtistAuthor(filter: {slug: {current: {ne: null}}}) {
+      allSanityExhibition(filter: {slug: {current: {ne: null}}}) {
         edges {
           node {
             id
@@ -59,87 +60,17 @@ async function createArtistAuthorPages (graphql, actions) {
 
   if (result.errors) throw result.errors
 
-  const artistAuthorEdges = (result.data.allSanityArtistAuthor || {}).edges || []
+  const exhibitionEdges = (result.data.allSanityExhibition || {}).edges || []
 
-  artistAuthorEdges
+  exhibitionEdges
     .forEach(edge => {
       const id = edge.node.id
       const slug = edge.node.slug.current
-      const path = `/creator/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+      const path = `/exhibition/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
 
       createPage({
         path,
-        component: require.resolve('./src/templates/artistAuthor.js'),
-        context: {id}
-      })
-    })
-}
-/* Research Threads */
-async function createResearchThreadPages (graphql, actions) {
-  const {createPage} = actions
-  const result = await graphql(`
-    {
-      allSanityResearchThread(filter: {slug: {current: {ne: null}}}) {
-        edges {
-          node {
-            id
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  if (result.errors) throw result.errors
-
-  const researchThreadEdges = (result.data.allSanityResearchThread || {}).edges || []
-
-  researchThreadEdges
-    .forEach(edge => {
-      const id = edge.node.id
-      const slug = edge.node.slug.current
-      const path = `/thread/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
-
-      createPage({
-        path,
-        component: require.resolve('./src/templates/researchThread.js'),
-        context: {id}
-      })
-    })
-}
-/* Events */
-async function createEventPages (graphql, actions) {
-  const {createPage} = actions
-  const result = await graphql(`
-    {
-      allSanityEvent(filter: {slug: {current: {ne: null}}}) {
-        edges {
-          node {
-            id
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  if (result.errors) throw result.errors
-
-  const eventEdges = (result.data.allSanityEvent || {}).edges || []
-
-  eventEdges
-    .forEach(edge => {
-      const id = edge.node.id
-      const slug = edge.node.slug.current
-      const path = `/event/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
-
-      createPage({
-        path,
-        component: require.resolve('./src/templates/event.js'),
+        component: require.resolve('./src/templates/exhibition.js'),
         context: {id}
       })
     })
@@ -183,10 +114,8 @@ async function createDefaultPages (graphql, actions) {
 
 exports.createPages = async ({graphql, actions}) => {
   await createProjectPages(graphql, actions)
-  await createResearchThreadPages(graphql, actions)
-  await createArtistAuthorPages(graphql, actions)
+  await createExhibitionPages(graphql, actions)
   await createDefaultPages(graphql, actions)
-  await createEventPages(graphql, actions)
 
 }
 

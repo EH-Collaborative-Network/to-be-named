@@ -6,6 +6,7 @@ import MediaItem from "../MediaItem/mediaItem"
 import { Link } from "gatsby";
 import TranslatedPhrase from "./translatedPhrase.js";
 import * as styles from "./block.module.css";
+import Person from "../Person/person"
 
 const serializers = {
   types: {
@@ -56,6 +57,21 @@ const components = {
           {children}
         </Link>
       )
+    },
+    imageLink: ({ value, children }) => {
+      
+      return (
+        <a className="image-link" href={value?.href}>
+          <div className="wrapper"><MediaItem media={value?.image}/></div>
+        </a>
+      )
+    },
+    person: ({ value, children }) => {
+      let person = {};
+      person.node = value.reference;
+      return (
+        <a className={styles.blockPerson}><Person blue={true} hideArrow={true} person={person.node} key={""}/></a>
+      );
     },
     media: ({ value, children }) => {
       

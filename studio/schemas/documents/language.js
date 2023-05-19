@@ -183,6 +183,24 @@ export default {
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'websiteContributors',
+      type: 'string',
+      title: 'Website Contributors'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'editedVolumeContributors',
+      type: 'string',
+      title: 'Edited Volume Contributors'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'current',
+      type: 'string',
+      title: 'current'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
       name:'partners',
       type: 'string',
       title: 'Partner Institutions'
@@ -216,6 +234,42 @@ export default {
       name:'projects',
       type: 'string',
       title: 'Projects'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'artworkIndex',
+      type: 'string',
+      title: 'Artwork Index'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'worksOnDisplay',
+      type: 'string',
+      title: 'Works on Display'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'contact',
+      type: 'string',
+      title: 'Contact'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'peopleAndPartners',
+      type: 'string',
+      title: 'People & Partners'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'seeAllExhibitionLocations',
+      type: 'string',
+      title: 'See All Exhibition Locations'
+    },
+    {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'seeAllArtworks',
+      type: 'string',
+      title: 'See All Artworks'
     },
     {
       description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
