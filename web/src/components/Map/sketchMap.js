@@ -106,7 +106,7 @@ function sketch (p) {
         }
         p.frameRate(10)
         /* make labels */
-        let traveling = p.createElement('h5', "<a href='/exhibition/traveling'>See Traveling Works<br><span>(works that will move throughout the exhibition sites)</span><span class='hidden-message'><br>more info→</span></a>");
+        let traveling = p.createElement('h5', "<a href='/exhibition/traveling-works'>See Traveling Works<br><span>(works that will move throughout the exhibition sites)</span><span class='hidden-message'><br>more info→</span></a>");
         let fw = p.width/25;
         let fh = p.height/25;
         traveling.position(2.3 * fw , 23.5 * fh - fh);

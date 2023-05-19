@@ -253,7 +253,8 @@ const ExhibitionTemplate = props => {
         }
         <br></br><br></br>
         {/* <h2 style={{'text-transform':'uppercase'}}><strong><TranslatedPhrase translations={languagePhrases} phrase={'worksOnDisplay'}/></strong></h2> */}
-        
+        {projectCards.length > 0 ?
+        <>
         <h2 style={{'text-transform':'uppercase'}}><strong><TranslatedPhrase translations={languagePhrases} phrase={'regional'}/></strong></h2>
         <div className={cardStyles.cardWrapper}>
           {projectCards}
@@ -262,7 +263,8 @@ const ExhibitionTemplate = props => {
         <div className={cardStyles.cardWrapper}>
           {projectCardsTraveling}
         </div>
-        
+        </>
+        : <span>More coming soon...</span>}
       </Container>
     </Layout>
   );
