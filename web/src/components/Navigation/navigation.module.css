@@ -26,6 +26,8 @@
 
 .mobileHeader{
     display:block;
+    position: relative;
+    z-index: 999;
     @media (--media-min-medium) {
         display:none;
     }

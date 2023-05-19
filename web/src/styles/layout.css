@@ -435,3 +435,6 @@ li.alice-carousel__stage-item {
   flex-wrap: wrap;
   align-items: flex-start;
 }
+.people-page.two-column li{
+  opacity: 0;
+}
