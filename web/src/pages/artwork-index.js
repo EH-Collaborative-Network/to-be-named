@@ -78,6 +78,7 @@ export const query = graphql`
     projects: allSanityProject{
       edges {
         node {
+              sortLetter
               titles{
                 text
                 language{
@@ -158,7 +159,16 @@ const ArtworkIndexPage = props => {
   const page = (data || {}).page.edges[0].node
   const languagePhrases = (data || {}).languagePhrases?.edges;
  
-
+  projects.sort(function (a, b) {
+    if (a.node.sortLetter < b.node.sortLetter) {
+      return -1;
+    }
+    if (a.node.sortLetter > b.node.sortLetter) {
+      return 1;
+    }
+    return 0;
+  });
+  
   if (errors) {
     return (
       <Layout>

@@ -59,6 +59,7 @@ export const query = graphql`
       edges{
         node {
           traveling
+          sortLetter
           titles{
             text
             language{
@@ -193,8 +194,16 @@ const ExhibitionTemplate = props => {
   const globalLanguages = site.languages;
   const languagePhrases = (data || {}).languagePhrases?.edges;
   const location = useLocation();
-  // projects.sort((a,b) => a.node.artists[0].name - b.node.artists[0].name); // b - a for reverse sort
 
+  projects.sort(function (a, b) {
+    if (a.node.sortLetter < b.node.sortLetter) {
+      return -1;
+    }
+    if (a.node.sortLetter > b.node.sortLetter) {
+      return 1;
+    }
+    return 0;
+  });
     /* Create artist cards based on current filters */
   let projectCards = []
   let projectCardsTraveling = []

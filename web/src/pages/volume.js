@@ -157,7 +157,15 @@ const VolumePage = props => {
   const projects = (data || {}).projects.edges
   const page = (data || {}).page.edges[0].node
   const languagePhrases = (data || {}).languagePhrases?.edges;
- 
+  projects.sort(function (a, b) {
+    if (a.node.sortLetter < b.node.sortLetter) {
+      return -1;
+    }
+    if (a.node.sortLetter > b.node.sortLetter) {
+      return 1;
+    }
+    return 0;
+  });
 
   if (errors) {
     return (
