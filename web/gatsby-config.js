@@ -196,22 +196,16 @@ module.exports = {
             type: "project"
           }))
 
-          let persons = data.allSanityPerson.edges.map((edge) => ({
-            id: edge.node.id,
-            descriptions:  edge.node.bios,
-            name: edge.node.name,
-            type: "person"
-          }))
 
           let exhibitions = data.allSanityExhibition.edges.map((edge) => ({
             id: edge.node.id,
-            descriptions:  edge.node.descriptions,
+            descriptions:  edge.node.statement,
             titles: edge.node.titles,
             slug: edge.node.slug,
             type: "exhibition"
           }))
 
-          let finalArray = events.concat( projects, exhibitions, pages, persons)
+          let finalArray = events.concat( projects, exhibitions, pages)
           return(finalArray.flat(1))
         },
       },
