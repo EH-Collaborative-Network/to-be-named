@@ -72,9 +72,7 @@ const PageTemplate = props => {
   const location = useLocation();
   let preview = false;
   const [previewData, setPreviewData] = useState(false)
-  if(location?.search){
-    preview = queryString.parse(location.search).preview;
-  }
+  
   if(preview && !previewData){
     const fetchData = async () => {
       setPreviewData(await client.fetch(previewQuery).then((data) => {

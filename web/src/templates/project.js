@@ -201,9 +201,7 @@ const ProjectTemplate = props => {
     }
   }
   const [previewData, setPreviewData] = useState(false)
-  if(location?.search){
-    preview = queryString.parse(location.search).preview;
-  }
+ 
   if(preview && !previewData){
     const fetchData = async () => {
       setPreviewData(await client.fetch(previewQuery).then((data) => {

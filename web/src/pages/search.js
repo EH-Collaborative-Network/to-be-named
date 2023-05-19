@@ -76,10 +76,7 @@ const Search = props => {
   const results = index ? useFlexSearch(query, index, store) : []
   
   useEffect(()=>{
-    if(location?.search){
-        let phrase = queryString.parse(location.search).query
-        setQuery(phrase)
-      }
+    
   },[])
 
   if (!site) {
