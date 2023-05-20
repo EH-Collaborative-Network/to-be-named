@@ -6,7 +6,7 @@
     top:0;
     left:0;
     width: 100%;
-    z-index: 9;
+    z-index: 999;
     height:100vh;
     display:none;
     background: var(--color-white);
@@ -27,7 +27,7 @@
 .mobileHeader{
     display:block;
     position: relative;
-    z-index: 999;
+    z-index: 998;
     @media (--media-min-medium) {
         display:none;
     }
