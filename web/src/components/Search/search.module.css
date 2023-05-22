@@ -92,6 +92,7 @@
     background-color: transparent;
     width:100%;
     margin:0;
+    font-size: var(--font-small-size);
     @media (--media-min-medium) {
         margin:inherit;
     }
