@@ -241,7 +241,7 @@ const ExhibitionTemplate = props => {
         </div>
         <h1><TranslatedTitle translations={page.titles}/></h1>
         <div className="top-title">
-          <div>
+          <div className='curators'>
           <BlockContent blocks={ page.dates}/>
           </div>
         </div>

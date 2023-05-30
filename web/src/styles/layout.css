@@ -356,6 +356,9 @@ li.alice-carousel__stage-item {
 .top-title a:nth-child(2){
   font-style: italic;
 }
+.top-title .curators a:nth-child(2){
+  font-style: normal;
+}
 .top-text + h1{
   margin-top:0;
 }
