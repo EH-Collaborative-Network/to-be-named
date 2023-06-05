@@ -6,9 +6,12 @@
     margin-top:0;
     margin-right:0;
     padding:0;
+    display: inline;
     color:var(--color-red);
 }
-
+.blockPerson{
+    display: inline !important;
+}
 .blockPerson > span > div:first-child:hover::after{
     background:var(--blue-link-gradient);
 }

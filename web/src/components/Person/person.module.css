@@ -3,5 +3,9 @@
 
 .person{
     cursor:pointer;
+    display: inline;
+}
+.person > div:first-child{
+    background:var(--blue-link-gradient);
     display: inline-block;
 }
