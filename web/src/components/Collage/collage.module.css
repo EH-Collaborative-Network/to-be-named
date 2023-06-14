@@ -3,6 +3,7 @@
 .root {
     margin:0;
     position:relative;
+    user-select: all;
     background-color: var(--color-white);
   @media (--media-min-small) {
     margin:0;
@@ -56,7 +57,12 @@
   -moz-user-select: none;
   user-select: none;
 }
-
+.root *{
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 .enter a{
   text-decoration: none;
   color:inherit;
