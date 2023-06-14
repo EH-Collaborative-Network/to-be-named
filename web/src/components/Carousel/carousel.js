@@ -15,9 +15,7 @@ const Carousel = ({ media, imageOnly }) => {
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
-  console.log(' running')
   useEffect(() => {
-    console.log('useeffect running')
     let track = document.getElementsByClassName(styles.slideTrack)[0];
     let as = track.querySelectorAll('a');
     if(as.length == 0){
@@ -36,7 +34,7 @@ const Carousel = ({ media, imageOnly }) => {
       t = t.split("(-")[1];
       t = parseFloat(t)
       let valToScroll = 0;
-      console.log('interval running')
+
       if(track.classList.contains('paused')){
         // inner.scrollLeft += 0;
         
@@ -57,6 +55,7 @@ const Carousel = ({ media, imageOnly }) => {
         // inner.scrollLeft += 0.5;
         valToScroll += 2
       }
+      console.log(valToScroll)
       inner.scrollBy({left: valToScroll, behavior: "smooth"})
   
     }, 30);
