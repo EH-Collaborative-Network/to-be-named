@@ -15,8 +15,9 @@ const Carousel = ({ media, imageOnly }) => {
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
-  
+  console.log(' running')
   useEffect(() => {
+    console.log('useeffect running')
     let track = document.getElementsByClassName(styles.slideTrack)[0];
     let as = track.querySelectorAll('a');
     if(as.length == 0){
