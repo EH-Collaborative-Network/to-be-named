@@ -35,6 +35,7 @@ const Carousel = ({ media, imageOnly }) => {
       t = t.split("(-")[1];
       t = parseFloat(t)
       let valToScroll = 0;
+      console.log('interval running')
       if(track.classList.contains('paused')){
         // inner.scrollLeft += 0;
         
