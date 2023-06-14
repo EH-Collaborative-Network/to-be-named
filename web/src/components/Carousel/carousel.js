@@ -38,27 +38,26 @@ const Carousel = ({ media, imageOnly }) => {
       if(track.classList.contains('paused')){
         // inner.scrollLeft += 0;
         
-      }else if(track.classList.contains('rtl') && inner.scrollLeft >= (inner.scrollWidth - inner.offsetWidth)){
+      }else if(track.classList.contains('rtl') && inner.scrollLeft >= (inner.scrollWidth - inner.offsetWidth - 100)){
         // inner.scrollLeft -= 0.5;
-        valToScroll -= 2
+        valToScroll -= 1
         track.classList.remove('rtl')
         track.classList.add('ltr')
       }else if(track.classList.contains('ltr') && inner.scrollLeft <= 0){
         // inner.scrollLeft += 0.5;
-        valToScroll += 2
+        valToScroll += 1
         track.classList.remove('ltr')
         track.classList.add('rtl')
       }else if(track.classList.contains('ltr')){
         // inner.scrollLeft -= 0.5;
-        valToScroll -= 2
+        valToScroll -= 1
       }else{
         // inner.scrollLeft += 0.5;
-        valToScroll += 2
+        valToScroll += 1
       }
-      console.log(valToScroll)
-      inner.scrollBy({left: valToScroll, behavior: "smooth"})
+      inner.scrollBy({left: valToScroll, behavior: "auto"})
   
-    }, 30);
+    }, 20);
 
     return () => clearInterval(interval);
 
