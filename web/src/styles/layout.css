@@ -355,6 +355,7 @@ li.alice-carousel__stage-item {
 }
 .top-title a:nth-child(2){
   font-style: italic;
+  height:fit-content;
 }
 .top-title .curators a:nth-child(2){
   font-style: normal;
