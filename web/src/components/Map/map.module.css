@@ -54,7 +54,8 @@
     z-index: 8;
     font-weight: normal;
     opacity:0.8;
-    font-size:0.8em;
+    font-size:0.6em;
+    line-height: 1.15;
     transition:0.1s;
     background-color: #f8f5f2fc;
     cursor: pointer;
@@ -62,17 +63,13 @@
     text-shadow: #fff 10px 10px 10px;
     @media (--media-min-small) {
         background: transparent;
+        font-size:0.8em;
     }
 }
 .root a{
     text-decoration: none;
 }
-.root h5.on{
-    opacity: 1;
-    line-height: 24px;
-    font-weight: bold;
-    /* color:lime */
-}
+
 .root h5:hover{
     opacity: 1;
     top:-10px;

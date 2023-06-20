@@ -408,7 +408,7 @@ li.alice-carousel__stage-item {
 }
 .exhibition-map .on{
     opacity: 1;
-    line-height: 24px;
+    line-height: 1.15;
     font-weight: bold;
     /* color:lime */
 }
