@@ -4,10 +4,8 @@ import sketch3 from "./sketch3";
 import sketch4 from "./sketch4";
 import three from "./real.jpg"
 import one from "./LBH1.jpg"
-import six from "./genesis.jpg"
 import five from "./symphony.jpg"
 import four from "./7.jpg"
-import two from "./composite.jpg"
 import refusal from "./refusal_small.gif";
 import {ReactP5Wrapper} from "react-p5-wrapper";
 import React from "react";
