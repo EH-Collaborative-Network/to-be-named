@@ -62,7 +62,7 @@ const components = {
       
       return (
         <a className="image-link" href={value?.href}>
-          <div className="wrapper"><MediaItem media={value?.image}/></div>
+          <div className={styles.imageLink + " wrapper"}><MediaItem media={value?.image}/></div>
         </a>
       )
     },
