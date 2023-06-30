@@ -76,24 +76,37 @@
         padding:0;
         padding-bottom:0;
     }
+    /* @media (--media-min-large-desktop){
+        height: 42vh;
+        margin-top:16px;
+    } */
 }
 .ehcn{
-    width: 40%;
+    width: 30%;
     left:-2%;
     position: relative;
     @media (--media-min-medium) {
-       height: 6.5vh;
+       height: 5.5vh;
        width:auto;
     }
 }
-
+.coling{
+    width: 30%;
+    left:-2%;
+    top:-2vh;
+    position: relative;
+    @media (--media-min-medium) {
+       height: 3.0vh;
+       width:auto;
+    }  
+}
 .rv{
-    width: 35%;
+    width: 30%;
     left:-2%;
     top:-1vh;
     position: relative;
     @media (--media-min-medium) {
-       height: 4.0vh;
+       height: 3.0vh;
        width:auto;
     }
 }
