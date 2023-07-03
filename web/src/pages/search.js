@@ -77,7 +77,7 @@ const Search = props => {
   const [query, setQuery] = useState(null);
   const results = index ? useFlexSearch(query, index, store) : []
   let searchCards = []
-  console.log(results[0])
+
   results.map(function(node, index){
     let image;
     let show = false;
@@ -96,6 +96,12 @@ const Search = props => {
 
   })
   useEffect(()=>{
+    let params;
+    if(location.search){
+      params = location.search.split("?")[1].split("=")[1];
+      params = params.replace(/%20/g, " ");
+      setQuery(params)
+    }
     
   },[])
 
