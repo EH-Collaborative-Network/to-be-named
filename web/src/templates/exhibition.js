@@ -151,6 +151,7 @@ export const query = graphql`
             _id
           }
           altText
+          caption
         }
       }
       statement{
@@ -227,7 +228,7 @@ const ExhibitionTemplate = props => {
     }
 
   })
-  let media = []
+
 
 
   

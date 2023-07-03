@@ -25,6 +25,9 @@ const Carousel = ({ media, imageOnly }) => {
     for(let i = 0; i < as.length; i++){
       totalWidth = totalWidth + as[i].offsetWidth + 5;
     }
+    if (totalWidth < document.querySelector(".inner").offsetWidth){
+      totalWidth = document.querySelector(".inner").offsetWidth * 2
+    }
     track.style.width = totalWidth + "px"
     let interval = setInterval(() => {
       let track = document.getElementsByClassName(styles.slideTrack)[0];
@@ -142,7 +145,7 @@ const Carousel = ({ media, imageOnly }) => {
         return(<></>)
       }
     }else{
-      return <MediaItem key={index} media={node}></MediaItem>;
+      return (<div><MediaItem key={index} media={node}></MediaItem></div>);
     }
     
 })
