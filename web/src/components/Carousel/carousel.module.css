@@ -150,6 +150,7 @@
 }
 .root .figure, .figure  div{
   height: 40vh;
+  max-height:40vh;
   display: inline-block;
 }
 .wrapper{
