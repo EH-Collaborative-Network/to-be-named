@@ -74,6 +74,21 @@ module.exports = {
                   id
                   keywords
                   name
+                  exhibition
+                  mainImage {
+                    crop {
+                      _key
+                      _type
+                      top
+                      bottom
+                      left
+                      right
+                    }
+                    asset {
+                      _id
+                    }
+                    altText
+                  }
                   titles {
                     text
                     language {
@@ -112,6 +127,20 @@ module.exports = {
                   }
                   id
                   name
+                  image {
+                    crop {
+                      _key
+                      _type
+                      top
+                      bottom
+                      left
+                      right
+                    }
+                    asset {
+                      _id
+                    }
+                    altText
+                  }
                   titles {
                     text
                     language {
@@ -157,6 +186,8 @@ module.exports = {
             titles: edge.node.titles,
             slug: edge.node.slug,
             artists: edge.node.artists,
+            exhibition: edge.node.exhibition,
+            mainImage: edge.node.mainImage,
             type: "project"
           }))
 
@@ -166,6 +197,7 @@ module.exports = {
             descriptions:  edge.node.statement,
             titles: edge.node.titles,
             slug: edge.node.slug,
+            image: edge.node.image,
             type: "exhibition"
           }))
 

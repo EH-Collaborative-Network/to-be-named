@@ -2,6 +2,7 @@ import { useFlexSearch } from 'react-use-flexsearch'
 import React from "react";
 import { graphql } from "gatsby";
 import { useState } from 'react';
+import Card from "../components/Card/card"
 import Container from "../components/Container/container";
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
@@ -75,7 +76,25 @@ const Search = props => {
   const index = (data || {}).items?.index
   const [query, setQuery] = useState(null);
   const results = index ? useFlexSearch(query, index, store) : []
-  
+  let searchCards = []
+  console.log(results[0])
+  results.map(function(node, index){
+    let image;
+    let show = false;
+    let absolutelynoshow = true;
+
+    let projectLinks = []
+    projectLinks.push(  <sup><TranslatedPhrase translations={languagePhrases} phrase={node.type}/></sup>
+    )
+
+    if(node.type == "project" && node.exhibition){
+      searchCards.push( <Card languagePhrases={languagePhrases} globalLanguages={globalLanguages} slug={"/project/"+node.slug.current} image={node.mainImage} descriptions={projectLinks} titles={node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index} banner={false} /> )
+
+    }else if(node.type == "exhibition"){
+      searchCards.push( <Card languagePhrases={languagePhrases} globalLanguages={globalLanguages} slug={"/exhibition/"+node.slug.current} image={node.image} descriptions={projectLinks} titles={node.titles} languagePhrases={languagePhrases} globalLanguages={globalLanguages} key={index} banner={false} extra={styles.exhibitionCard}/> )
+    }
+
+  })
   useEffect(()=>{
     
   },[])
@@ -126,7 +145,8 @@ const Search = props => {
             <em id="no-results"><TranslatedPhrase translations={languagePhrases} phrase={"noResults"}/> "{query}"</em>
           }
           <div className={styles.resultsWrapper}>
-          {
+            {searchCards}
+          {/* {
 
               results.map(function(node,index){
                 let slug = node.slug?.current || "";
@@ -157,15 +177,8 @@ const Search = props => {
                               :
                               (<><TranslatedTitle translations={node.titles}/>→</>)
                             }</h4>
-                            <div><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={node.descriptions}/></div>
-                          </Link>
-                        </div>
-                    )
-                
-                
-              })
-          }
-          </div>
+                            {/* <div><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={node.descriptions}/></div> */}
+                  </div>
         </Container>
       </Layout>
       
