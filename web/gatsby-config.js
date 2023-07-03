@@ -61,32 +61,6 @@ module.exports = {
         // required.
         query: `
           {
-            allSanityPage {
-              edges {
-                node {
-                  bodies {
-                    _rawText(resolveReferences: {maxDepth: 10})
-                    language {
-                      code
-                      name
-                    }
-                  }
-                  id
-                  keywords
-                  name
-                  titles {
-                    text
-                    language {
-                      code
-                      name
-                    }
-                  }
-                  slug {
-                    current
-                  }
-                }
-              }
-            }
             allSanityProject {
               edges {
                 node {
@@ -106,6 +80,19 @@ module.exports = {
                       code
                       name
                     }
+                  }
+                  artists {
+                    id
+                      _id
+                      name
+                      bios{
+                        _rawText(resolveReferences: { maxDepth: 20 })
+                        language{
+                          id
+                          name
+                          code
+                        }
+                      }
                   }
                   slug {
                     current
@@ -138,21 +125,6 @@ module.exports = {
                 }
               }
             }
-            allSanityPerson{
-              edges {
-                node {
-                  bios {
-                    _rawText(resolveReferences: {maxDepth: 10})
-                    language {
-                      code
-                      name
-                    }
-                  }
-                  id
-                  name
-                }
-              }
-            }
            
           }
         `,
@@ -177,15 +149,6 @@ module.exports = {
         // field above (default: 'id'). This is required.
         normalizer: ({ data }) => {
 
-        
-
-          let pages = data.allSanityPage.edges.map((edge) => ({
-            id: edge.node.id,
-            descriptions:  edge.node.bodies,
-            titles: edge.node.titles,
-            slug:edge.node.slug,
-            type: "page"
-          }))
 
     
           let projects = data.allSanityProject.edges.map((edge) => ({
@@ -193,6 +156,7 @@ module.exports = {
             descriptions:  edge.node.descriptions,
             titles: edge.node.titles,
             slug: edge.node.slug,
+            artists: edge.node.artists,
             type: "project"
           }))
 
@@ -205,7 +169,7 @@ module.exports = {
             type: "exhibition"
           }))
 
-          let finalArray = pages.concat( projects, exhibitions)
+          let finalArray = projects.concat(exhibitions)
           return(finalArray.flat(1))
         },
       },

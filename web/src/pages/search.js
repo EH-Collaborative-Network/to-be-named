@@ -35,6 +35,7 @@ export const query = graphql`
                 code
                 about
                 volume
+                project
                 contact
                 peopleAndPartners
                 artworkIndex
@@ -136,8 +137,8 @@ const Search = props => {
                       case 'project':
                         slug = "/project/"+slug;
                         break;
-                    case 'artistAuthor':
-                        slug = "/creator/"+slug;
+                    case 'exhibition':
+                        slug = "/exhibition/"+slug;
                         break;
                       case 'researchThread':
                         slug = "/thread/"+slug;
