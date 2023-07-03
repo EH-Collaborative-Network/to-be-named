@@ -206,7 +206,7 @@ select:focus{
   background-color: var(--color-gray);
 }
 #light-box.show, .modal.show{
-  z-index: 9;
+  z-index: 999;
 }
 .modal.show{
   opacity: 1;
