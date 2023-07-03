@@ -181,7 +181,9 @@
 .root figcaption{
   display: none;
 }
-
+.root img{
+  max-height: 40vh;
+}
 .simpleImage{
   height:auto;
   margin:0;
