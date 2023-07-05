@@ -241,7 +241,7 @@ const ProjectTemplate = props => {
 
           </div>
         }
-        <div className="top-text one-column"><BlockContent blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/> { page.mainLink &&
+        <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={(preview && previewData) ? previewData.descriptions : page.descriptions}/> { page.mainLink &&
           <a style={{"text-decoration":"none"}} href={page.mainLink.url}>{page.mainLink.text}</a>
           }</div>
        

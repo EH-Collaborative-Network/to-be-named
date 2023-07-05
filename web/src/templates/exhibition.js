@@ -243,10 +243,10 @@ const ExhibitionTemplate = props => {
         <h1><TranslatedTitle translations={page.titles}/></h1>
         <div className="top-title">
           <div className='curators'>
-          <BlockContent blocks={ page.dates}/>
+          <BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={ page.dates}/>
           </div>
         </div>
-        <div className="top-text one-column"><BlockContent blocks={ page.statement}/></div>
+        <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={ page.statement}/></div>
         {page.media?.length > 0 &&
            <div className={carouselStyles.special}>
             <Carousel imageOnly={false} media={page.media}/>
