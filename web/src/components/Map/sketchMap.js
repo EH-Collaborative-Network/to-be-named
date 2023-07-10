@@ -78,7 +78,7 @@ function sketch (p) {
     let indeces = [0, 9, 21,28, 43, 56,63]
     let locations = [
         "<a href='/exhibition/berlin'>Germany<br><span>June 30 - Oct 1, 2023</span><span class='hidden-message'><br>more info→</span></a>",
-        "<a href='/exhibition/hudson-valley'>U.S.A.<br><span>Sep 08 - Oct 14, 2023</span><span class='hidden-message'><br>more info→</span></a>",
+        "<a href='/exhibition/hudson-valley'>U.S.A.<br><span>Sep 01 - Oct 14, 2023</span><span class='hidden-message'><br>more info→</span></a>",
         "<a href='/exhibition/athens'>Greece<br><span>Oct 26 - Nov 20, 2023</span><span class='hidden-message'><br>more info→</span></a>",
         "<a href='/exhibition/palestine'>Palestine<br><span>Spring, 2024</span><span class='hidden-message'><br>more info→</span></a>",
         "<a href='/exhibition/bishkek'>Kyrgyzstan<br><span>Spring, 2024</span><span class='hidden-message'><br>more info→</span></a>",
