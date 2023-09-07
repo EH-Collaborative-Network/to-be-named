@@ -47,12 +47,12 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
       { theme => {
         return(
           <ul className={styles.menu}>
-              <li className={url.includes("about") ? styles.on: ""}><Link to="/about/"><TranslatedPhrase translations={translations} phrase={"about"}/>→</Link></li>
-              <li className={url.includes("artwork-index") ? styles.on: ""}><Link to="/artwork-index/"><TranslatedPhrase translations={translations} phrase={"artworkIndex"}/>→</Link></li>
-              <li className={url.includes("exhibition") ? styles.on : ""}><Link to="/exhibition/"><TranslatedPhrase translations={translations} phrase={"exhibition"}/>→</Link></li>
-              <li className={url.includes("volume") ? styles.on : ""}><Link to="/volume"><TranslatedPhrase translations={translations} phrase={"volume"}/>→</Link></li>
-              <li className={url.includes("people-and-partners") ? styles.on : ""}><Link to="/people-and-partners/"><TranslatedPhrase translations={translations} phrase={"peopleAndPartners"}/>→</Link></li>
-              <li className={url.includes("contact") ? styles.on : ""}><Link to="/contact/"><TranslatedPhrase translations={translations} phrase={"contact"}/>→</Link></li>
+              <li className={url.includes("about") ? styles.on: ""}><Link to="/about/"><TranslatedPhrase translations={translations} phrase={"about"}/></Link></li>
+              {/* <li className={url.includes("artwork-index") ? styles.on: ""}><Link to="/artwork-index/"><TranslatedPhrase translations={translations} phrase={"artworkIndex"}/></Link></li> */}
+              <li className={url.includes("exhibition") ? styles.on : ""}><Link to="/exhibition/"><TranslatedPhrase translations={translations} phrase={"exhibition"}/></Link></li>
+              <li className={url.includes("volume") ? styles.on : ""}><Link to="/volume"><TranslatedPhrase translations={translations} phrase={"volume"}/></Link></li>
+              <li className={url.includes("people-and-partners") ? styles.on : ""}><Link to="/people-and-partners/"><TranslatedPhrase translations={translations} phrase={"peopleAndPartners"}/></Link></li>
+              <li className={url.includes("contact") ? styles.on : ""}><Link to="/contact/"><TranslatedPhrase translations={translations} phrase={"contact"}/></Link></li>
           </ul>
           )
       }}
