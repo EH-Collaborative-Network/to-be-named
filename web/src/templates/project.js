@@ -36,6 +36,7 @@ export const query = graphql`
           peopleAndPartners
           seeAllArtworks
           upcomingEvents
+          seeAllExhibitionLocations
           researchThreads
           availableIn
           search
@@ -225,9 +226,9 @@ const ProjectTemplate = props => {
             })}
             </div>
             {page.volume ?
-                <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></Link>
+                <Link to="/volume" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'volume'}/></Link>
               : 
-                <Link to="/artwork-index" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllArtworks'}/></Link>
+                <Link to="/exhibition" className='breadcrumb'>← <TranslatedPhrase translations={languagePhrases} phrase={'seeAllExhibitionLocations'}/></Link>
               }
         </div>
         }

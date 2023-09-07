@@ -85,7 +85,6 @@ const ContactPage = props => {
   const [feeds, setFeedsData] = useState([])
   let token = process.env.GATSBY_INSTAGRAM_TOKEN
 
-
   useEffect(() => {
     // this is to avoid memory leaks
     
@@ -157,9 +156,12 @@ const ContactPage = props => {
           <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : ap} globalLanguages={globalLanguages}/></div>
           <br/>
           <div id='instagram-wrapper'>
-          {feeds.map((feed) => (
-                <Feed key={feed.id} feed={feed} />
-            ))}
+          {feeds.map((feed) => {
+                if(feed.media_type != "VIDEO"){
+                 return ( <Feed key={feed.id} feed={feed} />)
+                }
+                
+              })}
           </div>
         </Container>
       </Layout>
