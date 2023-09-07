@@ -54,7 +54,7 @@ const Collage = ({phrase, translations}) => {
         }
         <img draggable="false" src={refusal}/>
         <div className={styles.enter}>
-          <Link to="/home/"><h4><TranslatedPhrase translations={translations} phrase={phrase}/>→</h4></Link>
+          <Link to="/home/"><h4><TranslatedPhrase translations={translations} phrase={phrase}/></h4></Link>
         </div>
       </div>
   )
