@@ -405,6 +405,7 @@ li.alice-carousel__stage-item {
 }
 .exhibition-map h5:hover .hidden-message{
   display: inline;
+  text-decoration: underline;
 }
 .exhibition-map .on{
     opacity: 1;

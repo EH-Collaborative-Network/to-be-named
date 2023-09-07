@@ -77,9 +77,11 @@
 }
 .root h5 .hidden-message{
     display: none;
+    text-decoration: underline;
 }
 .root h5:hover .hidden-message{
     display: inline;
+    text-decoration: underline;
 }
 
 .root h5 span{

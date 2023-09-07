@@ -108,10 +108,10 @@
 }
 .root h2{
     margin:0;
-    margin-bottom:0;
-    text-decoration: none;
+    margin-bottom:5px;
+    text-decoration: underline;
     @media (--media-min-medium) {
-        margin-bottom:0px;
+        margin-bottom:5px;
     }
 }
 

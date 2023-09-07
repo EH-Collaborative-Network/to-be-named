@@ -16,7 +16,7 @@ const Card = ({ titles, slug, image, descriptions,languagePhrases, globalLanguag
       <Link to={slug}>
         
         {titles &&
-          <h2><TranslatedTitle translations={titles}/>→</h2> 
+          <h2><TranslatedTitle translations={titles}/></h2> 
         }
         
         {descriptions &&
