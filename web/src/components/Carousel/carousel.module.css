@@ -190,3 +190,19 @@
     max-width: 25%;
   }
 }
+.arrowButtonLeft, .arrowButtonRight{
+  position: absolute;
+  top: 40%;
+  padding:5px;
+  padding-top:12px;
+  cursor: pointer;
+  left:0;
+  background-color: var(--color-white);
+  @media (--media-min-medium) {
+    top: 40%;
+  }
+}
+.arrowButtonRight{
+  left:auto;
+  right:0;
+}

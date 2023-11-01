@@ -167,7 +167,7 @@
 .menu a{
     color: inherit;
     display: inline-block;
-    text-decoration: underline;
+    text-decoration: none;
 }
 .menu{
     list-style: none;
