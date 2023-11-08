@@ -446,3 +446,10 @@ li.alice-carousel__stage-item {
 .people-page.two-column li{
   opacity: 0;
 }
+
+.three-dee iframe{
+  max-width: 100% !important;
+  /* @media(--media-min-medium){
+    width: 
+  } */
+}

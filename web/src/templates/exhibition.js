@@ -4,6 +4,7 @@ import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Card from "../components/Card/card";
+import MediaItem from "../components/MediaItem/mediaItem";
 import Layout from "../containers/layout";
 import BlockContent from "../components/TranslationHelpers/block-content";
 import { useLocation } from '@reach/router';
@@ -115,6 +116,11 @@ export const query = graphql`
         asset {
           _id
         }
+      }
+      threedwalk{
+        embed
+        altText
+        caption
       }
       media{
         embed{
@@ -247,11 +253,28 @@ const ExhibitionTemplate = props => {
           </div>
         </div>
         <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={ page.statement}/></div>
+        {page.threedwalk &&
+        <>
+        <br></br><br></br>
+        <h2 style={{'text-transform':'uppercase'}}><strong>3D walkthrough of exhibition:</strong></h2>
+
+          <div className="three-dee">
+            <MediaItem media={{"embed":page.threedwalk}}></MediaItem>
+          </div>
+          </>
+        }
         {page.media?.length > 0 &&
-           <div className={carouselStyles.special}>
+        <>
+        <br></br><br></br>
+        <h2 style={{'text-transform':'uppercase'}}><strong>Installation Images:</strong></h2>
+        <div className={carouselStyles.special}>
             <Carousel imageOnly={false} media={page.media}/>
            </div> 
+        </>
+           
         }
+
+        
         <br></br><br></br>
         {/* <h2 style={{'text-transform':'uppercase'}}><strong><TranslatedPhrase translations={languagePhrases} phrase={'worksOnDisplay'}/></strong></h2> */}
         {projectCards.length > 0 &&

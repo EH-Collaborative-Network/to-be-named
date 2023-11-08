@@ -46,6 +46,11 @@ export default {
       type: 'figure'
     },
     {
+      name: 'threedwalk',
+      title: '3D walkthrough',
+      type: 'embed'
+    },
+    {
       name:'current',
       type: 'boolean',
       title: 'Is this exhibition currently showing?',

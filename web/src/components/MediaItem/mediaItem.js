@@ -30,6 +30,7 @@ function lightboxed(e){
   document.querySelector("#light-box .inner").append(media)
   document.getElementById("light-box").classList.add("show");
 } 
+console.log(media.embed)
   return(
     <div className={'media-item'} onClick={lightboxed}>
         {image &&
