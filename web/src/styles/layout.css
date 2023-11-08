@@ -453,3 +453,8 @@ li.alice-carousel__stage-item {
     width: 
   } */
 }
+.top-text h1{
+  text-transform: uppercase;
+  margin-top: calc(var(--space)*2);
+  font-size: var(--font-medium-size);
+}
