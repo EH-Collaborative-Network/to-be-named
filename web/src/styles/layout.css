@@ -72,11 +72,11 @@ strong{
 }
 h1{
   font-size: var(--font-large-size);
-  margin:25px 0;
+  margin:var(--space) 0;
 }
 h2{
   font-size: var(--font-medium-size);
-  margin:25px 0;
+  margin:var(--space) 0;
 }
 h1,h2,h3,h4,h5,h6{
   font-weight:normal;
@@ -93,12 +93,12 @@ h4{
     position: relative;
     display: inline-block;
     vertical-align: top;
-    padding: 5px 10px;
+    padding: calc(var(--space-small)/ 2) var(--space-small);
     z-index: 0;
     padding-right: 0;
-    padding-left: 5px;
+    padding-left: calc(var(--space-small)/ 2);
     margin-top: 8px;
-    margin-right:12px;
+    margin-right:var(--space-small);
     color: var(--color-black);
     background: var(--white-gradient);
     border-radius: 0px;
@@ -127,12 +127,12 @@ h4{
   position: relative;
   display: inline-block;
   vertical-align: top;
-  padding: 5px 10px;
+  padding: calc(var(--space-small)/ 2) var(--space-small);
   z-index: 0;
   padding-right: 0;
   padding-left: 5px;
   margin-top: 8px;
-  margin-right:12px;
+  margin-right:var(--space-small);
   color: var(--color-black);
   background: var(--light-blue-gradient);
   border-radius: 0px;
@@ -167,7 +167,7 @@ width: 100%;
 .two-column{
   column-count: 2;
   column-gap: 1rem;
-  margin-bottom:25px;
+  margin-bottom:var(--space);
 }
 
 .top-text.two-column > p:first-child{
@@ -194,7 +194,7 @@ select{
 	background: transparent;
 	padding: 2px 8px;
 	-webkit-appearance: menulist;
-  margin:  10px 2px;
+  margin:  var(--space-small) 2px;
 }
 input[type=text]{
   padding: 8px 8px;
@@ -281,12 +281,12 @@ li.alice-carousel__stage-item {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  padding: 5px 10px;
+  padding: calc(var(--space-small)/ 2) var(--space-small);
   z-index: 0;
   padding-right: 0;
-  padding-left: 5px;
+  padding-left: calc(var(--space-small)/ 2);
   margin-top: 8px;
-  margin-right:12px;
+  margin-right:var(--space-small);
   background: var(--white-gradient);
   border-radius: 0px;
   text-decoration: none;
@@ -312,7 +312,7 @@ li.alice-carousel__stage-item {
   margin: 5px 0;
   position: relative;
   top:-0.5em;
-  margin-bottom:2em;
+  margin-bottom:var(--space);
 }
 .main-link.top-link{
   margin-bottom:0;
@@ -368,7 +368,7 @@ li.alice-carousel__stage-item {
 }
 .top-text.about .wrapper{
   display: inline-block;
-  margin:12px;
+  margin:var(--space-small);
   pointer-events: none;
 }
 .top-text.about .wrapper *{
@@ -389,7 +389,7 @@ li.alice-carousel__stage-item {
 }
 
 .project-title{
-  margin: 10px 0;
+  margin: var(--space-small) 0;
   max-width: auto;
   @media(--media-min-medium){
     max-width:900px;
@@ -417,8 +417,8 @@ li.alice-carousel__stage-item {
   margin:0;
 }
 .embed-caption{
-  margin-top:1em;
-  margin-bottom:2em;
+  margin-top:var(--space-small);
+  margin-bottom:var(--space-small);
 }
 .people-page .wrapper *{
   /* width: 100px; */
@@ -441,7 +441,7 @@ li.alice-carousel__stage-item {
   align-items: flex-start;
 }
 .people-page.two-column{
-  margin-top:1em;
+  margin-top:var(--space-small);
 }
 .people-page.two-column li{
   opacity: 0;

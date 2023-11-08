@@ -70,7 +70,7 @@
   text-decoration: none;
   color:inherit;
   background: var(--color-gray);
-  padding:10px;
+  padding:var(--space-small);
   display: inline-block;
 }
 .enter a h4{

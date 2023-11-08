@@ -10,11 +10,6 @@
   top:0;
   overflow: hidden;
   z-index: -2;
-  @media (--media-min-medium) {
-    /* margin-left:16vw;
-    padding:50px;
-    padding-left:75px; */
-  }
 
 }
 .inner > div > div > div > div, .inner > div > div{
@@ -27,7 +22,7 @@
 }
 .close{
     text-align: right;
-    padding: 15px;
+    padding: var(--space-small);
     cursor: pointer;
     position: absolute;
     right:0;
@@ -36,7 +31,7 @@
     max-width: 35px;
     @media (--media-min-small) {
       max-width: 50px;
-      padding: 25px 30px;
+      padding: var(--space);
     }
 }
 .close svg{
@@ -48,18 +43,18 @@
 
 .inner{
     text-align: center;
-    padding-top:5em;
+    padding-top:calc(var(--space)* 2);
     margin-top:0;
     max-height: calc(100vh - 3em);
-    padding-bottom:1em;
+    padding-bottom:var(--space);
     overflow:scroll;
     @media (--media-min-small) {
-      padding-top:3em;
+      padding-top:calc(var(--space));
       margin-top:0;
     }
 }
 .inner > div{
-  margin-bottom:3em;
+  margin-bottom:var(--space);
 }
 
 

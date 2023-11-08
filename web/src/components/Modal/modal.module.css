@@ -24,7 +24,7 @@
 }
 
 .modal figure{
-  margin-bottom:1em;
+  margin-bottom:var(--space-small);
 }
 .modal{
   background: #e7e5e4fb;
@@ -49,7 +49,7 @@
 }
 .close{
   text-align: right;
-  padding: 25px 30px;
+  padding: var(--space);
   cursor: pointer;
   float:right;
   position:absolute;
@@ -63,7 +63,7 @@
   width: 100%;
 }
 .inner{
-  padding:20px 20px 30px;
+  padding:var(--space);
   overflow:scroll;
   height: 90vh;
   @media (--media-min-medium) {

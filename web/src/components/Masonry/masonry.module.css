@@ -2,7 +2,7 @@
 @import '../../styles/custom-properties.css';
 
 .root{
-    margin-top:3em;
+    margin-top:var(--space);
 }
 .inner{
     display:block;
@@ -30,10 +30,10 @@
     height:auto;
 }
 .inner > div{
-    margin-bottom:25px;
+    margin-bottom:var(--space);
 }
 .inner > div > div > div{
-    margin-bottom:25px;
+    margin-bottom:var(--space);
 }
 .inner iframe{
     pointer-events:none;

@@ -4,8 +4,8 @@
 
 .root{
     background-color: var(--color-gray);
-    padding: 10px;
-    margin-bottom:15px;
+    padding: var(--space-small);
+    margin-bottom:var(--space-small);
     flex-basis:100%;
     min-height: 100px;
     max-width: 1000px;
@@ -27,8 +27,8 @@
     flex-basis:100%;
     margin-right:0;
     @media (--media-min-medium) {
-        flex-basis: calc(50% - 35px);
-        margin-right:15px;
+        flex-basis: calc(50% - (var(--space-small)*3));
+        margin-right:var(--space-small);
     }
 }
 .oneColumn .root{

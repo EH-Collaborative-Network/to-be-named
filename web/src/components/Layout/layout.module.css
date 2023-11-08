@@ -2,5 +2,5 @@
 @import '../../styles/custom-properties.css';
 
 .content{
-    padding-bottom:3em;
+    padding-bottom:calc(var(--space) * 2);
 }
