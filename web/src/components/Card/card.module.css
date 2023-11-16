@@ -14,9 +14,11 @@
     overflow: hidden;
     display: block;
 }
+
 .root em{
     position: relative;
-    top:0em;
+    /* top:0em; */
+    margin-bottom: var(--space);
     display: inline-block;
 }
 .root p{
@@ -108,10 +110,10 @@
 }
 .root h2{
     margin:0;
-    margin-bottom:5px;
-    text-decoration: underline;
+    margin-bottom:var(--space-small);
+    text-decoration: none;
     @media (--media-min-medium) {
-        margin-bottom:5px;
+        margin-bottom:var(--space-small);
     }
 }
 
