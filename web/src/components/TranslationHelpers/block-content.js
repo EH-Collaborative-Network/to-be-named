@@ -97,6 +97,7 @@ const BlockContent = ({ blocks, globalLanguages, languagePhrases }) => {
     { theme => {
       let translation = []
       let lang = theme.lang;
+
       if(!status){
         setStatus(lang)
       }
@@ -116,13 +117,15 @@ const BlockContent = ({ blocks, globalLanguages, languagePhrases }) => {
         })
     
         if(lang){
+ 
           blocks.forEach(element => {
             if(element.language.code == lang){
               language = element.language.name
-              
+
               if(element._rawText){
                 translation = element._rawText
               }else if(element.text){
+                console.log("text")
                 translation = element.text
               }else{
                 translation = ""
@@ -132,6 +135,7 @@ const BlockContent = ({ blocks, globalLanguages, languagePhrases }) => {
             
           });
         } else {
+       
           blocks.forEach(element => {
             if(element.language.name == "English"){
               language = "English"
@@ -143,10 +147,17 @@ const BlockContent = ({ blocks, globalLanguages, languagePhrases }) => {
         }
 
         if(translation.length < 1){
+         
           setSpecial(true);
           blocks.forEach(element => {
+
             if(element.language.name == "English"){
-              translation = element._rawText
+              if(element._rawText){
+                  translation = element._rawText
+              }else{
+                translation = element.text
+              }
+              
               language = "English"
             }
 
