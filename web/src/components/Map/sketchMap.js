@@ -81,7 +81,7 @@ function sketch (p) {
         "<a href='/exhibition/hudson-valley'>U.S.A.<br><span>Sep 01 - Oct 14, 2023</span><span class='hidden-message'><br>more info</span></a>",
         "<a href='/exhibition/athens'>Greece<br><span>Oct 25 - Nov 20, 2023</span><span class='hidden-message'><br>more info</span></a>",
         "<a href='/exhibition/bishkek'>Kyrgyzstan<br><span>Mar 2 - Mar 31, 2024</span><span class='hidden-message'><br>more info</span></a>",
-        "<a href='/exhibition/sakha'>Online with artists from Sakha<span>Jun 8 - Aug 31, 2024</span><span class='hidden-message'><br>more info</span></a>",
+        "<a href='/exhibition/sakha'>Online with Sakha Artists<span>Jun 8 - Aug 31, 2024</span><span class='hidden-message'><br>more info</span></a>",
         "<a href='/exhibition/palestine'>Palestine<br><span>Summer, 2024</span><span class='hidden-message'><br>more info</span></a>",
         "<a href='/exhibition/mexico'>Mexico<br><span>August 1 - Aug 31, 2024</span><span class='hidden-message'><br>more info</span></a>"
     ]
