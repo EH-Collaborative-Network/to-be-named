@@ -68,7 +68,7 @@
     margin-left:var(--space-small);
     @media (--media-min-medium) {
         width: auto;
-        height: 42vh;
+        height: 36vh;
         background-color:transparent;
         margin-top:var(--space-small);
         border:none;
