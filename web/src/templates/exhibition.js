@@ -236,7 +236,7 @@ const ExhibitionTemplate = props => {
   })
 
 
-
+ 
   
   return (
     <Layout navTranslations={languagePhrases} globalLanguages={globalLanguages} >
@@ -252,7 +252,10 @@ const ExhibitionTemplate = props => {
           <BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={ page.dates}/>
           </div>
         </div>
+       
         <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={ page.statement}/></div>
+        {page.slug.current != "sakha" &&
+        <>
         {page.threedwalk &&
         <>
         <br></br><br></br>
@@ -292,7 +295,8 @@ const ExhibitionTemplate = props => {
           {projectCardsTraveling}
         </div>
         </>}
-
+        </>
+        }
       </Container>
     </Layout>
   );
