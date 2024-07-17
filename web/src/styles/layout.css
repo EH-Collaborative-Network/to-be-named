@@ -416,6 +416,9 @@ li.alice-carousel__stage-item {
 .top-title p{
   margin:0;
 }
+.top-title .modal p{
+  margin:var(--space-small) 0;
+}
 .embed-caption{
   margin-top:var(--space-small);
   margin-bottom:var(--space-small);
