@@ -461,3 +461,6 @@ li.alice-carousel__stage-item {
   margin-top: calc(var(--space)*2);
   font-size: var(--font-medium-size);
 }
+.top-text.one-column .gatsby-image-wrapper [data-main-image]{
+   object-fit: contain;
+}
