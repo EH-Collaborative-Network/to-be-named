@@ -463,4 +463,5 @@ li.alice-carousel__stage-item {
 }
 .top-text.one-column .gatsby-image-wrapper [data-main-image]{
    object-fit: contain !important;
+   width: 100% !important;
 }
