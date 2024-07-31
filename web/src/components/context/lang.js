@@ -1,9 +1,25 @@
 import React from "react"
+let defaultState;
 
-const defaultState = {
-  lang: "en",
-  setLang: () => {},
+if(typeof window != `undefined`){
+  if(window.location.href.includes("language=es")){
+    defaultState = {
+      lang: "es",
+      setLang: () => {},
+    }
+  }else{
+    defaultState = {
+      lang: "en",
+      setLang: () => {},
+    }
+  }
+}else{
+  defaultState = {
+    lang: "en",
+    setLang: () => {},
+  }
 }
+
 const LangContext = React.createContext(defaultState)
 
 class LangProvider extends React.Component {
@@ -19,13 +35,25 @@ class LangProvider extends React.Component {
   }
 
   componentDidMount() {
-    // Getting dark mode value from localStorage!
     const langEn = JSON.parse(localStorage.getItem("lang"))
+
     if (langEn) {
       this.setState({ lang: langEn })
-    } else {
+    } if(typeof window != `undefined`){
+      if(window.location.href.includes("language=es")){
+        this.setState({ lang: "es" })
+      }else{
+        this.setState({ lang: "en" })
+      }
+    }else {
       this.setState({ lang: "en" })
     }
+    // Getting dark mode value from localStorage!
+    // if (langEn) {
+    //   this.setState({ lang: langEn })
+    // } else {
+    //   this.setState({ lang: "en" })
+    // }
   }
   render() {
     const { children } = this.props
