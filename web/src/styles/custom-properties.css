@@ -18,10 +18,10 @@
   --font-medium-size: clamp(22px, 1.5vw, 45px); 
   --font-slight-size: clamp(22px, 1.35vw, 42px); 
   --font-medium-line-height: calc(30 / 21); /* 30px */
-  --font-large-size: 2.4rem;
+  --font-large-size: 2rem;
   --font-large-line-height: calc(57 / 49); /* 57px */
   @media (--media-max-medium) {
-    --font-large-size: 2rem;
+    --font-large-size: 1.5rem;
     --font-base-size: clamp(16px, 1.2vw, 40px); /* 16px */
     --font-medium-size: clamp(18px, 1.5vw, 45px); 
     --font-slight-size: clamp(16px, 1.35vw, 42px); 

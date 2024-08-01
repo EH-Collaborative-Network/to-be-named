@@ -339,6 +339,12 @@ li.alice-carousel__stage-item {
   .main-link.top-link{
     top:0;
   }
+  .top-title{
+    flex-direction: column;
+  }
+  .top-title :nth-child(2){
+    margin-top: 15px;
+  }
 }
 
 .hp-text p{

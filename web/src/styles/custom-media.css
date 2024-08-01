@@ -3,3 +3,4 @@
 @custom-media --media-min-medium (min-width: 675px);
 @custom-media --media-min-large (min-width: 900px);
 @custom-media --media-min-large-desktop (min-width: 1125px);
+@custom-media --media-max-medium (max-width: 675px);
