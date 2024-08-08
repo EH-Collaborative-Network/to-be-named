@@ -34,24 +34,24 @@ module.exports = {
         overlayDrafts: !isProd && token
       }
     },
-    {
-      resolve: "gatsby-plugin-google-tagmanager",
-      options: {
-        id: "G-LVZH6EJH74",
+    // {
+    //   resolve: "gatsby-plugin-google-tagmanager",
+    //   options: {
+    //     id: "G-LVZH6EJH74",
   
-        // Include GTM in development.
-        //
-        // Defaults to false meaning GTM will only be loaded in production.
-        includeInDevelopment: false,
+    //     // Include GTM in development.
+    //     //
+    //     // Defaults to false meaning GTM will only be loaded in production.
+    //     includeInDevelopment: false,
   
-        // datalayer to be set before GTM is loaded
-        // should be an object or a function that is executed in the browser
-        //
-        // Defaults to null
-        defaultDataLayer: { platform: "gatsby" },
+    //     // datalayer to be set before GTM is loaded
+    //     // should be an object or a function that is executed in the browser
+    //     //
+    //     // Defaults to null
+    //     defaultDataLayer: { platform: "gatsby" },
      
-      },
-    },
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

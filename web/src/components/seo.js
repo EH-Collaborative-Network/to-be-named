@@ -47,7 +47,14 @@ function SEO({lang}) {
                     }
                   : []
               )}
-           />
+           ><script src="https://www.googletagmanager.com/gtag/js?id=G-LVZH6EJH74"></script>
+           <script async={false} type="text/javascript">
+          {`window.dataLayer = window.dataLayer || []
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag('js', new Date())
+          window.gtag('config', 'G-LVZH6EJH74')`
+          }
+        </script></Helmet>
           );
 }
 
