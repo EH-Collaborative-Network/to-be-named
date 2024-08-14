@@ -2,10 +2,12 @@
 
 .root {
     margin:0;
+    display: none;
     position:relative;
-    background-color: limegreen;
+    background-color: white;
   @media (--media-min-small) {
     margin:0;
+    display: block;
   }
 
 }
