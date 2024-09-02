@@ -266,7 +266,7 @@ const ExhibitionTemplate = props => {
         {page.media?.length > 0 &&
         <>
         <br></br><br></br>
-        <h2 style={{'text-transform':'uppercase'}}><strong>Installation Images:</strong></h2>
+        <h2 style={{'text-transform':'uppercase'}}><strong>Installation & Opening Events Images:</strong></h2>
         <div className={carouselStyles.special}>
             <Carousel imageOnly={false} media={page.media}/>
            </div> 
