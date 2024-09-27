@@ -251,7 +251,7 @@ const ExhibitionTemplate = props => {
         </div>
        
         <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} globalLanguages={globalLanguages} blocks={ page.statement}/></div>
-        {page.slug.current != "sakha" &&
+        {page.slug.current != "sakha" || page.slug.current != "palestine" &&
         <>
         {page.threedwalk &&
         <>
