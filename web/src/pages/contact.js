@@ -1,21 +1,15 @@
 import React, {useState, useEffect, useRef} from "react";
 import { graphql } from "gatsby";
-import {
-  mapEdgesToNodes,
-  filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from "../lib/helpers";
 import Container from "../components/Container/container";
 import BlockContent from "../components/TranslationHelpers/block-content";
 import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import { useLocation } from '@reach/router';
-import queryString from 'query-string';
-import { Link } from "@reach/router";
 import Feed from "../components/Feed/feed";
 import TranslatedTitle from "../components/TranslationHelpers/translatedTitle";
 import sanityClient from "@sanity/client";
+
 const client = sanityClient({
   projectId: '46orb7yp',
   dataset: 'production',
@@ -82,7 +76,7 @@ export const query = graphql`
 
 const ContactPage = props => {
   const { data, errors } = props;
-  const [feeds, setFeedsData] = useState([])
+  const [feeds, setFeedsData] = useState(null)
   let token = process.env.GATSBY_INSTAGRAM_TOKEN
 
   useEffect(() => {
@@ -156,7 +150,7 @@ const ContactPage = props => {
           <div className="top-text one-column"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : ap} globalLanguages={globalLanguages}/></div>
           <br/>
           <div id='instagram-wrapper'>
-          {feeds.map((feed) => {
+          {feeds?.map((feed) => {
                 if(feed.media_type != "VIDEO"){
                  return ( <Feed key={feed.id} feed={feed} />)
                 }
