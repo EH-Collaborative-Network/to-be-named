@@ -31,6 +31,12 @@ export default {
         title: 'About To Be–Named'
     },
     {
+      description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
+      name:'aboutProject',
+      type: 'string',
+      title: 'About The Project'
+  },
+    {
         description: 'This translation is for cross-site navigation. Page-specific translations can be added via their own page in the CMS',
         name:'aboutVolume',
         type: 'string',
