@@ -16,12 +16,14 @@
   top:0;
   left:0;
   z-index: -3;
-  width:auto;
+  display: none;
+  width:18%;
   height:100vh;
   pointer-events: none;
   @media (--media-min-small) {
-    width:auto;
+    width:18%;
     height:100vh;
+    display: block;
   }
 }
 .root .solid canvas{
@@ -32,11 +34,15 @@
 .root canvas{
   cursor: pointer;
   position:fixed;
+  display: none;
   top:0;
   left:0;
   z-index: -2;
   mix-blend-mode: soft-light;
   opacity: 0.7;
+  @media (--media-min-small) {
+    display: block;
+  }
 }
 
 

@@ -127,10 +127,10 @@ const HomePage = props => {
   let media = []
 
   site.projects?.map(function(project,index){
-    let x = []
-    x.push(project.mainImage)
-    x.push(project.titles)
-    x.push("/project/"+project.slug.current)
+    let x = {}
+    x.embed = null
+    x.pdf = null
+    x.image = project.mainImage
     media.push(x);
   })
 
@@ -140,10 +140,10 @@ const HomePage = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         {/* <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1> */}
-        <div className="top-text one-column homepage-special-text"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/></div>
+        <div className="top-text one-column homepage-special-text"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/><br></br>
       {media?.length > 0 &&
-           <Carousel imageOnly={true} media={(preview && previewData) ? previewData.media : media}/>
-        }
+           <Carousel imageOnly={false} media={(preview && previewData) ? previewData.media : media}/>
+        }</div>
         <div className="bottom-text"><br></br><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.credits : site.credits} globalLanguages={globalLanguages}/></div>
       </Container>
     </Layout>

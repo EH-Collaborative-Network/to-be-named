@@ -3,6 +3,7 @@ function sketchSix (p) {
     let img;
     let graphics;
     let num = 1;
+    let counter = 0;
     let shouldDraw = true;
     let veins = []
     p.setup = function() {
@@ -10,9 +11,9 @@ function sketchSix (p) {
         
         if(typeof window != `undefined`){
             if(window.innerWidth <= 768){
-              c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
+              c = p.createCanvas((window.innerWidth/100 * 18), (window.innerHeight)); 
             }else{
-              c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
+              c = p.createCanvas((window.innerWidth/100 * 18), (window.innerHeight)); 
             }
         }
         p.background("#F8F8F8")
@@ -29,7 +30,7 @@ function sketchSix (p) {
 
 
         if(typeof window != `undefined`){
-            if(shouldDraw){
+            if(shouldDraw && counter < 100){
 
                 for(let i = 0; i < veins.length;i++){
                 veins[i].show()
@@ -37,6 +38,7 @@ function sketchSix (p) {
                 
             }
         }     
+        counter += 1;
     }
     p.mousePressed = function(){
         shouldDraw = true;

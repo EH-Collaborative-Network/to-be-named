@@ -11,9 +11,9 @@ function sketch1 (p) {
         
         if(typeof window != `undefined`){
             if(window.innerWidth <= 768){
-              c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
+              c = p.createCanvas((window.innerWidth/100 * 18), (window.innerHeight)); 
             }else{
-              c = p.createCanvas((window.innerWidth), (window.innerHeight)); 
+              c = p.createCanvas((window.innerWidth/100 * 18), (window.innerHeight)); 
             }
             p.background(255,0,0)
             p.noStroke();

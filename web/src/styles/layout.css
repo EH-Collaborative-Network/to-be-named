@@ -29,9 +29,12 @@ a:link, a:visited{
   color:inherit;
 }
 .homepage-special-text{
-  font-size: var(--font-medium-size)
+  /* font-size: var(--font-medium-size) */
 }
-.top-text{
+.homepage-special-text p{
+  margin-bottom:0;
+}
+.top-text, .bottom-text{
   max-width: 900px;
 }
 .top-text a,.top-title a{

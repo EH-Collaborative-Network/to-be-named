@@ -5,7 +5,6 @@ import { Figure } from "../Figure/figure";
 import TranslatedTitle from "../TranslationHelpers/translatedTitle";
 import { Link } from "@reach/router";
 import Masonry from "../Masonry/Masonry";
-
 const Carousel = ({ media, imageOnly }) => {
   const [start, setStart] = useState([0,0]);
   const [a, setA] = useState("")
@@ -16,7 +15,9 @@ const Carousel = ({ media, imageOnly }) => {
   const [scrollLeft, setScrollLeft] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   let track;
+
   useEffect(() => {
+    
     track = document.getElementsByClassName(styles.slideTrack)[0];
     let as = track.querySelectorAll('a');
     if(as.length == 0){
@@ -30,6 +31,12 @@ const Carousel = ({ media, imageOnly }) => {
       totalWidth = document.querySelector(".inner").offsetWidth * 2
     }
     track.style.width = totalWidth + "px"
+    if(typeof window != `undefined`){
+      let forty = window.innerHeight/100 * 40;
+      totalWidth = as.length * forty;
+      track.style.width = totalWidth + "px"
+    }
+    console.log("HIII")
 
   }, []);
   const handleOver = function(event){
@@ -38,6 +45,7 @@ const Carousel = ({ media, imageOnly }) => {
   const handleOut = function(event){
     setPaused(false)
   }
+  
   const handleDown = function(event){
     event.preventDefault()
     let track = document.getElementsByClassName(styles.slideTrack)[0];
@@ -138,6 +146,7 @@ const Carousel = ({ media, imageOnly }) => {
         return(<></>)
       }
     }else{
+
       return (<div><MediaItem key={index} media={node}></MediaItem></div>);
     }
     
