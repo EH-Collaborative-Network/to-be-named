@@ -44,6 +44,7 @@ export const query = graphql`
           current
           contact
           artworkIndex
+          aboutProject
           peopleAndPartners
           upcomingEvents
           researchThreads

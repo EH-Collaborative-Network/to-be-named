@@ -38,6 +38,7 @@ export const query = graphql`
           name
           code
           about
+          aboutProject
           volume
           peopleAndPartners
           contact

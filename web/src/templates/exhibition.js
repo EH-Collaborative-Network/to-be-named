@@ -45,6 +45,7 @@ export const query = graphql`
           exhibition
           worksOnDisplay
           traveling
+          aboutProject
           regional
           contact
           artworkIndex

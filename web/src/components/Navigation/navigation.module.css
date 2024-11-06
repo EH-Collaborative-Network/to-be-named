@@ -172,6 +172,25 @@
     margin-top:0;
     margin-bottom:0;
 }
+.multinav li{
+    list-style: none;
+}
+.menu .multinav.on::before{
+    height: 30%;
+}
+.multinav{
+    transition: 0.2s;
+    cursor: pointer;
+}
+.multinav ul{
+    transition: 0.2s;
+    max-height: 0;
+    overflow: hidden;
+}
+.multinav.on ul{
+    max-height: 1000px;
+    overflow: visible;
+}
 .on a{
     background-color: var(--color-gray);
 }

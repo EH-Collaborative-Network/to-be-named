@@ -75,6 +75,7 @@ export const query = graphql`
           code
           about
           volume
+          aboutProject
           exhibition
           peopleAndPartners
           contact

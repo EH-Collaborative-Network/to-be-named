@@ -35,6 +35,7 @@ export const query = graphql`
           artworkIndex
           peopleAndPartners
           seeAllArtworks
+          aboutProject
           upcomingEvents
           seeAllExhibitionLocations
           researchThreads
