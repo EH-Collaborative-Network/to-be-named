@@ -178,6 +178,9 @@
 .menu .multinav.on::before{
     height: 30%;
 }
+.menu .multinav:hover::before{
+    height: 30%;
+}
 .multinav{
     transition: 0.2s;
     cursor: pointer;
@@ -191,7 +194,11 @@
     max-height: 1000px;
     overflow: visible;
 }
-.on a{
+.multinav:hover ul{
+    max-height: 1000px;
+    overflow: visible;
+}
+.on > a{
     background-color: var(--color-gray);
 }
 .on::before{

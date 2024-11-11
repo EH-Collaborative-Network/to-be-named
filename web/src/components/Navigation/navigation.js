@@ -56,7 +56,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
       { theme => {
         return(
           <ul className={styles.menu}>
-              <li onClick={openAbout} className={(url.includes("about") || url.includes("people-and-partners")|| aboutOpen)  ? styles.on + " " + styles.multinav: styles.multinav}><TranslatedPhrase translations={translations} phrase={"about"}/>
+              <li onClick={openAbout} className={(url.includes("about") || url.includes("people-and-partners")|| aboutOpen)  ? styles.on + " " + styles.multinav: styles.multinav}><a><TranslatedPhrase translations={translations} phrase={"about"}/></a>
                 <ul>
                   <li className={url.includes("about") ? styles.on: ""}><Link to="/about/"><TranslatedPhrase translations={translations} phrase={"aboutProject"}/></Link></li>
                   <li className={url.includes("people-and-partners") ? styles.on : ""}><Link to="/people-and-partners/"><TranslatedPhrase translations={translations} phrase={"peopleAndPartners"}/></Link></li>
