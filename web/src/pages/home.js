@@ -141,11 +141,11 @@ const HomePage = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         {/* <h1><TranslatedTitle translations={(preview && previewData) ? previewData.titles : page.titles}/></h1> */}
-        <div className="top-text one-column homepage-special-text"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/><br></br>
+        <div className="top-text one-column homepage-special-text"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.bodies : page.bodies} globalLanguages={globalLanguages}/>
       {media?.length > 0 &&
            <Carousel imageOnly={false} media={(preview && previewData) ? previewData.media : media}/>
         }</div>
-        <div className="bottom-text"><br></br><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.credits : site.credits} globalLanguages={globalLanguages}/></div>
+        <div className="bottom-text"><BlockContent languagePhrases={languagePhrases} blocks={(preview && previewData) ? previewData.credits : site.credits} globalLanguages={globalLanguages}/></div>
       </Container>
     </Layout>
   );
