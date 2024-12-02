@@ -4,7 +4,7 @@ export default {
   name: 'location',
   type: 'document',
   title: 'Location',
-  icon: MdPattern,
+  icon: MdLocationPin,
   fields: [
     {
       name: 'name',
