@@ -14,6 +14,7 @@ import language from './documents/language'
 import researchThread from './documents/researchThread'
 import exhibition from './documents/exhibition'
 import medium from './documents/medium'
+import location from './documents/location'
 // Object types
 import embed from './objects/embed'
 import figure from './objects/figure'
@@ -43,6 +44,7 @@ export default createSchema({
     exhibition,
     researchThread,
     medium,
+    location,
     // The following are document types which will appear
     // in the studio.
     embed,
