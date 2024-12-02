@@ -58,6 +58,27 @@ body {
   color: var(--color-black);
   margin: 0;
 }
+/* DARK MODE */
+.dark{
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.dark .nav img, .dark #navigation img{
+  filter: invert(1) brightness(200%) grayscale(1);
+}
+.dark .nav path, .dark #navigation path,.dark .nav line, .dark #navigation line{
+  stroke: var(--color-white);
+  fill: none;
+}
+.dark .nav select, .dark #navigation select,.dark .nav input[type=text], .dark #navigation input[type=text]{
+   border: 1px solid var(--color-white);
+    color:var(--color-white);
+}
+.dark .card{
+  background-color: var(--color-light-gray);
+}
+/****/
 #global-wrapper{
   background:var(--blue-gradient);
 }

@@ -36,7 +36,7 @@ const Carousel = ({ media, imageOnly }) => {
       totalWidth = as.length * forty;
       track.style.width = totalWidth + "px"
     }
-    console.log("HIII")
+
 
   }, []);
   const handleOver = function(event){

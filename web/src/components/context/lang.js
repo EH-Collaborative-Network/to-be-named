@@ -25,6 +25,7 @@ const LangContext = React.createContext(defaultState)
 class LangProvider extends React.Component {
   state = {
     lang: "en",
+    mode: "light"
   }
   setLang = (language) => {
     this.setState((state) => ({
@@ -34,8 +35,17 @@ class LangProvider extends React.Component {
     // this.setState({ lang })
   }
 
+  setMode = (mode) => {
+    this.setState((state) => ({
+      mode: mode
+    }));
+    localStorage.setItem("mode", JSON.stringify(mode))
+    // this.setState({ lang })
+  }
+
   componentDidMount() {
     const langEn = JSON.parse(localStorage.getItem("lang"))
+    const mode = JSON.parse(localStorage.getItem("mode"))
 
     if (langEn) {
       this.setState({ lang: langEn })
@@ -48,6 +58,17 @@ class LangProvider extends React.Component {
     }else {
       this.setState({ lang: "en" })
     }
+    if (mode) {
+      this.setState({ mode: mode })
+    } if(typeof window != `undefined`){
+      if(window.location.href.includes("mode=dark")){
+        this.setState({ mode: "dark" })
+      }else{
+        this.setState({ mode: "light" })
+      }
+    }else {
+      this.setState({ mode: "light" })
+    }
     // Getting dark mode value from localStorage!
     // if (langEn) {
     //   this.setState({ lang: langEn })
@@ -57,12 +78,15 @@ class LangProvider extends React.Component {
   }
   render() {
     const { children } = this.props
-    const { lang } = this.state
+    const { lang, mode } = this.state
+
     return (
       <LangContext.Provider
         value={{
           lang,
+          mode,
           setLang: this.setLang,
+          setMode: this.setMode
         }}
       >
         {children}

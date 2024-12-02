@@ -7,7 +7,7 @@ import { Link } from "gatsby";
 
 const Card = ({ titles, slug, image, descriptions,languagePhrases, globalLanguages, extra, banner }) => {
   return(
-    <div className={styles.root + " " + extra}>
+    <div className={styles.root + " card " + extra}>
       {slug &&
       <>
       {banner &&

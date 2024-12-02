@@ -145,19 +145,41 @@
     position: relative;
     width: 70%;
 }
-
+.modeWrapper{
+    position: relative;
+    width: 70%;
+}
+.modeWrapper select{
+    margin-top:0;
+}
 .globe{
     position: absolute;
     width:18px;
     left:10px;
     top:16px;
+}
+.sun{
+    position: absolute;
+    width:18px;
+    left:10px;
+    top:-1px;
 } 
+.moon{
+    position: absolute;
+    width:18px;
+    left:10px;
+    top:3px;
+}
 .lang{
     text-indent:30px;
     height:2.5em;
     margin-left:0;
 }
 .langWrapper select{
+    width: calc(100% - 0px);
+    margin-right:0;
+}
+.modeWrapper select{
     width: calc(100% - 0px);
     margin-right:0;
 }

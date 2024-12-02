@@ -1,7 +1,7 @@
 import { graphql, StaticQuery } from "gatsby";
 import React, { useState } from "react";
 import Layout from "../components/Layout/layout";
-
+import LangContext from '../components/context/lang.js'
 const query = graphql`
   query SiteTitleQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -28,6 +28,10 @@ function LayoutContainer(props) {
           );
         }
         return (
+          <LangContext.Consumer>
+          { theme => {
+            return(
+              <div className={theme.mode}>
           <Layout
             {...props}
             showNav={showNav}
@@ -35,6 +39,10 @@ function LayoutContainer(props) {
             onHideNav={handleHideNav}
             onShowNav={handleShowNav}
           />
+          </div>
+            )}}
+
+          </LangContext.Consumer>
         );
       }}
     />

@@ -125,7 +125,7 @@ const BlockContent = ({ blocks, globalLanguages, languagePhrases }) => {
               if(element._rawText){
                 translation = element._rawText
               }else if(element.text){
-                console.log("text")
+
                 translation = element.text
               }else{
                 translation = ""

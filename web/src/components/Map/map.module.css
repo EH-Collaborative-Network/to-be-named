@@ -2,9 +2,11 @@
 .root{
     position: relative;
     height: 400px;
+    color: var(--color-black);
     @media (--media-min-medium) {
         height: 700px;
       }
+    
 }
 
 .loader{
@@ -33,7 +35,7 @@
     top:0;
     left:0;
     position:absolute;
-    z-index: -1;
+    z-index: 0;
     @media (--media-min-medium) {
         width:calc(100vw/1.38 - 1px);
       }

@@ -543,8 +543,8 @@ const ArtworkIndexPage = props => {
             <h4><TranslatedPhrase translations={languagePhrases} phrase={'researchThreads'}/>:</h4>
             {
             threads.map(function(node, index){
-              console.log('+++')
-              console.log(node)
+
+
                 return(
                   <>
                   <input className={filterStyles.checkBox} id={"check-"+index} onChange={handleThread} value={node.name} type="checkbox" checked={(currentThreads?.includes(node.name)) ? true : ''}/>

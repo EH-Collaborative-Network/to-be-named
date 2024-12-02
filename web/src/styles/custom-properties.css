@@ -8,6 +8,7 @@
   --space-small: 15px;
   --color-white: #F8F8F8;
   --color-gray: rgba(139, 100, 54, 0.07);
+  --color-light-gray: rgba(248, 248, 248,0.07);
   --clear: rgba(245,245,245,0);
   --border-black: border 1px solid #1C1E33; 
   /* Typography */

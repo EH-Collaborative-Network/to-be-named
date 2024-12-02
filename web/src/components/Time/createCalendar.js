@@ -95,7 +95,7 @@ const CreateCalendar = ({globalLanguages, translations, year, month, theme, even
             
         })
         multiEvents.forEach(function(event,i){
-          console.log(i)
+
           if((event[1].getDate() - event[0].getDate()) >= 3 && (d.getDate() - event[0].getDate()) == Math.floor((event[1].getDate() - event[0].getDate())/2)){
             dayContent.push(
               <div>

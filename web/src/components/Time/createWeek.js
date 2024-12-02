@@ -68,7 +68,7 @@ const CreateWeek = ({globalLanguages, translations, year, week, theme, events, o
     let satSquares = [];
 
     events.forEach(function(event){
-      // console.log(event)
+
       if(event.node.startDate && event.node.timeZone){
         let start = event.node.startDate
         let end = event.node.endDate || event.node.startDate;

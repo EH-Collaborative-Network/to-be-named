@@ -7,7 +7,7 @@ import { Link } from "@reach/router";
 
 const Masonry = ({ media }) => {
   let medias = media.map(function(node, index){
-    console.log(node)
+
       return <MediaItem key={index} media={node}></MediaItem>;  
     })
 

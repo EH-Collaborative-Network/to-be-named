@@ -32,8 +32,8 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
   }
   return (
     <>
-    <div className={styles.mobileHeader}>
-      <div className={styles.logo}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
+    <div className={styles.mobileHeader + " " + "nav"}>
+      <div className={styles.logo + " " + 'logo'}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
         <div className={styles.close} onClick={openHandler}>
           <svg viewBox="0 0 75 55" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="73.4602" height="3.52472" rx="1.76236" transform="matrix(1 0 -0.0253564 0.999678 0.179688 25.8008)" fill="#333333"/>
@@ -43,8 +43,8 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         </div>
     </div>
     <div id="navigation" className={styles.header}>
-      <div className={styles.logo + " " + styles.logoMobile}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
-      <div className={styles.logo + " " + styles.logoDesktop}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logo} /></Link></div>
+      <div className={styles.logo + " " + styles.logoMobile + " " + 'logo'}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
+      <div className={styles.logo + " " + styles.logoDesktop + " " + 'logo'}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logo} /></Link></div>
       <div className={styles.close} onClick={closeHandler}>
         <svg  viewBox="0 0 54 57" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="73.4602" height="3.45354" rx="1.72677" transform="matrix(0.698084 0.716016 -0.698084 0.716016 2.61719 0.69043)" fill="#333333"/>
@@ -78,6 +78,12 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         let value = event.target.value
         localStorage.setItem("lang", JSON.stringify(value))
         theme.setLang(value)
+      }
+      let handleMode = (event) => {
+        let value = event.target.value
+        localStorage.setItem("darkMode", JSON.stringify(value))
+        theme.setMode(value)
+
       }
       function handleSearch(e){
         let el = e.target;
@@ -132,6 +138,40 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
               
             </select> 
           </div>
+
+          <div className={styles.modeWrapper}>
+            {
+              theme.mode == "dark" ?
+              <svg className={styles.moon} width="29" height="29" viewBox="0 0 27 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.0485 31.4827H17.03C12.3614 31.4075 8.06044 29.7792 4.91565 26.8984C1.79398 24.0364 0.0805374 20.1974 0.0920991 16.085C0.103661 11.9788 1.80092 8.1523 4.8694 5.31115C8.00263 2.40947 12.3105 0.8125 17.0023 0.8125C17.0231 0.8125 17.0416 0.8125 17.0624 0.8125C19.1921 0.818763 21.2385 1.13607 23.1415 1.75607L26.0921 3.1756L23.093 3.53883C16.9722 5.22348 12.847 10.3651 12.8308 16.3376C12.8169 22.0094 16.5583 26.9548 22.3623 28.9359L25.0122 29.631L22.3137 30.7082C20.6396 31.1946 18.8753 31.4555 17.067 31.4848H17.0485V31.4827ZM17.0023 2.69129C12.8771 2.69129 9.09868 4.08577 6.35855 6.62213C3.6693 9.11048 2.18246 12.4735 2.17321 16.0891C2.16165 19.7027 3.66236 23.0741 6.39786 25.5791C9.15418 28.1029 12.9349 29.5329 17.0485 29.6039C17.6613 29.5934 18.2671 29.5538 18.8637 29.4828C13.839 26.7544 10.7335 21.8424 10.7497 16.3313C10.7659 10.5467 14.1812 5.44058 19.5089 2.85829C18.7111 2.74974 17.8925 2.69338 17.0578 2.69129C17.0393 2.69129 17.0231 2.69129 17.0046 2.69129H17.0023Z" fill="#D9D9D9"/>
+              </svg>
+
+              :
+
+              <svg className={styles.sun} width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M33.646 19.1494C33.646 25.931 27.5798 31.584 19.8958 31.584C12.2117 31.584 6.14551 25.931 6.14551 19.1494C6.14551 12.3679 12.2117 6.71484 19.8958 6.71484C27.5798 6.71484 33.646 12.3679 33.646 19.1494Z" stroke="#161830" stroke-width="2"/>
+              <line x1="19.3958" y1="3.86523" x2="19.3958" y2="0.611729" stroke="#161830"/>
+              <line x1="19.3958" y1="3.58398" x2="19.3958" y2="0.330479" stroke="#161830"/>
+              <line x1="19.3958" y1="37.9668" x2="19.3958" y2="34.7133" stroke="#161830"/>
+              <line x1="3.39575" y1="19.6484" x2="0.142246" y2="19.6484" stroke="#161830"/>
+              <line x1="39.6492" y1="19.6484" x2="36.3957" y2="19.6484" stroke="#161830"/>
+              <line x1="7.87496" y1="7.83402" x2="5.57439" y2="5.53345" stroke="#161830"/>
+              <line x1="33.51" y1="33.4688" x2="31.2094" y2="31.1682" stroke="#161830"/>
+              <line x1="31.2094" y1="7.12692" x2="33.51" y2="4.82634" stroke="#161830"/>
+              <line x1="5.57443" y1="32.7617" x2="7.875" y2="30.4611" stroke="#161830"/>
+              </svg>
+
+            }
+
+            <select aria-label="select dark mode" className={styles.lang} onChange={handleMode} name="mode" id="mode">
+              {/* <option style={{"display":"none"}} selected>Select language</option> */}
+              <option key={0} value={"light"} selected={theme.mode == "light"}>light mode</option>)
+              <option key={1} value={"dark"} selected={theme.mode == "dark"}>dark mode</option>)
+
+              
+            </select> 
+          </div>
+
         </div>
       )}}
      </LangContext.Consumer>
