@@ -137,6 +137,12 @@ export default {
       of:[{type:'reference', title:'Medium', to: [{type: 'medium'}]}]
     },
     {
+      name: 'locations', 
+      type: 'array', 
+      title: 'Location(s)', 
+      of:[{type:'reference', title:'Location', to: [{type: 'location'}]}]
+    },
+    {
         name: 'keywords',
         type: 'array',
         title: 'Keywords',
