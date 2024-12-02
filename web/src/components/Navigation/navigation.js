@@ -42,7 +42,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
           </svg>
         </div>
     </div>
-    <div id="navigation" className={styles.header}>
+    <div id="navigation" className={styles.header + " navHeader"}>
       <div className={styles.logo + " " + styles.logoMobile + " " + 'logo'}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logoMobile} /></Link></div>
       <div className={styles.logo + " " + styles.logoDesktop + " " + 'logo'}><Link to="/home/"><img alt={"Logo says 'To Be -- Named.'"} src={logo} /></Link></div>
       <div className={styles.close} onClick={closeHandler}>

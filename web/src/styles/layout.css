@@ -78,6 +78,12 @@ body {
 .dark .card{
   background-color: var(--color-light-gray);
 }
+.dark .nav rect,.dark .navHeader rect{
+  fill: var(--color-white);
+}
+.dark .navHeader{
+  background: var(--color-black);
+}
 /****/
 #global-wrapper{
   background:var(--blue-gradient);
