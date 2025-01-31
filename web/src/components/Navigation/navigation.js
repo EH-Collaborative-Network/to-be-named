@@ -178,7 +178,7 @@ const Navigation = ({ siteTitle, translations, globalLanguages }) =>{
         <ul className={styles.menu}>
           {/* <li><TranslatedPhrase translations={translations} phrase={"ehcnSupported"}/></li> */}
           <li><a href='https://ehcn.bard.edu'><img className={styles.ehcn} alt="A grey H within three green lines suggesting the letter E." src={ehcn}/></a></li>
-          <li><a href='https://naturalhistory.si.edu/research/anthropology/programs/recovering-voices'><img className={styles.rv} alt="Recovering is written in gold and Voices is written in orange." src={rv}/></a></li>
+          {/*<li><a href='https://naturalhistory.si.edu/research/anthropology/programs/recovering-voices'><img className={styles.rv} alt="Recovering is written in gold and Voices is written in orange." src={rv}/></a></li> */}
           <li><a href='https://coling.al.uw.edu.pl/'><img className={styles.coling} alt="COLING is written in black with an orange speech bubble." src={coling}/></a></li>
 
         </ul>
