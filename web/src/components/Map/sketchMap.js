@@ -128,7 +128,9 @@ function sketch (p) {
                 h5.position(x * fw - (fw * 2.5), y * fh - (fh * 4.5));
             }else if(i == 5){
                 h5.position(x * fw + (fw * 0), y * fh - (fh * 4));
-            }else if(i == 6){
+            }}else if(i == 6){
+                h5.position(x * fw + (fw * 0), y * fh - (fh * 4));
+            }else if(i == 7){
                 h5.position(x * (fw + (fw * 0.1)), y * fh - (fh * 1.5));
             }
             
