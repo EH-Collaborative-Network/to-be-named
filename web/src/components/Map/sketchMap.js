@@ -84,7 +84,7 @@ function sketch (p) {
         "<a href='/exhibition/sakha'>Online with <br>Sakha Artists<br><span>Jul 8, 2024</span><span class='hidden-message'><br>more info</span></a>",
         "<a href='/exhibition/mexico'>Mexico<br><span>Aug 1 - Sep 22, 2024</span><span class='hidden-message'><br>more info</span></a>",
         "<a href='/exhibition/palestine'>Palestine Online<br><span>Oct 1, 2024</span><span class='hidden-message'><br>more info</span></a>",
-        "<a href='/exhibition/colombia'>Colombia<br><span>2025</span><span class='hidden-message'><br>more info</span></a>",
+        "<a href='/exhibition/colombia'>Colombia<br><span>Mar 2 - Apr 3, 2026</span><span class='hidden-message'><br>more info</span></a>",
     ]
     let els = [
 
