@@ -241,6 +241,13 @@ select:focus{
 .modal.show{
   opacity: 1;
 }
+.dark .modal.show {
+    background: var(--color-black);
+    box-shadow: 0 0 5px 15px var(--color-black);
+}
+.dark .modal.show svg rect{
+  fill: var(--color-white);
+}
 #light-box > *{
   display: none;
 }
