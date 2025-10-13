@@ -12,6 +12,7 @@ import timeZone from './documents/timeZone'
 import siteSettings from './documents/siteSettings'
 import language from './documents/language'
 import researchThread from './documents/researchThread'
+import pedagogy from './documents/pedagogy'
 import exhibition from './documents/exhibition'
 import medium from './documents/medium'
 import location from './documents/location'
@@ -43,6 +44,7 @@ export default createSchema({
     project,
     exhibition,
     researchThread,
+    pedagogy,
     medium,
     location,
     // The following are document types which will appear
