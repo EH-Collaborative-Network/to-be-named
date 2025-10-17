@@ -226,6 +226,19 @@ export const query = graphql`
 
 const ResearchThreadsPage = props => {
     const { data, errors } = props;
+    
+    if (errors) {
+        return (
+            <Layout>
+                <GraphQLErrorList errors={errors} />
+            </Layout>
+        );
+    }
+
+    const site = (data || {}).site;
+    const globalLanguages = site.languages;
+    const languagePhrases = (data || {}).languagePhrases?.edges;
+    
     const threads = (data || {}).threads.edges
     const projects = (data || {}).projects.edges
     const locations = (data || {}).locations?.edges || []
@@ -376,7 +389,6 @@ const ResearchThreadsPage = props => {
     }
 
     const site = (data || {}).site;
-    const globalLanguages = site.languages;
     const ap = (data || {}).ap.edges[0]?.node?.bodies;
     let previewQuery = '*[_id == "drafts.' + (data || {}).ap.edges[0]?.node?._id + '"]{ _id, titles[]{language->{code}, text}, bodies[]{language->{code}, text}}'
     const location = useLocation();
@@ -397,7 +409,6 @@ const ResearchThreadsPage = props => {
     }
     
     const titles = (data || {}).ap.edges[0]?.node?.titles;
-    const languagePhrases = (data || {}).languagePhrases?.edges;
 
     if (!site) {
         throw new Error(
