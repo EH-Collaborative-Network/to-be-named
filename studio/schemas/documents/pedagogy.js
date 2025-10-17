@@ -13,6 +13,11 @@ export default {
       validation: Rule => Rule.required().error('name cannot be left blank')
     },
     {
+      name: 'mainImage',
+      title: 'Thumbnail Image',
+      type: 'figure',
+    },
+    {
         name:'slug',
         type: 'slug',
         title: 'Slug (what should the link to this page look like)',
