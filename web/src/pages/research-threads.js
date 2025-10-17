@@ -71,7 +71,7 @@ export const query = graphql`
             }
           }
           bodies{
-            _rawText(resolveReferences: { maxDepth: 20 })
+            _rawText(resolveReferences: { maxDepth: 5 })
             language{
               id
               name
@@ -94,7 +94,7 @@ export const query = graphql`
                 }
               }
               descriptions{
-                _rawText(resolveReferences: { maxDepth: 20 })
+                _rawText(resolveReferences: { maxDepth: 5 })
                 language{
                   id
                   name
@@ -344,7 +344,9 @@ const ResearchThreadsPage = props => {
     let projectCards = filteredProjects.map((node, index) => {
         let image = node.node.mainImage;
         let projectLinks = [
-        
+            <Link key={index} to={"/project/" + node.node.slug.current}>
+                <TranslatedTitle translations={node.node.titles} />
+            </Link>
         ];
 
         node.node.artists?.forEach((artist, idx) => {
