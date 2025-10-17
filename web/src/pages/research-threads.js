@@ -43,17 +43,6 @@ export const query = graphql`
         node {
           name
           code
-          about
-          aboutProject
-          volume
-          contact
-          artworkIndex
-          exhibition
-          peopleAndPartners
-          upcomingEvents
-          researchThreads
-          availableIn
-          search
         }
       }
     }
@@ -65,16 +54,12 @@ export const query = graphql`
           titles{
             text
             language{
-              id
-              name
               code
             }
           }
           bodies{
-            _rawText(resolveReferences: { maxDepth: 5 })
+            _rawText
             language{
-              id
-              name
               code
             }
           }
@@ -84,140 +69,85 @@ export const query = graphql`
     threads: allSanityResearchThread {
       edges {
         node {
-              name
-              titles{
-                text
-                language{
-                  id
-                  name
-                  code
-                }
-              }
-              descriptions{
-                _rawText(resolveReferences: { maxDepth: 5 })
-                language{
-                  id
-                  name
-                  code
-                }
-              }
+          name
+          titles{
+            text
+            language{
+              code
+            }
+          }
+          descriptions{
+            _rawText
+            language{
+              code
+            }
+          }
         }
       }
     }
-      projects: allSanityProject{
+    projects: allSanityProject{
       edges {
         node {
-              sortLetter
-              titles{
-                text
-                language{
-                  id
-                  name
-                  code
-                }
-              }
-              artists {
-                id
-                  _id
-                  name
-              }
-              mainImage {
-                crop {
-                  _key
-                  _type
-                  top
-                  bottom
-                  left
-                  right
-                }
-                asset {
-                  _id
-                }
-                altText
-              }
-              slug {
-                current
-              }
-              exhibition
-              commissioned
-              traveling
-              regional
-              studentWork
-              exhibitions{
-                titles{
-                  text
-                  language{
-                    id
-                    name
-                    code
-                  }
-                }
-                name
-              }
-              researchThreads{
-                titles{
-                  text
-                  language{
-                    id
-                    name
-                    code
-                  }
-                }
-                name
-              }
-              locations{
-                titles{
-                  text
-                  language{
-                    id
-                    name
-                    code
-                  }
-                }
-                name
-              }
-              mediums{
-                titles{
-                  text
-                  language{
-                    id
-                    name
-                    code
-                  }
-                }
-                name
-              }
-          
+          sortLetter
+          titles{
+            text
+            language{
+              code
+            }
+          }
+          artists {
+            name
+          }
+          mainImage {
+            crop {
+              top
+              bottom
+              left
+              right
+            }
+            asset {
+              _id
+            }
+            altText
+          }
+          slug {
+            current
+          }
+          researchThreads{
+            name
+          }
+          locations{
+            name
+          }
+          mediums{
+            name
+          }
         }
       }
     }
     locations: allSanityLocation {
       edges {
         node {
-              name
-              titles{
-                text
-                language{
-                  id
-                  name
-                  code
-                }
-              }
+          name
+          titles{
+            text
+            language{
+              code
+            }
+          }
         }
       }
     }
     mediums: allSanityMedium {
       edges {
         node {
-              name
-              titles{
-                text
-                language{
-                  id
-                  name
-                  code
-                }
-              }
+          name
+          titles{
+            text
+            language{
+              code
+            }
+          }
         }
       }
     }
@@ -379,16 +309,6 @@ const ResearchThreadsPage = props => {
             />
         );
     });
-
-    if (errors) {
-        return (
-            <Layout>
-                <GraphQLErrorList errors={errors} />
-            </Layout>
-        );
-    }
-
-    const site = (data || {}).site;
     const ap = (data || {}).ap.edges[0]?.node?.bodies;
     let previewQuery = '*[_id == "drafts.' + (data || {}).ap.edges[0]?.node?._id + '"]{ _id, titles[]{language->{code}, text}, bodies[]{language->{code}, text}}'
     const location = useLocation();
