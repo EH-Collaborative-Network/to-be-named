@@ -39,7 +39,41 @@ async function createProjectPages (graphql, actions) {
       })
     })
 }
+/* Pedagogy */
+async function createPedagogyPages (graphql, actions) {
+  const {createPage} = actions
+  const result = await graphql(`
+    {
+      allSanityPedagogy(filter: {slug: {current: {ne: null}}}) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
 
+  if (result.errors) throw result.errors
+
+  const pedagogyEdges = (result.data.allSanityPedagogy || {}).edges || []
+
+  pedagogyEdges
+    .forEach(edge => {
+      const id = edge.node.id
+      const slug = edge.node.slug.current
+      const path = `/pedagogy/${slug.replace(/[?=]/g, "").replace(/[#=]/g, "")}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/pedagogy.js'),
+        context: {id}
+      })
+    })
+}
 /* Exhibitions */
 async function createExhibitionPages (graphql, actions) {
   const {createPage} = actions
@@ -115,6 +149,7 @@ async function createDefaultPages (graphql, actions) {
 exports.createPages = async ({graphql, actions}) => {
   await createProjectPages(graphql, actions)
   await createExhibitionPages(graphql, actions)
+  await createPedagogyPages(graphql, actions)  
   await createDefaultPages(graphql, actions)
 
 }
