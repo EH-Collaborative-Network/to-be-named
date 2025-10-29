@@ -76,36 +76,6 @@ export default {
         description: '',
     },
     {
-        name:'studentWork',
-        type: 'boolean',
-        title: 'Is this student work?',
-        description: '',
-    },
-    {
-        name:'commissioned',
-        type: 'boolean',
-        title: 'Is this a commissioned work?',
-        description: '',
-    },
-      {
-        name:'regional',
-        type: 'boolean',
-        title: 'Is this a regional work?',
-        description: '',
-    },
-    {
-      name:'traveling',
-      type: 'boolean',
-      title: 'Is this a traveling work?',
-      description: '',
-    },
-    {
-      name:'websiteContributor',
-      type: 'boolean',
-      title: 'Is a website contributor?',
-      description: '',
-    },
-    {
         name: 'mainLink',
         title: 'Link to project website (if any)',
         type: 'link'
