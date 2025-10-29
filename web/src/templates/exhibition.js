@@ -44,7 +44,6 @@ export const query = graphql`
           timezone
           exhibition
           worksOnDisplay
-          traveling
           aboutProject
           regional
           contact
@@ -60,7 +59,6 @@ export const query = graphql`
     projects: allSanityProject (filter: {exhibitions: {elemMatch: {id:{eq: $id}} }}){
       edges{
         node {
-          traveling
           sortLetter
           titles{
             text
