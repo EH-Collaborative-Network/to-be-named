@@ -49,7 +49,6 @@ export const query = graphql`
           upcomingEvents
           researchThreads
           availableIn
-          regional
           allLocations
           mediums
           allArtists
