@@ -54,9 +54,6 @@ export const query = graphql`
           mediums
           allArtists
           noResults
-          studentWork
-          traveling
-          commissioned
           search
         }
       }
@@ -144,86 +141,21 @@ const ExhibitionPage = props => {
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
     );
   }
-  /* Artist Type = currentFilter, Mediums = currentMediums, Location = currentLocation */
-  // let currentFilter = null;
-  // let currentMediums = null;
-  // let currentLocation = null;
-  const [currentFilter, setCurrentFilter] = useState(null);
-  const [currentMediums, setCurrentMediums] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
-  let params = [];
+
+
   /* Set currentFilter, currentMediums, currentLocation based on url params */
-    useEffect(() => {
-
-  if(location?.search){
-    if(location.search.split("?").length > 1 ){
-      params = location.search.split("?")[1].split("&");
-    }
-    params.forEach((param) => {
-      let p = param.split("=")[0];
-      let v = param.split("=")[1];
-      if(p == "filter"){
-        // currentFilter = v
-        setCurrentFilter(v)
-      }else if(p == "medium" ){
-        let ve = v.split("%20").join(" ") //handle spaces
-        // currentMediums = ve.split(',')
-        setCurrentMediums(ve.split(','))
-      }else if(p == "location"){
-        let ve = v.split("%20").join(" ") //handle spaces
-        setCurrentLocation(ve)
-      }
-    })
-  }
-    }, []);
 
 
 
-  /******************************/
-  /* event handlers for filters */
-  /******************************/
-  
-  /* Filtering by artist type */
-  function handleFilter(e){
-    let value = e.target.value;
-    if(currentFilter){
-      let params = location.href.split("?")[1]
-      params = params.split("&");
-      let newParams =[]
-      params.forEach((node) =>{
-        if(node.split("=")[0] == "filter"){
-          if(value == "all"){
-            node = null
-          }else{
-           node = "filter="+ value
-          } 
-        }
-        if(node) newParams.push(node)
-      })
-      newParams = newParams.join("&")
-      if(typeof window != `undefined`) window.location.href = location.href.split("?")[0] + "?" + newParams
-    } else {
-      let newParams;
-      if(location.search){
-        newParams = location.href + "&filter=" + value
-       } else if(location.href[location.href.length -1] == "?"){
-        newParams = location.href + "filter=" + value
-       } else {
-        newParams = location.href + "?filter=" + value
-       }
-      if(typeof window != `undefined`) window.location.href = newParams
-    }
-   
-  }
+
+
 /* Create artist cards based on current filters */
 
   let exhibitionCards = []
   exhibitions.sort((a,b) => a.node.order - b.node.order); // b - a for reverse sort
 
   exhibitions.map(function(node, index){
-    let image;
-    let show = false;
-    let absolutelynoshow = true;
+
 
     let projectLinks = []
 
